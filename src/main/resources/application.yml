@@ -1,0 +1,19 @@
+#服务端容器的配置
+server:
+  port: 8088
+
+#数据库配置
+spring:
+  datasource:
+    username: zhongfucheng
+    password: zhong
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ouzicheng?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+# 图片服务器路径
+file_path: http://localhost:8081

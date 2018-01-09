@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ozc Journal｜完善个人信息</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!--Materialize -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--样式-->
+    <link rel="stylesheet" href="css/register&login.css">
+    <style>
+        header, main, footer {
+            padding-left: 300px;
+        }
+
+        @media only screen and (max-width : 992px) {
+            header, main, footer {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!--左侧导航条-->
+<ul id="slide-out" class="side-nav fixed">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="imgs/1.jpeg">
+            </div>
+            <a href="#!user"><img class="circle" src="imgs/headPortrait.png"></a>
+            <a href="#!name"><span class="white-text " id="userNickName">张三</span></a>
+            <a href="#!email"><span class="white-text email">未填邮箱地址</span></a>
+        </div>
+    </li>
+    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons">perm_identity</i>完善个人信息</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">用户操作</a></li>
+
+    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix">label</i>回到首页</a></li>
+
+    <li><a class="waves-effect" href="#!"><i class="material-icons prefix">mode_edit</i>编写新的日志</a></li>
+
+    <li><a class="waves-effect" href="#!"><i class="material-icons">search</i>查看日志</a></li>
+    <li><a class="waves-effect" href="#!"><i class="material-icons">settings_power</i>退出登陆</a></li>
+</ul>
+
+
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <div class="center-align"><img src="imgs/logo-big.png" alt="" >
+        </div>
+        <!--表单-->
+        <div class="row">
+            <form class="col s8 offset-s4" id="personalInfo" action="/user" method="put" enctype="multipart/form-data">
+
+                <div class="row">
+                    <div class="input-field col s6">
+
+                        <img src="imgs/headPortrait.png" id="displayImg" class="left" alt="">
+
+                        <div class="file-field input-field right">
+                            <div class="btn">
+                                <span>设置头像</span>
+                                <input type="file">
+                                <input type='hidden' id='uploadImg' name='uploadImg' value=''/>
+                            </div>
+                        </div>
+                        <p>
+                            请上传的图片大小不超过1M。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" name="email" type="email" class="validate" required  >
+                        <label for="email">邮箱地址</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12 ">
+                        <button class="btn waves-effect waves-light " type="submit" id="submitForm" name="action">完善个人信息
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br><br>
+    </div>
+</div>
+
+
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="script/commonScript.js"></script>
+
+
+</body>
+</html>
