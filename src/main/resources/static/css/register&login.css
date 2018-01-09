@@ -1,0 +1,10 @@
+/*背景图*/
+body {
+    background-image: url(../imgs/register&loginBG.gif);
+    background-repeat: repeat;
+}
+
+/*错误提示的样式*/
+.error {
+    color: red;
+}
