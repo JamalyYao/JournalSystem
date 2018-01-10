@@ -9,6 +9,9 @@ $(function () {
     path = prePath;
 });
 
+//图片服务器路径
+var file_path = "http://localhost:8888";
+
 
 // 显示或者记录错误
 var Error = {

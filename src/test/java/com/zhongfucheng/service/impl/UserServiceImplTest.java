@@ -54,6 +54,7 @@ public class UserServiceImplTest {
 
     @Test
     public void userLogin() {
+        //用户注册
         User user = userService.userLogin("13719193845", "123123");
         System.out.println(user);
 

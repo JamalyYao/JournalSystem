@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletOutputStream;
@@ -79,24 +80,50 @@ public class UserController {
 
     }
 
+    /**
+     * 更新用户的数据
+     */
+    @PutMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
+    public Result uploadUser(String id, String email, String headPortrait,HttpSession session) {
+
+
+        //根据id获取用户
+        User user = userService.findUserById(Integer.parseInt(id));
+
+        if (email != null && email != "") {
+            user.setEmail(email);
+        }
+
+        if (headPortrait != null && headPortrait != "") {
+            user.setHeadPortrait(headPortrait);
+        }
+
+        userService.userUpload(user);
+
+        session.setAttribute("user", user);
+
+        return ResultUtil.success();
+    }
+
 
     /**
      * 发送手机验证码(设置验证码到session中)
      */
     @GetMapping("/user/mobileCode")
-    public void mobileCode(HttpSession session, String mobileNo ) {
+    public void mobileCode(HttpSession session, String mobileNo) {
         //生成4位随机数
         String fourRandom = WebUtils.getFourRandom();
         SendSmsDemo.sendSMS(mobileNo, "3", new String[]{fourRandom, "3"}, session);
 
     }
+
     /**
      * 获取用户
      *
      * @param
      */
     @GetMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
-    public Result getUser( HttpSession session) {
+    public Result getUser(HttpSession session) {
 
         User user = (User) session.getAttribute("user");
         if (user != null) {

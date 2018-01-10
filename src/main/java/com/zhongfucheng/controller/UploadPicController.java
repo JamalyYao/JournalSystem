@@ -1,15 +1,25 @@
 package com.zhongfucheng.controller;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.zhongfucheng.dto.ImagePath;
+import com.zhongfucheng.dto.Result;
+import com.zhongfucheng.service.ThumbnailService;
+import com.zhongfucheng.utils.ResultUtil;
+import com.zhongfucheng.utils.WebUtils;
+import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -24,21 +34,37 @@ import java.util.Random;
 public class UploadPicController {
 
 
+    /**
+     * 图片的宽度和高度
+     */
+    public static final int WIDTH = 120;
+    public static final int HEIGHT = 120;
+
+
     //日志对象
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+    //图片服务器的路径
+    @Value("${file_path}")
+    private String filePath;
+
+
+    @Autowired
+    private ThumbnailService thumbnailService;
+
     /**
      * 上传图片
+     *
      * @param imgsFile
-     * @param writer
      * @throws IOException
      */
     @PostMapping(value = "/image", produces = {"application/json;charset=UTF-8"})
-    public void uploadPic(@RequestParam MultipartFile imgsFile, Writer writer) throws IOException {
+    public Result uploadPic(@RequestParam MultipartFile imgsFile, HttpSession session) throws IOException {
         //上传文件的名字是不能相同的，因此我们设置一下文件的名称
         String fileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
         Random random = new Random();
-        for(int i = 0; i < 3; i++){
+        for (int i = 0; i < 3; i++) {
             fileName = fileName + random.nextInt(10);
         }
         //拿到该文件的原始名称
@@ -52,27 +78,28 @@ public class UploadPicController {
          * 相对路径是保存在数据库中，通过input来进行提交的。
          */
         //获得上传文件的绝对路径
-        //String realPath = ResourcesUtils.readProp("file_path")+"/upload/"+fileName+suffix;
-
+        String realPath = filePath + "/upload/" + fileName + suffix;
 
         //获得相对路径
-        String relativePath = "/upload/"+fileName+suffix;
+        String relativePath = "/upload/" + fileName + suffix;
+
+        //缩略图的生成
+        BufferedImage bufferedImage = Thumbnails.of(imgsFile.getInputStream()).size(WIDTH, HEIGHT).asBufferedImage();
+
+        //将BufferImage转成byte进行上传
+        byte[] bytes = WebUtils.imageToBytes(bufferedImage, suffix.substring(1,suffix.length()));
+
 
         //创建jersy的客户端
         Client client = Client.create();
         //创建web资源对象
-        //WebResource wr = client.resource(realPath);
+        WebResource wr = client.resource(realPath);
 
         //拿到文件的二进制数据，使用web资源对象上传
-        byte[] bytes = imgsFile.getBytes();
-        //wr.put(bytes);
+        wr.put(bytes);
 
-        //使用JSON格式把我们的绝对路径和相对路径返回出去。
-  /*      JSONObject jo = new JSONObject();
-        jo.accumulate("realPath", realPath);
-        jo.accumulate("relativePath", relativePath);
-        String result = jo.toString();
-        System.out.println(result);
-        writer.write(result);*/
+
+        return ResultUtil.success(new ImagePath(realPath, relativePath));
+
     }
 }

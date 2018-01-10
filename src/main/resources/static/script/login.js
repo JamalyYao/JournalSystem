@@ -10,7 +10,6 @@ var login = {
         }
 
     },
-
     //验证表单
     validateForm: function () {
         $("#loginForm").validate({
@@ -117,7 +116,6 @@ var login = {
     //页面初始化
     init: function (params) {
         login.validateForm();
-
 
         //点击图片更换验证码
         $("#captcha").click(function () {
