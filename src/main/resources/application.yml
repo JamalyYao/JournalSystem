@@ -14,6 +14,11 @@ spring:
       ddl-auto: update
     show-sql: true
 
+# 文件上传的大小
+  http:
+    multipart:
+      max-file-size: 100Mb
 
 # 图片服务器路径
-file_path: http://localhost:8081
+file_path: http://localhost:8888
+

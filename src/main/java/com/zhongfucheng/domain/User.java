@@ -65,6 +65,8 @@ public class User  implements Serializable {
         this.headPortrait = headPortrait;
     }
 
+
+
     public User() {
 
     }

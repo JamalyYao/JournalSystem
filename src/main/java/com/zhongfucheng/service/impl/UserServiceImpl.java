@@ -44,6 +44,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserByMobileNoAndPassword(mobileNo, password);
     }
 
+    @Override
+    public User userUpload(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findUserById(int id) {
+        return userRepository.findOne(id);
+    }
 
 
 }

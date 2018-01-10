@@ -19,13 +19,19 @@ var index = {
             url: index.URL.getUserURL(),
             type: "get",
             success: function (result) {
-
                 console.log(result);
                 if (result && result['code'] == 0) {
                     $("#registerLi").hide();
                     $("#loginLi").hide();
-
                     $("#userNickName").html(result['data'].userNickName);
+
+                    if (result['data'].email != null && result['data'].email != "") {
+                        $("#userEmail").html(result['data'].email);
+                    }
+
+                    if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
+                        $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
+                    }
 
 
                 } else {
@@ -37,8 +43,6 @@ var index = {
                 Error.displayError(result);
             }
         });
-
-
     }
 
 

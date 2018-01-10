@@ -69,6 +69,14 @@
         </dependency>
 
 
+        <!--压缩图片、修改像素-->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

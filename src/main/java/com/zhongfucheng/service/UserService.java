@@ -49,4 +49,21 @@ public interface UserService {
     User userLogin(String mobileNo, String password);
 
 
+    /**
+     * 更新用户的数据
+     *
+     * @param user
+     * @return
+     */
+    User userUpload(User user);
+
+
+    /**
+     * 根据id获取用户
+     * @param id
+     * @return
+     */
+    User findUserById(int id);
+
+
 }
