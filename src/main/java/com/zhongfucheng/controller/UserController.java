@@ -14,10 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -217,5 +214,17 @@ public class UserController {
 
     }
 
+    /**
+     * 用户退出
+     *
+     * @param session
+     * @return
+     */
+    @DeleteMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
+    public Result login(HttpSession session) {
+        session.removeAttribute("user");
+        return ResultUtil.success();
+
+    }
 
 }

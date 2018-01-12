@@ -24,6 +24,7 @@
 
     <!--样式-->
     <link rel="stylesheet" href="css/register&login.css">
+
     <script src="script/commonScript.js"></script>
     <script src="script/register.js"></script>
 
@@ -43,30 +44,30 @@
         </div>
 
         <!--表单-->
-        <div class="row">
+        <div class="row ">
             <form class="col s8 offset-s4" id="registerForm" action="/user" method="post">
                 <div class="row">
                     <div class="input-field col s6">
-                        <i class="material-icons prefix">phone</i>
+                        <i class="material-icons prefix pink-text text-accent-1">phone</i>
                         <input id="mobileNo" name="mobileNo" type="tel" class="validate" required length="11">
                         <label for="mobileNo" data-error="wrong" data-success="right">手机号码</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s4">
-                        <i class="material-icons prefix">mode_edit</i>
-                        <input id="captcha" name="captcha" type="tel" length="4" minlength="4" maxlength="4" required>
+                        <i class="material-icons prefix pink-text text-accent-1">mode_edit</i>
+                        <input id="captcha"  name="captcha" type="tel" length="4" minlength="4" maxlength="4" required>
                         <label for="captcha" >验证码</label>
                     </div>
 
                     <div class="input-field col s3">
-                        <button class="btn waves-effect waves-light" type="button" id="getCaptcha">获取验证码
+                        <button class="btn waves-effect waves-light pink accent-1" type="button" id="getCaptcha">获取验证码
                         </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <i class="material-icons prefix">lock</i>
+                        <i class="material-icons prefix pink-text text-accent-1">lock</i>
                         <input id="password" name="password" type="password" class="validate" required length="18">
                         <label for="password" data-error="wrong" data-success="right">密码</label>
                     </div>
@@ -74,7 +75,7 @@
 
                 <div class="row ">
                     <div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
+                        <i class="material-icons prefix pink-text text-accent-1">account_circle</i>
                         <input id="userNickName" name="userNickName" type="text" length="18">
                         <label for="userNickName">请输入不超过18个字符的昵称</label>
                     </div>
@@ -83,10 +84,10 @@
                 <div class="row">
                     <div class="input-field col s3">
 
-                        <a href="/login.html">返回登陆页面</a>
+                        <a href="/login.html" class="pink-text text-accent-1">返回登陆页面</a>
                     </div>
                     <div class="input-field col s6">
-                        <button class="btn waves-effect waves-light" type="submit" id="submitForm" name="action">立即注册
+                        <button class="btn waves-effect waves-light pink accent-1" type="submit" id="submitForm" name="action">立即注册
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
