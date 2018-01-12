@@ -32,34 +32,9 @@
 </head>
 <body>
 
-<!--左侧导航条-->
-<ul id="slide-out" class="side-nav fixed">
-    <li>
-        <div class="userView">
-            <div class="background">
-                <img src="imgs/11.png">
-            </div>
-            <img id="slide-out-headPortrait" src="imgs/headPortrait.png"/><br>
-            <span class="black-text" id="userNickName">张三</span><br>
-            <span class="black-text email" id="userEmail">未填邮箱地址</span>
-        </div>
-    </li>
-    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons">perm_identity</i>完善个人信息</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="subheader">用户操作</a></li>
-
-    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix">label</i>回到首页</a></li>
-
-    <li><a class="waves-effect" href="#!"><i class="material-icons prefix">mode_edit</i>编写新的日志</a></li>
-
-    <li><a class="waves-effect" href="#!"><i class="material-icons">search</i>查看日志</a></li>
-    <li><a class="waves-effect" href="#!"><i class="material-icons">settings_power</i>退出登陆</a></li>
-</ul>
 
 
-
+<!--表单-->
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br>
@@ -78,9 +53,9 @@
                         <img src="imgs/headPortrait.png" id="displayImg" class="left " alt="">
 
                         <div class="file-field input-field right">
-                            <div class="btn" id="fileButton">
-                                <span>设置头像</span>
-                                <input type="file" name="imgsFile">
+                            <div class="btn pink accent-1" id="fileButton">
+                                <span > 设置头像</span>
+                                <input type="file" name="imgsFile" >
                             </div>
                             <input type='hidden' id='headPortrait' name='headPortrait' value=''/>
                         </div>
@@ -92,14 +67,14 @@
 
                 <div class="row">
                     <div class="input-field col s6">
-                        <i class="material-icons prefix">email</i>
+                        <i class="material-icons prefix pink-text text-accent-1">email</i>
                         <input id="email" name="email" type="email" class="validate" required  >
                         <label for="email">邮箱地址</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 ">
-                        <button class="btn waves-effect waves-light " type="button" id="submitForm" name="action">完善个人信息
+                        <button class="btn waves-effect waves-light pink accent-1" type="button" id="submitForm" name="action">完善个人信息
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -110,7 +85,31 @@
     </div>
 </div>
 
+<!--左侧导航条-->
+<ul id="slide-out" class="side-nav fixed">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="imgs/bg-small.png">
+            </div>
+            <img id="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
+            <span class="black-text " id="userNickName">张三</span><br>
+            <span id="userEmail" class="black-text email">未填邮箱地址</span>
+        </div>
+    </li>
+    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">用户操作</a></li>
 
+    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a></li>
+
+    <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a></li>
+
+    <li><a class="waves-effect" href="/journal.html"><i class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
+    <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a></li>
+</ul>
 
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -124,8 +123,8 @@
 <script>
     $(function () {
         personalInfo.init();
-    });
 
+    });
 
 </script>
 
