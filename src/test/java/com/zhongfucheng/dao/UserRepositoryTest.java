@@ -43,7 +43,7 @@ public class UserRepositoryTest {
     }
 
 
-    @Test
+/*    @Test
     public void registerUser() {
 
         userRepository.save(new User("zhognfucheng", "13719193845", "123", new Date(), 1, null,null));
@@ -56,5 +56,5 @@ public class UserRepositoryTest {
         User user = userRepository.findUserByMobileNoAndPassword("13719193845", "123123");
 
         System.out.println(user);
-    }
+    }*/
 }

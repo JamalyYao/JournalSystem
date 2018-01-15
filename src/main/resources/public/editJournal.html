@@ -16,60 +16,104 @@
 
 
 </head>
+<style>
+    body {
+        background-image: url(../imgs/bg-big.png);
+        background-repeat: repeat;
+    }
+</style>
 
 
 <body>
 
-<div class="container #ffffff white">
-    <!--导航条-->
-    <nav class="#ffffff white" role="navigation">
-        <div class="nav-wrapper container">
-            <img class="brand-logo" src="imgs/logo-small.png"/>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li id="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
-                <li id="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
-                <li id="journalLi"><a class="#000000 black-text" href="/journal.html">日志</a></li>
-                <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
-                                       href="#">个人中心</a>
-                </li>
-            </ul>
+<!--导航条-->
+<nav class="#ffffff white" role="navigation">
+    <div class="nav-wrapper container">
+        <img class="brand-logo" src="imgs/logo-small.png"/>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li id="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
+            <li id="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
+            <li id="journalLi"><a class="#000000 black-text" href="/journal.html">日志</a></li>
+            <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
+                                   href="#">个人中心</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--左侧导航条-->
+<ul id="slide-out" class="side-nav ">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="imgs/bg-small.png">
+            </div>
+            <img id="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
+            <span class="black-text " id="userNickName">张三</span><br>
+            <span id="userEmail" class="black-text email">未填邮箱地址</span>
         </div>
-    </nav>
+    </li>
+    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">用户操作</a></li>
+
+    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a>
+    </li>
+
+    <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
+    </li>
+
+    <li><a class="waves-effect" href="/journal.html"><i
+            class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
+    <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
+    </li>
+</ul>
 
 
-    <div class="input-field  #eeeeee grey lighten-3">
-        <i class="material-icons prefix">mode_edit</i>
-        <input id="icon_prefix2" type="text"/>
-        <label for="icon_prefix2">请输入文章标题</label>
-    </div>
+<!--表单内容-->
+<div class="container #ffffff white   ">
 
-
-    <div id="editor" class="section">
-    </div>
-
-    <div class="#eeeeee grey lighten-3 section">
-        <i class="material-icons prefix">mode_edit</i>文章标签：
-        <div class="chips chips-placeholder"></div>
-    </div>
-
-    <div class="row section">
-        <div class="col s6">
-            <button id="submitButton" class="btn waves-effect waves-light" type="submit" name="action">发表日志
-                <i class="material-icons right">send</i>
-            </button>
-
+    <form id="journalContentForm" >
+        <!--标题-->
+        <div class="input-field  #eeeeee grey lighten-3  ">
+            <i class="material-icons prefix pink-text text-accent-1">mode_edit</i>
+            <input id="title" name="title" type="text"/>
+            <label for="title">请输入文章标题</label>
         </div>
 
-        <div class="col s6">
-            <button class="btn waves-effect waves-light" type="submit" name="action">返回
-                <i class="material-icons right">label_outline</i>
-            </button>
+
+        <!--编辑器-->
+        <div id="editor" class="section">
         </div>
 
-    </div>
+        <!--标签-->
+        <div class="#eeeeee grey lighten-3 section ">
+            <i class="material-icons prefix pink-text text-accent-1">mode_edit</i>文章标签：
+            <div class="chips chips-placeholder"></div>
+        </div>
 
+        <input type="hidden" name="tags">
 
+        <div class="row section ">
+            <div class="col s6">
+                <button id="submitButton" class="btn waves-effect waves-light pink accent-1 " type="button"
+                        name="action">
+                    发表日志
+                    <i class="material-icons right">send</i>
+                </button>
 
+            </div>
+
+            <div class="col s6">
+                <button class="btn waves-effect waves-light pink accent-1" type="submit" name="action">返回
+                    <i class="material-icons right">label_outline</i>
+                </button>
+            </div>
+
+        </div>
+    </form>
 
 </div>
 
@@ -80,34 +124,20 @@
 
 <script src="script/commonScript.js"></script>
 
+<script src="script/editJournal.js"></script>
+
 
 <!--富文本编辑器-->
 <script src="https://cdn.bootcss.com/wangEditor/10.0.13/wangEditor.min.js"></script>
 
-
 <script>
-
-
-    $('.chips-placeholder').material_chip({
-        placeholder: 'Enter a tag',
-        secondaryPlaceholder: '按回车分隔'
+    $(function () {
+        //初始化该页面的JS
+        editJournal.init();
 
     });
 
 </script>
-
-<script type="text/javascript">
-    var E = window.wangEditor
-    var editor = new E('#editor')
-
-
-    editor.customConfig.uploadImgServer = path + '/upload';  // 上传图片到服务器接口
-    editor.customConfig.uploadFileName = 'imgsFile'; // 参数名称
-    //...文件上传如果用到其他参数再去看文档。http://www.wangeditor.com/index.html
-
-    editor.create()
-</script>
-
 
 </body>
 </html>

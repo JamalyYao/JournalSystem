@@ -13,12 +13,13 @@ import java.util.Date;
 @Entity
 public class Blog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
 
-    /** 文章id主键. */
+    /**
+     * 文章id主键.
+     */
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer blogId;
 
     /** 用户id外键. */
 
@@ -31,37 +32,68 @@ public class Blog implements Serializable {
      * <p>
      * JoinColumn:指定外键名
      */
-    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER, optional = false)
+/*    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
-    private String userId = "";
+    private Integer userId;*/
 
-    /** 文章标题. */
+    private User user;
+
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_userId")
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * 文章内容.
+     */
+    private String content;
+
+
+    /**
+     * 文章标题.
+     */
     private String title = "";
 
-    /** 文章作者. */
+    /**
+     * 文章作者.
+     */
     private String author = "";
 
-    /** 文章创建时间. */
+
+    /**
+     * 文章创建时间.
+     */
     private Date create_time = new Date();
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public Integer getBlogId() {
+        return blogId;
     }
 
-    public Integer getId() {
-        return id;
+    public void setBlogId(Integer blogId) {
+        this.blogId = blogId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
+/*
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+*/
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getTitle() {
@@ -87,5 +119,4 @@ public class Blog implements Serializable {
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
     }
-
 }

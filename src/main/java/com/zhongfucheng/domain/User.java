@@ -18,13 +18,11 @@ import java.util.Date;
 @Entity
 public class User  implements Serializable {
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
 
     /** 主键. */
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer userId;
 
     /** 用户名. */
     @NotNull(message = "昵称不能为空")
@@ -55,50 +53,20 @@ public class User  implements Serializable {
      */
     private String headPortrait = "";
 
-    public User(String userNickName, String mobileNo, String password, Date registerTime, Integer validity, String email, String headPortrait) {
-        this.userNickName = userNickName;
-        this.mobileNo = mobileNo;
-        this.password = password;
-        this.registerTime = registerTime;
-        this.validity = validity;
-        this.email = email;
-        this.headPortrait = headPortrait;
-    }
-
 
 
     public User() {
 
     }
 
-    public String getEmail() {
-        return email;
+
+
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getHeadPortrait() {
-        return headPortrait;
-    }
-
-    public void setHeadPortrait(String headPortrait) {
-        this.headPortrait = headPortrait;
-    }
-
-
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserNickName() {
@@ -141,10 +109,26 @@ public class User  implements Serializable {
         this.validity = validity;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getHeadPortrait() {
+        return headPortrait;
+    }
+
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", userNickName='" + userNickName + '\'' +
                 ", mobileNo='" + mobileNo + '\'' +
                 ", password='" + password + '\'' +

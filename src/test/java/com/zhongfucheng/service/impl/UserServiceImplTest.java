@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -44,13 +43,13 @@ public class UserServiceImplTest {
 
     }
 
-    @Test
+/*    @Test
     public void registerUser() {
 
         userService.registerUser(new User("ouzicheng", "1234432", "123", new Date(), 1, null,null));
 
 
-    }
+    }*/
 
     @Test
     public void userLogin() {

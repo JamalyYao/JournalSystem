@@ -12,43 +12,45 @@ import java.io.Serializable;
 @Entity
 public class Tag implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+
+    // TODO 还是没找到哪里出错了。
 
     /** 标签id主键. */
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer tagId;
 
     /** 用户id外键. */
-    @ManyToOne(targetEntity = User.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "userId")
-    private String userId = "";
+    @ManyToOne(targetEntity = com.zhongfucheng.domain.User.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id")
+    private Integer  userId ;
 
     /** 标签名字. */
     private String tagName = "";
 
     /** 文章Id外键. */
-    @ManyToOne(targetEntity = Blog.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "blogId")
-    private String blogId = "";
+    @ManyToOne(targetEntity = com.zhongfucheng.domain.Blog.class, cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "blog_id")
+    private Integer  blogId ;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+
+    public Tag() {
     }
 
-    public Integer getId() {
-        return id;
+
+    public Integer getTagId() {
+        return tagId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -60,11 +62,11 @@ public class Tag implements Serializable {
         this.tagName = tagName;
     }
 
-    public String getBlogId() {
+    public Integer getBlogId() {
         return blogId;
     }
 
-    public void setBlogId(String blogId) {
+    public void setBlogId(Integer blogId) {
         this.blogId = blogId;
     }
 }

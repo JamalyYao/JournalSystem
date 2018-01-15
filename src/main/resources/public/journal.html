@@ -17,7 +17,7 @@
 </head>
 <style>
     body {
-        background-image: url(../imgs/1.png);
+        background-image: url(../imgs/bg-big.png);
         background-repeat: repeat;
     }
 </style>
@@ -29,27 +29,26 @@
 <nav class="#ffffff white" role="navigation">
     <div class="nav-wrapper container">
         <img class="brand-logo" src="imgs/logo-small.png"/>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li id="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
-            <li id="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
-            <li id="journalLi"><a class="#000000 black-text" href="/journal.html">日志</a></li>
-            <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
+        <ul userId="nav-mobile" class="right hide-on-med-and-down">
+            <li userId="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
+            <li userId="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
+            <li userId="journalLi"><a class="#000000 black-text" href="/journal.html">日志</a></li>
+            <li userId="personalLi"><a class="#000000 black-text" userId="button-collapse" data-activates="slide-out"
                                    href="#">个人中心</a>
             </li>
         </ul>
     </div>
 </nav>
 <!--左侧导航条-->
-
-<ul id="slide-out" class="side-nav ">
+<ul userId="slide-out" class="side-nav ">
     <li>
         <div class="userView">
             <div class="background">
                 <img src="imgs/bg-small.png">
             </div>
-            <img id="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
-            <span class="black-text " id="userNickName">张三</span><br>
-            <span id="userEmail" class="black-text email">未填邮箱地址</span>
+            <img userId="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
+            <span class="black-text " userId="userNickName">张三</span><br>
+            <span userId="userEmail" class="black-text email">未填邮箱地址</span>
         </div>
     </li>
     <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a></li>
@@ -63,7 +62,7 @@
     <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a></li>
 
     <li><a class="waves-effect" href="/journal.html"><i class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
-    <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a></li>
+    <li userId="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a></li>
 </ul>
 
 
@@ -83,7 +82,7 @@
                 <li class="tab col s3"><a class="active" href="#test1"><i class="material-icons">search</i>查看日志</a></li>
                 <li class="tab col s3"><a  target="_self" href="/editJournal.html"><i class="material-icons">mode_edit</i>编写新日志</a></li>
                 <li class="tab col s3 "><a href="#test3"><i class="material-icons ">settings</i>管理日志</a></li>
-                <li class="tab col s3"><a href="#test4"><i class="material-icons ">label</i>返回首页</a></li>
+                <li class="tab col s3"><a target="_self" href="/index.html"><i class="material-icons ">label</i>返回首页</a></li>
             </ul>
         </div>
     </div>
@@ -92,44 +91,9 @@
 
         <!--左侧显示模块-->
         <div class="col s3">
-            <div class="card  #f48fb1 pink lighten-3">
+            <div class="card  pink accent-1">
                 <div class="card-content white-text">
-                    <span class="card-title">公告 lighten-3</span>
-                    <p>2017年9月</p>
-                    <p>2017年8月</p>
-                    <p>2017年7月</p>
-                    <p>2017年6月</p>
-                    <div class="divider"></div>
-                </div>
-                <div class="col s9">
-                </div>
-            </div>
-
-            <div class="card  #f8bbd0 pink lighten-4">
-                <div class="card-content white-text">
-                    <span class="card-title">文章存档 lighten-4</span>
-                    <p>2017年9月</p>
-                    <p>2017年8月</p>
-                    <p>2017年7月</p>
-                    <p>2017年6月</p>
-                    <div class="divider"></div>
-                </div>
-
-            </div>
-            <div class="card  #f8bbd0 pink lighten-2">
-                <div class="card-content white-text">
-                    <span class="card-title">文章存档 lighten-2</span>
-                    <p>2017年9月</p>
-                    <p>2017年8月</p>
-                    <p>2017年7月</p>
-                    <p>2017年6月</p>
-                    <div class="divider"></div>
-                </div>
-
-            </div>
-            <div class="card  #ff80ab pink accent-1">
-                <div class="card-content white-text">
-                    <span class="card-title">文章存档 accent-1</span>
+                    <span class="card-title"><i class="material-icons">view_list</i>文章存档 </span>
                     <p>2017年9月</p>
                     <p>2017年8月</p>
                     <p>2017年7月</p>
@@ -138,99 +102,56 @@
                 </div>
             </div>
 
-            <div class="card  #ec407a pink lighten-1">
+            <div class="card pink accent-1">
                 <div class="card-content white-text">
-                    <span class="card-title">文章存档 lighten-1</span>
-                    <p>2017年9月</p>
-                    <p>2017年8月</p>
-                    <p>2017年7月</p>
-                    <p>2017年6月</p>
+                    <span class="card-title"><i class="material-icons">contacts</i>文章标签 </span>
+                    <p>日志</p>
+                    <p>喜欢</p>
+                    <p>女朋友</p>
+                    <p>男朋友</p>
                     <div class="divider"></div>
                 </div>
             </div>
 
-
-            <div class="card  #f50057 pink accent-3">
+            <div class="card pink accent-1">
                 <div class="card-content white-text">
-                    <span class="card-title">文章存档 accent-3</span>
-                    <p>2017年9月</p>
-                    <p>2017年8月</p>
-                    <p>2017年7月</p>
-                    <p>2017年6月</p>
+                   <span class="card-title"> <i class="material-icons">search</i>搜索日志 </span>
+                    <p>日志</p>
+                    <p>喜欢</p>
+                    <p>女朋友</p>
+                    <p>男朋友</p>
                     <div class="divider"></div>
                 </div>
             </div>
-
         </div>
 
         <!--右侧文章内容-->
         <div class="col s9">
             <ul class="collection with-header">
-                <li class="collection-header"><h4><a href="">蔬菜</a></h4></li>
+                <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
                 <li class="collection-item">
                     <div class="truncate">
                         <p>阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p><span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
-                            href="#!" class="secondary-content"><i class="material-icons ">search</i>查看全文</a></div>
+                            href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a></div>
+                </li>
+            </ul>
+            <ul class="collection with-header">
+                <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
+                <li class="collection-item">
+                    <div class="truncate">
+                        <p>阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p><span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
+                            href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a></div>
                 </li>
             </ul>
 
             <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
+                <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
                 <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
+                    <div class="truncate">
+                        <p>阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p><span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
+                            href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a></div>
                 </li>
             </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4>蔬菜</h4></li>
-                <li class="collection-item">
-                    <div>阿斯顿发的双方都双方都双方都是否<a href="#!" class="secondary-content"><i class="material-icons">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-
 
             <!--分页组件-->
             <ul class="pagination">
@@ -251,13 +172,19 @@
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
 <script src="script/commonScript.js"></script>
 
-<script>
+<script src="script/journal.js"></script>
 
+
+<script>
     $(function () {
         //侧边导航条
         $("#button-collapse").sideNav();
+
+
+        journal.init();
     });
 </script>
 

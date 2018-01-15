@@ -40,24 +40,24 @@
 </head>
 <body>
 
-<input type="hidden" id="userId">
+<input type="hidden" id="id">
 
 <!--导航条-->
-<div class="container">
-    <nav class="#ffffff white" role="navigation">
-        <div class="nav-wrapper container">
-            <img class="brand-logo" src="imgs/logo-small.png"/>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li id="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
-                <li id="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
-                <li id="journalLi"><a class="#000000 black-text" href="/journal.html">日志</a></li>
-                <li id="personalLi" ><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
-                                       href="#">个人中心</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
+
+<nav class="#ffffff white" role="navigation">
+    <div class="nav-wrapper container">
+        <img class="brand-logo" src="imgs/logo-small.png"/>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li id="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
+            <li id="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
+            <li id="journalLi"><a class="#000000 black-text" href="/journal.html">日志</a></li>
+            <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
+                                   href="#">个人中心</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 
 <!--轮播图-->
 <div class="section no-pad-bot" id="index-banner">
@@ -150,46 +150,52 @@
             <span id="userEmail" class="black-text email">未填邮箱地址</span>
         </div>
     </li>
-    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a></li>
+    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
+    </li>
     <li>
         <div class="divider"></div>
     </li>
     <li><a class="subheader">用户操作</a></li>
 
-    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a></li>
+    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a>
+    </li>
 
-    <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a></li>
+    <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
+    </li>
 
-    <li><a class="waves-effect" href="/journal.html"><i class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
-    <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a></li>
+    <li><a class="waves-effect" href="/journal.html"><i
+            class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
+    <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
+    </li>
 </ul>
 
 
 <!--页脚-->
-<div class="container">
-    <footer class="page-footer #fafafa grey lighten-5">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="black-text">网站说明</h5>
-                    <p class="black-text">本网站用于编写个人的日记，记录生活的点点滴滴。</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="black-text">相关链接</h5>
-                    <ul>
-                        <li><a href="https://zhongfucheng.bitcron.com/" class="pink-text text-accent-1">技术博客</a></li>
-                        <li><a href="https://github.com/ZhongFuCheng3y" class="pink-text text-accent-1">GitHub地址</a></li>
-                    </ul>
-                </div>
+
+<footer class="page-footer #fafafa grey lighten-5">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="black-text">网站说明</h5>
+                <p class="black-text">本网站用于编写个人的日记，记录生活的点点滴滴。</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="black-text">相关链接</h5>
+                <ul>
+                    <li><a href="https://zhongfucheng.bitcron.com/" class="pink-text text-accent-1">技术博客</a></li>
+                    <li><a href="https://github.com/ZhongFuCheng3y" class="pink-text text-accent-1">GitHub地址</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="footer-copyright">
-            <div class="container black-text">
-                备案号：<a href="" class="pink-text text-accent-1">粤ICP备17145745号</a>
-            </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container black-text">
+            备案号：<a href="" class="pink-text text-accent-1">粤ICP备17145745号</a>
         </div>
-    </footer>
-</div>
+    </div>
+</footer>
+
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
