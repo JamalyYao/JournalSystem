@@ -1,12 +1,14 @@
 package com.zhongfucheng.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by ozc on 2018/1/3.
@@ -16,55 +18,54 @@ import java.util.Date;
  */
 
 @Entity
-public class User  implements Serializable {
+@Table(name = "t_user")
+public class User implements Serializable {
 
 
-    /** 主键. */
-    @Id
-    @GeneratedValue
     private Integer userId;
 
-    /** 用户名. */
     @NotNull(message = "昵称不能为空")
-    @Size(min=2,max=18,message="昵称最低2位、最高18位")
+    @Size(min = 2, max = 18, message = "昵称最低2位、最高18位")
     private String userNickName = "";
 
-    /** 手机号码. */
     @NotNull(message = "手机号码不能为空")
-    @Size(min=11,max=11,message="手机号码只能是11位")
+    @Size(min = 11, max = 11, message = "手机号码只能是11位")
     private String mobileNo = "";
 
-    /** 密码. */
     @NotNull(message = "密码不能为空")
-    @Size(min=6,max=18,message="密码只能是6到18位")
+    @Size(min = 6, max = 18, message = "密码只能是6到18位")
     private String password = "";
 
-    /** 注册时间. */
     private Date registerTime = new Date();
 
-    /**
-     * 是否有效 0 有效 1 无效.
-     */
     private Integer validity = 0;
 
     private String email = "";
-    /**
-     * 头像.
-     */
+
     private String headPortrait = "";
 
+    /**
+     * 一个用户对应多篇日志
+     */
+    @JsonIgnore
+    Set<Blog> blogSet = new HashSet<>();
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "user", fetch = FetchType.EAGER)
+    public Set<Blog> getBlogSet() {
+        return blogSet;
+    }
+
+
+    /* 主键*/
+    @Id
+    @GeneratedValue
+    public Integer getUserId() {
+        return userId;
+    }
 
 
     public User() {
 
     }
-
-
-
-    public Integer getUserId() {
-        return userId;
-    }
-
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
@@ -123,6 +124,10 @@ public class User  implements Serializable {
 
     public void setHeadPortrait(String headPortrait) {
         this.headPortrait = headPortrait;
+    }
+
+    public void setBlogSet(Set<Blog> blogSet) {
+        this.blogSet = blogSet;
     }
 
     @Override

@@ -35,7 +35,8 @@ var editJournal = {
 
             //文章标题，内容，标签
             var title = $("#title").val();
-            editJournal.submitForm(title, editor.txt.html(), tags.toString())
+            editJournal.submitForm(title, editor.txt.html(), tags.toString());
+
         });
 
 
@@ -120,20 +121,14 @@ var editJournal = {
             },
             success: function (result) {
                 if (result && result['code'] == 0) {
-                    //5秒后跳转到登陆页面
-                    console.log(result);
-
+                    //跳转回去日志界面
+                    window.location.href = "/journal.html";
                 } else {
-                    console.log(result);
+                    Error.displayError(result);
                 }
             },
             error: function () {
-                sweetAlert({
-                    title: "系统错误了！",
-                    text: "请联系管理员！",
-                    type: "error",
-                    showConfirmButton: false
-                });
+                Error.displayError(result);
             }
         });
 

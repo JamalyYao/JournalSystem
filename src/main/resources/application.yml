@@ -9,6 +9,7 @@ spring:
     password: zhong
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/ouzicheng?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    # JPA配置
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,6 +21,17 @@ spring:
   http:
     multipart:
       max-file-size: 100Mb
+
+# freemarker配置
+  freemarker:
+    suffix: .ftl
+    request-context-attribute: request
+    expose-session-attributes: true
+    content-type: text/html
+    check-template-location: true
+    charset: UTF-8
+    cache: false
+    template-loader-path: classpath:/templates
 
 # 图片服务器路径
 file_path: http://localhost:8888

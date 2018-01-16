@@ -11,36 +11,32 @@ import java.util.Date;
  * @version 1.0
  */
 @Entity
+@Table(name = "t_blog")
 public class Blog implements Serializable {
 
-
-    /**
-     * 文章id主键.
-     */
-    @Id
-    @GeneratedValue
     private Integer blogId;
 
-    /** 用户id外键. */
+    private String content;
 
-    /**
-     * ManyToOne：多对一的配置
-     * cascade(级联)：all(所有)，merge(更新)，refresh(查询)，persistence(保存)，remove(删除)
-     * fetch: eager:立即加载  one的一方默认是立即加载
-     * lazy:懒加载    many的一方默认是懒加载
-     * optional:是否可选,外键是否允许为空
-     * <p>
-     * JoinColumn:指定外键名
-     */
-/*    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId")
-    private Integer userId;*/
+    private String title = "";
 
+    private String author = "";
+
+    private Date createTime = new Date();
+
+    /** 用户外键. */
     private User user;
 
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_userId")
+    @Id
+    @GeneratedValue
+    public Integer getBlogId() {
+        return blogId;
+    }
+
+    /** 多篇日志对应一个用户*/
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -48,46 +44,9 @@ public class Blog implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    /**
-     * 文章内容.
-     */
-    private String content;
-
-
-    /**
-     * 文章标题.
-     */
-    private String title = "";
-
-    /**
-     * 文章作者.
-     */
-    private String author = "";
-
-
-    /**
-     * 文章创建时间.
-     */
-    private Date create_time = new Date();
-    public Integer getBlogId() {
-        return blogId;
-    }
-
     public void setBlogId(Integer blogId) {
         this.blogId = blogId;
     }
-
-/*
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-*/
-
     public String getContent() {
         return content;
     }
@@ -112,11 +71,23 @@ public class Blog implements Serializable {
         this.author = author;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "blogId=" + blogId +
+                ", content='" + content + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", createTime=" + createTime +
+                ", user=" + user +
+                '}';
     }
 }

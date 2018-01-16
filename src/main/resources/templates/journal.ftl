@@ -134,41 +134,44 @@
 
         <!--右侧文章内容-->
         <div class="col s9">
-            <ul class="collection with-header">
-                <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
-                <li class="collection-item">
-                    <div class="truncate">
-                        <p>
-                            阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p>
-                        <span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
-                            href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
-                    </div>
-                </li>
+             <#list blogs as blog>
 
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
-                <li class="collection-item">
-                    <div class="truncate">
-                        <p>
-                            阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p>
-                        <span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
-                            href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="collection with-header">
-                <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
-                <li class="collection-item">
-                    <div class="truncate">
-                        <p>
-                            阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p>
-                        <span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
-                            href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
-                    </div>
-                </li>
-            </ul>
+                <ul class="collection with-header">
+                    <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">${blog.title}</a></h4></li>
+                    <li class="collection-item">
+                        <div class="truncate">
+                            <p>${blog.content}</p>
+                            <span class="#bdbdbd grey-text lighten-1">发表时间：${blog.createTime}</span><a
+                                href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
+                        </div>
+                    </li>
 
+                </ul>
+             </#list>
+
+
+        <#--            <ul class="collection with-header">
+                        <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
+                        <li class="collection-item">
+                            <div class="truncate">
+                                <p>
+                                    阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p>
+                                <span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
+                                    href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4><a href="" class="pink-text text-accent-1">蔬菜</a></h4></li>
+                        <li class="collection-item">
+                            <div class="truncate">
+                                <p>
+                                    阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否阿斯顿发的双方都双阿斯顿发的爽肤水打发的双方都双方都双方都是否但是方都双方都是否</p>
+                                <span class="#bdbdbd grey-text lighten-1">发表时间：2018年1月12日14:56:40</span><a
+                                    href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
+                            </div>
+                        </li>
+                    </ul>-->
 
             <!--分页组件-->
             <ul class="pagination">

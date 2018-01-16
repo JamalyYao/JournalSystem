@@ -11,8 +11,11 @@ import com.zhongfucheng.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import java.util.List;
  * @version 1.0
  */
 
-@RestController
+@Controller
 public class BlogController {
 
     //日志对象
@@ -47,16 +50,18 @@ public class BlogController {
      * @return
      */
     @PostMapping(value = "/blog", produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
     public Result saveBlog(HttpSession session, Blog blog, String tags) {
-
 
         //得到当前用户信息
         User user = (User) session.getAttribute("user");
 
         //设置Blog的相关数据，保存Blog
         blog.setAuthor(user.getUserNickName());
-        blog.setCreate_time(new Date());
-        //blog.setUserId(user.getUserId());
+        blog.setCreateTime(new Date());
+        blog.setUser(user);
+
+        System.out.println(blog);
 
         Blog saveBlog = blogService.saveBlog(blog);
 
@@ -66,15 +71,37 @@ public class BlogController {
         List<Tag> tagList = new ArrayList<>();
         for (String tag : eachTag) {
             Tag tag1 = new Tag();
-            tag1.setBlogId(saveBlog.getBlogId());
+            tag1.setUser(user);
             tag1.setTagName(tag);
-            tag1.setUserId(user.getUserId());
+            tag1.setBlog(saveBlog);
             tagList.add(tag1);
         }
         tagService.saveTags(tagList);
 
 
         return ResultUtil.success();
+
+    }
+
+
+    /**
+     * 查询用户下所有博客
+     *
+     * @return
+     */
+    @GetMapping(value = "/blogs")
+    public String selectBlogs(Integer userId, Model model) {
+
+        List<Blog> blogs = null;
+        if (userId != null) {
+            User user = new User();
+            user.setUserId(userId);
+            blogs = blogService.selectAllBlog(user);
+        }
+
+        model.addAttribute("blogs", blogs);
+
+        return "/journal";
 
     }
 
