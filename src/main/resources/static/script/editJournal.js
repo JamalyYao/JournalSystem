@@ -46,7 +46,7 @@ var editJournal = {
         //添加标签
         $('.chips-placeholder').material_chip({
             placeholder: 'Enter a tag',
-            secondaryPlaceholder: '按回车分隔'
+            secondaryPlaceholder: '按回车确认'
         });
 
 
@@ -122,7 +122,8 @@ var editJournal = {
             success: function (result) {
                 if (result && result['code'] == 0) {
                     //跳转回去日志界面
-                    window.location.href = "/journal.html";
+                    window.location.href = "/blogs?userId="+result['data'].userId ;
+
                 } else {
                     Error.displayError(result);
                 }

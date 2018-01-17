@@ -68,7 +68,6 @@
             <version>1.2</version>
         </dependency>
 
-
         <!--压缩图片、修改像素-->
         <dependency>
             <groupId>net.coobird</groupId>
