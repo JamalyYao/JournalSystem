@@ -17,6 +17,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -81,11 +82,9 @@ public class UserController {
      * 更新用户的数据
      */
     @PutMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
-    public Result uploadUser(String id, String email, String headPortrait,HttpSession session) {
+    public Result uploadUser( String email, String headPortrait,HttpSession session) {
 
-
-        //根据id获取用户
-        User user = userService.findUserById(Integer.parseInt(id));
+        User user = (User) session.getAttribute("user");
 
         if (email != null && email != "") {
             user.setEmail(email);
@@ -97,7 +96,6 @@ public class UserController {
 
         userService.userUpload(user);
 
-        session.setAttribute("user", user);
 
         return ResultUtil.success();
     }
@@ -187,13 +185,11 @@ public class UserController {
      * @param mobileNo
      * @param password
      * @param inputCaptcha
-     * @param rememberMe
      * @param session
      * @return
      */
     @PostMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
-    public Result login(String mobileNo, String password, String inputCaptcha, String rememberMe, HttpSession session) {
-
+    public Result login(String mobileNo, String password, String inputCaptcha, HttpSession session,HttpServletResponse response) {
 
         //判断验证码是否正确
         if (WebUtils.validateCaptcha(inputCaptcha, "captcha", session)) {
@@ -202,6 +198,11 @@ public class UserController {
             User user = userService.userLogin(mobileNo, password);
             if (user != null) {
                 session.setAttribute("user", user);
+
+                /*设置自动登陆，一个星期*/
+                Cookie cookie = new Cookie("JSESSIONID",session.getId());
+                cookie.setMaxAge(604800);
+                response.addCookie(cookie);
 
                 return ResultUtil.success(user);
 

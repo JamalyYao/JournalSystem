@@ -9,6 +9,11 @@ var personalInfo = {
         },
         submitFormURL: function () {
             return path + "/user";
+        },
+        logOutUserURL:function () {
+
+            return path + "/session";
+
         }
     },
     init: function () {
@@ -24,6 +29,12 @@ var personalInfo = {
         //提交表单
         $("#submitForm").click(function () {
             personalInfo.submitForm();
+
+        });
+
+        //退出登陆
+        $("#logout").click(function () {
+            personalInfo.logOutUser();
         });
 
     },
@@ -93,24 +104,27 @@ var personalInfo = {
         });
     },
 
+    //提交表单
     submitForm: function () {
         $.ajax({
             url: personalInfo.URL.submitFormURL(),
             type: "put",
             data: $("#personalInfo").serialize(),
             success: function (result) {
+
+                console.log(result);
                 if (result && result['code'] == 0) {
                     //5秒后跳转到登陆页面
                     sweetAlert({
                         title: "更新成功！",
-                        text: "3秒后跳转到首页！",
-                        timer: 3000,
+                        text: "1秒后跳转到首页！",
+                        timer: 1000,
                         type: "success",
                         showConfirmButton: false
                     });
                     setTimeout(function () {
                         window.location.href = '/index.html';
-                    }, 3000);
+                    }, 1000);
 
                 } else {
                     Error.displayError(result);
@@ -125,6 +139,30 @@ var personalInfo = {
                 });
             }
         });
+
+    },
+
+    //退出登陆
+    logOutUser: function () {
+        $.ajax({
+            url: personalInfo.URL.logOutUserURL(),
+            type: "delete",
+            success: function (result) {
+                if (result && result['code'] == 0) {
+
+                    //退出成功返回首页
+                    window.location.href = '/index.html';
+
+
+                } else {
+                    console.log(result)
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+
 
     }
 

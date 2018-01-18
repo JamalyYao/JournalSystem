@@ -67,14 +67,14 @@ var login = {
                             //5秒后跳转到登陆页面
                             sweetAlert({
                                 title: "登陆成功！",
-                                text: "3秒后跳转到首页！",
-                                timer: 3000,
+                                text: "1秒后跳转到首页！",
+                                timer: 1000,
                                 type: "success",
                                 showConfirmButton: false
                             });
                             setTimeout(function () {
                                 window.location.href = '/index.html';
-                            }, 3000);
+                            }, 1000);
 
                         } else {
                             Error.displayError(result);

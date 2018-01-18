@@ -68,8 +68,6 @@ public class BlogController {
         blog.setUser(user);
         Blog saveBlog = blogService.saveBlog(blog);
 
-        System.out.println(tags);
-
 
         //解析页面带过来的Tags，保存Tag
         if (tags != null && tags.length() > 0) {
@@ -106,11 +104,54 @@ public class BlogController {
         blogs = blogService.selectAllBlog(user);
 
         //查询文章存档信息
-        archiveRecords = blogService.selectArchiveRecords();
+        archiveRecords = blogService.selectArchiveRecords(String.valueOf(user.getUserId()));
 
         //查询标签
         tags = tagService.selectTagNames(user);
 
+        // 这里没有做分页，如果大于20篇文章。那么我们只取前20篇
+        if (blogs.size() > 20) {
+            model.addAttribute("blogs", blogs.subList(0, 20));
+        }
+        model.addAttribute("blogs", blogs);
+        model.addAttribute("archiveRecords", archiveRecords);
+        model.addAttribute("tags", tags);
+
+        return "/journal";
+
+    }
+
+
+    /**
+     * 根据标签查询用户下博客
+     *
+     * @return
+     */
+    @GetMapping(value = "/blogs/{tag}")
+    public String selectBlogsByDate(@PathVariable("tag") String tag, HttpSession session, Model model)  {
+        User user = (User) session.getAttribute("user");
+
+        List<Blog> blogs = null;
+        List<ArchiveRecords> archiveRecords = null;
+        List<String> tags = null;
+
+
+        //根据标签名查询出对应的文章
+        if (tag != null) {
+            blogs = blogService.selectBlogByTag(tag);
+        }
+
+        //查询文章存档信息
+        archiveRecords = blogService.selectArchiveRecords(String.valueOf(user.getUserId()));
+
+
+        //查询标签
+        tags = tagService.selectTagNames(user);
+
+        // 这里没有做分页，如果大于20篇文章。那么我们只取前20篇
+        if (blogs.size() > 20) {
+            model.addAttribute("blogs", blogs.subList(0, 20));
+        }
         model.addAttribute("blogs", blogs);
         model.addAttribute("archiveRecords", archiveRecords);
         model.addAttribute("tags", tags);
@@ -127,12 +168,12 @@ public class BlogController {
      */
     @GetMapping(value = "/blogs/{year}/{month}")
     public String selectBlogsByDate(@PathVariable("year") Integer year, @PathVariable("month") Integer month, HttpSession session, Model model) {
-
         User user = (User) session.getAttribute("user");
 
         List<Blog> blogs = null;
         List<ArchiveRecords> archiveRecords = null;
         List<String> tags = null;
+
 
         //解析日期，根据时间查询相关文章
         try {
@@ -144,15 +185,17 @@ public class BlogController {
             e.printStackTrace();
             throw new UserException(ResultEnum.UNKONW_ERROR);
         }
-
-
         //查询文章存档信息
-        archiveRecords = blogService.selectArchiveRecords();
+        archiveRecords = blogService.selectArchiveRecords(String.valueOf(user.getUserId()));
+
 
         //查询标签
         tags = tagService.selectTagNames(user);
-        System.out.println(tags);
 
+        // 这里没有做分页，如果大于20篇文章。那么我们只取前20篇
+        if (blogs.size() > 20) {
+            model.addAttribute("blogs", blogs.subList(0, 20));
+        }
         model.addAttribute("blogs", blogs);
         model.addAttribute("archiveRecords", archiveRecords);
         model.addAttribute("tags", tags);
@@ -160,5 +203,6 @@ public class BlogController {
         return "/journal";
 
     }
+
 
 }

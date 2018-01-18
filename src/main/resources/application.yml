@@ -17,6 +17,14 @@ spring:
         strategy: org.hibernate.cfg.ImprovedNamingStrategy
     show-sql: true
 
+    # formatSQL得这样写
+    properties:
+      hibernate:
+        format_sql: true
+
+
+
+
 # 文件上传的大小
   http:
     multipart:

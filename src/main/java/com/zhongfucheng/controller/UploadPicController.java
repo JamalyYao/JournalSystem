@@ -35,8 +35,8 @@ public class UploadPicController {
     /**
      * 图片的宽度和高度
      */
-    public static final int WIDTH = 120;
-    public static final int HEIGHT = 120;
+    public static final int WIDTH = 300;
+    public static final int HEIGHT = 160;
 
 
     //日志对象

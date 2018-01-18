@@ -35,46 +35,40 @@
 
 
 <!--表单-->
-<div class="section no-pad-bot" userId="index-banner">
+<div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br>
         <div class="center-align"><img src="imgs/logo-big.png" alt="" >
         </div>
         <!--表单-->
         <div class="row">
-            <form class="col s8 offset-s4" userId="personalInfo" action="/user" method="put" enctype="multipart/form-data">
-
-
-                <!--用户id-->
-                <input type="hidden" userId="userId" name="userId" value="">
+            <form class="col s8 offset-s4" id="personalInfo" action="/user" method="put" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s6">
 
-                        <img src="imgs/headPortrait.png" userId="displayImg" class="left " alt="">
+                        <img src="imgs/headPortrait.png" id="displayImg" class="left " alt="">
 
                         <div class="file-field input-field right">
-                            <div class="btn pink accent-1" userId="fileButton">
+                            <div class="btn pink accent-1" id="fileButton">
                                 <span > 设置头像</span>
                                 <input type="file" name="imgsFile" >
                             </div>
-                            <input type='hidden' userId='headPortrait' name='headPortrait' value=''/>
+                            <input type='hidden' id='headPortrait' name='headPortrait' value=''/>
                         </div>
-                        <p>
-                            请上传的图片大小最好不超过1M。
-                        </p>
+
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s6">
-                        <i class="material-icons prefix id">email</i>
-                        <input userId="email" name="email" type="email" class="validate" required  >
+                        <i class="material-icons prefix  pink-text text-accent-1">email</i>
+                        <input id="email" name="email" type="email" class="validate" required  >
                         <label for="email">邮箱地址</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 ">
-                        <button class="btn waves-effect waves-light pink accent-1" type="button" userId="submitForm" name="action">完善个人信息
+                        <button class="btn waves-effect waves-light pink accent-1" type="button" id="submitForm" name="action">完善个人信息
                             <i class="material-icons right">send</i>
                         </button>
                     </div>
@@ -86,30 +80,34 @@
 </div>
 
 <!--左侧导航条-->
-<ul userId="slide-out" class="side-nav fixed">
+<ul id="slide-out" class="side-nav fixed">
     <li>
         <div class="userView">
-            <div class="background">
-                <img src="imgs/bg-small.png">
-            </div>
-            <img userId="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
-            <span class="black-text " userId="userNickName">张三</span><br>
-            <span userId="userEmail" class="black-text email">未填邮箱地址</span>
+            <img id="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
+            <span class="black-text " id="userNickName">张三</span><br>
+            <span id="userEmail" class="black-text email">未填邮箱地址</span>
         </div>
     </li>
-    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons id">perm_identity</i>完善个人信息</a></li>
+    <li><a class="waves-effect" href="/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
+    </li>
     <li>
         <div class="divider"></div>
     </li>
     <li><a class="subheader">用户操作</a></li>
 
-    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix  id">label</i>回到首页</a></li>
+    <li><a class="waves-effect" href="/index.html"><i class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a>
+    </li>
 
-    <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix id">mode_edit</i>编写新的日志</a></li>
+    <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
+    </li>
 
-    <li><a class="waves-effect" href="/journal.html"><i class="material-icons id">search</i>查看日志</a></li>
-    <li userId="logout"><a class="waves-effect"><i class="material-icons id">settings_power</i>退出登陆</a></li>
+    <li><a class="waves-effect" href="/blogs"><i
+            class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
+    <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
+    </li>
 </ul>
+
+
 
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -123,7 +121,6 @@
 <script>
     $(function () {
         personalInfo.init();
-
     });
 
 </script>

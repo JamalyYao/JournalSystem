@@ -5,9 +5,17 @@ var journal = {
         getUserURL: function () {
             return path + "/user";
         },
+        logOutUserURL: function () {
+            return path + "/session";
+        }
     },
     init: function () {
         journal.getUser();
+
+        $("#logout").click(function () {
+            journal.logOutUser();
+        });
+
     },
 
     //得到用户
@@ -18,6 +26,12 @@ var journal = {
             success: function (result) {
 
                 if (result && result['code'] == 0) {
+
+                    //大字版显示
+                    $("#userNickName-Head").html(result['data'].userNickName);
+                    $("#userEmail-Head").html(result['data'].email);
+
+
 
                     //如果登陆了，那么将注册和登陆按钮隐藏掉
                     $("#registerLi").hide();
@@ -49,6 +63,29 @@ var journal = {
                 Error.displayError(result);
             }
         });
+    },
+    //退出用户
+    logOutUser: function () {
+        $.ajax({
+            url: journal.URL.logOutUserURL(),
+            type: "delete",
+            success: function (result) {
+                if (result && result['code'] == 0) {
+
+                    //退出成功返回首页
+                    window.location.href = '/index.html';
+
+
+                } else {
+                    console.log(result)
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+
+
     }
 
 

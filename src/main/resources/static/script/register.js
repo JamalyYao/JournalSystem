@@ -103,14 +103,14 @@ var register = {
                             //5秒后跳转到登陆页面
                             sweetAlert({
                                 title: "注册成功！",
-                                text: "5秒后跳转到登陆页面！",
-                                timer: 5000,
+                                text: "3秒后跳转到登陆页面！",
+                                timer: 3000,
                                 type: "success",
                                 showConfirmButton: false
                             });
                             setTimeout(function () {
                                 window.location.href = '/login.html';
-                            }, 5000);
+                            }, 3000);
 
                         } else {
                             Error.displayError(result);

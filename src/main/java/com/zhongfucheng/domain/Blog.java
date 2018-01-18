@@ -16,7 +16,11 @@ public class Blog implements Serializable {
 
     private Integer blogId;
 
+    /** 内容携带HTML的*/
     private String content;
+
+    /** 内容无携带HTML*/
+    private String contentNoHTML;
 
     private String title = "";
 
@@ -26,6 +30,7 @@ public class Blog implements Serializable {
 
     /** 用户外键. */
     private User user;
+
 
 
     @Id
@@ -78,7 +83,13 @@ public class Blog implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    public String getContentNoHTML() {
+        return contentNoHTML;
+    }
 
+    public void setContentNoHTML(String contentNoHTML) {
+        this.contentNoHTML = contentNoHTML;
+    }
     @Override
     public String toString() {
         return "Blog{" +

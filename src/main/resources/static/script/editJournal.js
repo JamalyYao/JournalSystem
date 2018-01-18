@@ -8,6 +8,12 @@ var editJournal = {
         },
         submitFormURL: function () {
             return path + "/blog";
+        },
+        logOutUserURL: function () {
+            return path + "/session";
+        },
+        backJournalURL:function () {
+            return path + "/blogs";
         }
     },
     init: function () {
@@ -35,14 +41,25 @@ var editJournal = {
 
             //文章标题，内容，标签
             var title = $("#title").val();
-            editJournal.submitForm(title, editor.txt.html(), tags.toString());
+            editJournal.submitForm(title, editor.txt.html(),editor.txt.text(), tags.toString());
 
         });
 
 
+        //退出用户
+        $("#logout").click(function () {
+            editJournal.logOutUser();
+        });
+
+        //点击返回按钮，回到日志界面
+        $("#backJournal").click(function () {
+            window.location.href = editJournal.URL.backJournalURL();
+        });
+
+
+
     },
     tagOpera: function () {
-
         //添加标签
         $('.chips-placeholder').material_chip({
             placeholder: 'Enter a tag',
@@ -107,17 +124,38 @@ var editJournal = {
             }
         });
     },
+    //退出用户
+    logOutUser: function () {
+        $.ajax({
+            url: editJournal.URL.logOutUserURL(),
+            type: "delete",
+            success: function (result) {
+                if (result && result['code'] == 0) {
 
+                    //退出成功返回首页
+                    window.location.href = '/index.html';
+
+
+                } else {
+                    console.log(result)
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+    },
 
     //提交表单
-    submitForm: function (title, content, tags) {
+    submitForm: function (title, content,contentNoHTML, tags) {
         $.ajax({
             url: editJournal.URL.submitFormURL(),
             type: "post",
             data: {
                 "title": title,
                 "content": content,
-                "tags": tags
+                "tags": tags,
+                "contentNoHTML":contentNoHTML
             },
             success: function (result) {
                 if (result && result['code'] == 0) {
@@ -134,7 +172,9 @@ var editJournal = {
         });
 
 
-    }
+    },
+
+
 
 
 };

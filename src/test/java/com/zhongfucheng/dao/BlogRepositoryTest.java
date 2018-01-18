@@ -44,7 +44,7 @@ public class BlogRepositoryTest {
 
 
 
-        List<Object[]> ArchiveRecords = blogRepository.findArchiveRecords();
+        List<Object[]> ArchiveRecords = blogRepository.findArchiveRecords("1");
         List<ArchiveRecords> ArchiveRecord = new ArrayList<>();
         for (Object[] record : ArchiveRecords) {
             ArchiveRecords archiveRecords = new ArchiveRecords();
@@ -75,9 +75,23 @@ public class BlogRepositoryTest {
         Date endDate = sdf.parse(endDate1);
 
 
-        List<Blog> blogs = blogRepository.findBlogsByCreateTimeBetween(startDate, endDate);
+        List<Blog> blogs = blogRepository.findBlogsByCreateTimeBetweenOrderByCreateTimeDesc(startDate, endDate);
 
         System.out.println(blogs);
+
+    }
+
+    @Test
+    public void selectBlogByTagName() {
+
+        String name = "日本";
+
+
+        List<Blog> blogs = blogRepository.selectBlogByTagName(name);
+
+        System.out.println(blogs);
+
+
 
     }
 }
