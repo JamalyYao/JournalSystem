@@ -113,45 +113,44 @@
             </div>
 
             <div class="card pink accent-1 ">
-            <div class="card-content white-text  ">
-                <span class="card-title "><i class="material-icons">contacts</i>文章标签 </span><br>
+                <div class="card-content white-text  ">
+                    <span class="card-title "><i class="material-icons">contacts</i>文章标签 </span><br>
                      <#list tags as tag >
 
                             <div class="chip pink lighten-2 ">
                                 <a href="/blogs/${tag}" class="white-text ">${tag}</a>
                             </div>
                      </#list>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--右侧文章内容-->
-    <div class="col s9">
+        <!--右侧文章内容-->
+        <div class="col s9">
 
            <#if blogs?? && (blogs?size > 0)>
 
                 <#list blogs as blog>
 
                 <ul class="collection with-header">
-                    <li class="collection-header"><h5><a href="" class="pink-text text-accent-1">${blog.title}</a></h5>
+                    <li class="collection-header"><h5><a target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}" class="pink-text text-accent-1">${blog.title}</a></h5>
                     </li>
                     <li class="collection-item">
                         <div class="truncate">
                             <p class="truncate">${blog.contentNoHTML}</p>
                             <span class="#bdbdbd grey-text lighten-1">发表时间：${blog.createTime}</span><a
-                                href="#!" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
+                                target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
                         </div>
                     </li>
-
                 </ul>
                 </#list>
            <#else>
                您还没有编写过任何的文章。
            </#if>
 
-    </div>
+        </div>
 
-</div>
+    </div>
 </div>
 
 <!--Import jQuery before materialize.js-->

@@ -101,21 +101,27 @@ public class BlogController {
 
         //查询博客相关信息
         User user = (User) session.getAttribute("user");
-        blogs = blogService.selectAllBlog(user);
 
-        //查询文章存档信息
-        archiveRecords = blogService.selectArchiveRecords(String.valueOf(user.getUserId()));
+        if (user != null) {
+            blogs = blogService.selectAllBlog(user);
 
-        //查询标签
-        tags = tagService.selectTagNames(user);
+            //查询文章存档信息
+            archiveRecords = blogService.selectArchiveRecords(String.valueOf(user.getUserId()));
 
-        // 这里没有做分页，如果大于20篇文章。那么我们只取前20篇
-        if (blogs.size() > 20) {
-            model.addAttribute("blogs", blogs.subList(0, 20));
+            //查询标签
+            tags = tagService.selectTagNames(user);
+
+            // 这里没有做分页，如果大于20篇文章。那么我们只取前20篇
+            if (blogs.size() > 20) {
+                model.addAttribute("blogs", blogs.subList(0, 20));
+            }
+            model.addAttribute("blogs", blogs);
+            model.addAttribute("archiveRecords", archiveRecords);
+            model.addAttribute("tags", tags);
+        } else {
+            throw new UserException(ResultEnum.USER_NOEXIST);
         }
-        model.addAttribute("blogs", blogs);
-        model.addAttribute("archiveRecords", archiveRecords);
-        model.addAttribute("tags", tags);
+
 
         return "/journal";
 
@@ -128,7 +134,7 @@ public class BlogController {
      * @return
      */
     @GetMapping(value = "/blogs/{tag}")
-    public String selectBlogsByDate(@PathVariable("tag") String tag, HttpSession session, Model model)  {
+    public String selectBlogsByTag(@PathVariable("tag") String tag, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
 
         List<Blog> blogs = null;
@@ -201,6 +207,24 @@ public class BlogController {
         model.addAttribute("tags", tags);
 
         return "/journal";
+
+    }
+
+
+    /**
+     * 根据文章Id查询出文章的具体信息，显示详情页
+     *
+     * @return
+     */
+    @GetMapping(value = "/blogs/:{blogId}")
+    public String selectBlogsById(@PathVariable("blogId") Integer blogId, Model model) {
+
+
+        Blog blog = blogService.findBlogDetailById(blogId);
+
+
+        model.addAttribute("blog", blog);
+        return "/journalDetail";
 
     }
 
