@@ -3,6 +3,7 @@ package com.zhongfucheng.dao;
 import com.zhongfucheng.domain.Blog;
 import com.zhongfucheng.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * @author ozc
  * @version 1.0
  */
-public interface BlogRepository extends JpaRepository<Blog, Integer> {
+public interface BlogRepository extends JpaRepository<Blog, Integer> ,JpaSpecificationExecutor<Blog> {
 
     /**
      * 根据用户获取所有的日志,按照日志的时间排序

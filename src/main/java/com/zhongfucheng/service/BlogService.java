@@ -55,8 +55,18 @@ public interface BlogService {
     /**
      * 根据Id查询文章的详情
      */
-
     Blog findBlogDetailById(Integer blogId);
+
+    /**
+     * 分页+条件查询文章的数据
+     */
+    Page<Blog> paginationAndConditionBlog();
+
+
+
+
+
+
 
 
 

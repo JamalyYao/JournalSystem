@@ -12,7 +12,7 @@
 
     <style>
         body {
-            background-image: url(/imgs/bg-big.png);
+            background-image: url(${request.contextPath}/imgs/bg-big.png);
             background-repeat: repeat;
         }
     </style>

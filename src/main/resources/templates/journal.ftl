@@ -89,7 +89,7 @@
                         class="material-icons">search</i>查看日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/editJournal.html"><i
                         class="material-icons">mode_edit</i>编写新日志</a></li>
-                <li class="tab col s3 "><a href="#test3"><i class="material-icons ">settings</i>管理日志</a></li>
+                <li class="tab col s3 "><a target="_self" href="${request.contextPath}/postlist"><i class="material-icons ">settings</i>管理日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/index.html"><i
                         class="material-icons ">label</i>返回首页</a>
                 </li>

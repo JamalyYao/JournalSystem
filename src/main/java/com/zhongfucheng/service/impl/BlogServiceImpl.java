@@ -97,5 +97,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
 
+    // TODO 准备编写分页+条件的管理文章页面
+    @Override
+    public Page<Blog> paginationAndConditionBlog() {
+        return null;
+    }
+
 
 }

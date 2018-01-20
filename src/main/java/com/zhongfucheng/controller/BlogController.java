@@ -228,5 +228,19 @@ public class BlogController {
 
     }
 
+    /**
+     * 进入管理文章页面
+     *
+     * @return
+     */
+    @GetMapping(value = "/postlist")
+    public String manageJournal(Model model) {
+
+
+        //model.addAttribute("blog", blog);
+        return "/manageJournal.ftl";
+
+    }
+
 
 }
