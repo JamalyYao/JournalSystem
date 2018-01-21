@@ -47,24 +47,25 @@ public interface BlogService {
 
     List<Blog> selectBlogByTag(String tagName);
 
-    /**
-     * 分页排序文章(无条件)
-     */
-    Page<Blog> paginateAndSort(Integer currentPage);
+
 
     /**
      * 根据Id查询文章的详情
      */
     Blog findBlogDetailById(Integer blogId);
 
+
     /**
      * 分页+条件查询文章的数据
      */
-    Page<Blog> paginationAndConditionBlog();
+    Page<Blog> paginateAndSort(Integer currentPage, User user);
 
 
-
-
+    /**
+     * 根据文章Id删除文章
+     * @param blogId
+     */
+    void deleteBlogById(Integer blogId);
 
 
 

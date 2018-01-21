@@ -48,9 +48,10 @@ public class BlogServiceImplTest {
 
     @Test
     public void paginateAndSort() {
+        User user = new User();
+        user.setUserId(1);
+        Page<Blog> blogs = blogService.paginateAndSort(0, user);
 
-
-        Page<Blog> blogs = blogService.paginateAndSort(0);
 
         System.out.println(blogs);
 

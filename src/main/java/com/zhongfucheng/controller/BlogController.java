@@ -14,12 +14,10 @@ import com.zhongfucheng.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -231,16 +229,47 @@ public class BlogController {
     /**
      * 进入管理文章页面
      *
+     * @param currentPage 默认是0
      * @return
      */
-    @GetMapping(value = "/postlist")
-    public String manageJournal(Model model) {
+    @GetMapping(value = "/postlist/{currentPage}")
+    public String postList(@PathVariable("currentPage") Integer currentPage, Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        //查询分页+条件+排序的数据
+        Page<Blog> blogPage = blogService.paginateAndSort(currentPage - 1, user);
 
 
-        //model.addAttribute("blog", blog);
-        return "/manageJournal.ftl";
+        //得到分页的数据，总页数，总记录数，当前页数
+        List<Blog> blogsContent = blogPage.getContent();
+        int totalPages = blogPage.getTotalPages();
+        long totalElements = blogPage.getTotalElements();
+        int returnCurrentPage = blogPage.getNumber() + 1;
+
+
+        model.addAttribute("blogsContent", blogsContent);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalElements", totalElements);
+        model.addAttribute("returnCurrentPage", returnCurrentPage);
+        return "/manageJournal";
 
     }
 
+    /**
+     * 根据文章Id删除文章
+     *
+     * @param blogId
+     * @param model
+     * @return
+     */
+    @DeleteMapping(value = "/blogs/:{blogId")
+    public String deleteBlogById(@PathVariable("blogId") Integer blogId, Model model) {
+
+        blogService.deleteBlogById(blogId);
+
+        return "/manageJournal";
+
+    }
 
 }

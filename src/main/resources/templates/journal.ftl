@@ -89,7 +89,8 @@
                         class="material-icons">search</i>查看日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/editJournal.html"><i
                         class="material-icons">mode_edit</i>编写新日志</a></li>
-                <li class="tab col s3 "><a target="_self" href="${request.contextPath}/postlist"><i class="material-icons ">settings</i>管理日志</a></li>
+                <li class="tab col s3 "><a target="_self" href="${request.contextPath}/postlist/1"><i
+                        class="material-icons ">settings</i>管理日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/index.html"><i
                         class="material-icons ">label</i>返回首页</a>
                 </li>
@@ -133,13 +134,16 @@
                 <#list blogs as blog>
 
                 <ul class="collection with-header">
-                    <li class="collection-header"><h5><a target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}" class="pink-text text-accent-1">${blog.title}</a></h5>
+                    <li class="collection-header"><h5><a target="_blank"
+                                                         href="${request.contextPath}/blogs/:${blog.blogId}"
+                                                         class="pink-text text-accent-1">${blog.title}</a></h5>
                     </li>
                     <li class="collection-item">
                         <div class="truncate">
                             <p class="truncate">${blog.contentNoHTML}</p>
                             <span class="#bdbdbd grey-text lighten-1">发表时间：${blog.createTime}</span><a
-                                target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}" class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
+                                target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
+                                class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
                         </div>
                     </li>
                 </ul>

@@ -12,8 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,8 +32,8 @@ public class BlogServiceImpl implements BlogService {
     private BlogRepository blogRepository;
 
 
-    //每页显示10条
-    public static final Integer PAGE_SIZE = 10;
+    //每页显示5条
+    private static final Integer PAGE_SIZE = 10;
 
 
 
@@ -77,19 +79,6 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.selectBlogByTagName(tagName);
     }
 
-    @Override
-    public Page<Blog> paginateAndSort(Integer currentPage) {
-
-        //按照时间来排序(降序)
-        Sort sort = new Sort(new Order(Direction.DESC, "createTime"));
-
-        //index是从0开始的，并不是从1开始的
-        Pageable pageable = new PageRequest(0, PAGE_SIZE, sort);
-
-        Page<Blog> blogs = blogRepository.findAll(pageable);
-
-        return blogs;
-    }
 
     @Override
     public Blog findBlogDetailById(Integer blogId) {
@@ -97,10 +86,35 @@ public class BlogServiceImpl implements BlogService {
     }
 
 
-    // TODO 准备编写分页+条件的管理文章页面
     @Override
-    public Page<Blog> paginationAndConditionBlog() {
-        return null;
+    public Page<Blog> paginateAndSort(Integer currentPage, User user) {
+
+        //按照时间来排序(降序)
+        Sort sort = new Sort(new Order(Direction.DESC, "createTime"));
+
+        //index是从0开始的，并不是从1开始的
+        Pageable pageable = new PageRequest(currentPage, PAGE_SIZE, sort);
+
+
+        //添加过滤条件(查询当前用户下的)
+        Specification<Blog> blogSpecification = (root, query, cb) -> {
+
+            Path path = root.get("user");
+
+            return cb.equal(path, user);
+        };
+
+        Page<Blog> blogs = blogRepository.findAll(blogSpecification, pageable);
+
+
+        return blogs;
+    }
+
+    @Override
+    public void deleteBlogById(Integer blogId) {
+
+        blogRepository.delete(blogId);
+
     }
 
 
