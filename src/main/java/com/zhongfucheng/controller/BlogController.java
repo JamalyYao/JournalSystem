@@ -220,7 +220,6 @@ public class BlogController {
 
         Blog blog = blogService.findBlogDetailById(blogId);
 
-
         model.addAttribute("blog", blog);
         return "/journalDetail";
 
@@ -260,16 +259,17 @@ public class BlogController {
      * 根据文章Id删除文章
      *
      * @param blogId
-     * @param model
      * @return
      */
-    @DeleteMapping(value = "/blogs/:{blogId")
-    public String deleteBlogById(@PathVariable("blogId") Integer blogId, Model model) {
+    @DeleteMapping(value = "/blogs/{blogId}")
+    @ResponseBody
+    public Result<Blog> deleteBlogById(@PathVariable("blogId") Integer blogId) {
 
         blogService.deleteBlogById(blogId);
 
-        return "/manageJournal";
+        return ResultUtil.success();
 
     }
+
 
 }

@@ -71,8 +71,6 @@
 <!-- Page Layout here -->
 <div class="container">
     <div class="row section">
-
-
         <!--左侧管理导航-->
         <div class="col s3">
             <ul class="collection">
@@ -90,64 +88,25 @@
 
         <!--右侧数据-->
         <div class="col s9">
-             <#list blogsContent as blog >
-                 <ul class="collection with-header">
-                     <li class="collection-header"><h5><a target="_blank"
-                                                          href="${request.contextPath}/blogs/:${blog.blogId}"
-                                                          class="pink-text text-accent-1">${blog.title}</a></h5>
-                     </li>
-                     <li class="collection-item">
-                         <div class="truncate">
-                             <span class="#bdbdbd grey-text lighten-1"><i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">contacts</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span>
 
-                             <a blogId="${blog.blogId}" href="javascript:;"
-
-                             class="secondary-content pink-text text-accent-1">删除&nbsp;&nbsp;&nbsp;&nbsp;
-
-                             </a>
-
-                             <a
-                                     target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
-                                     class="secondary-content pink-text text-accent-1">编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
-
-                         <a
-                         target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
-                         class="secondary-content pink-text text-accent-1">查看全文&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                         </div>
-                     </li>
-                 </ul>
-             </#list>
-
-            <!--分页-->
-            <ul class="pagination">
-
-                <!--在当前页数大于1，才显示上一页按钮-->
-                <#if (returnCurrentPage>1) >
-                    <li><a href="${request.contextPath}/postlist/${returnCurrentPage-1}"><i class="material-icons">chevron_left</i></a></li>
-                <#else>
-                </#if>
-
-
-                <!--循环遍历总页数，如果页面处在当前页上，那么突出显示-->
-                <#list 1.. totalPages as page >
-                    <li <#if page == returnCurrentPage> class="active"<#else> class=""</#if>><a href="${request.contextPath}/postlist/${page}">${page}</a>
-                    </li>
-                </#list>
-
-
-                <!--在当前页数小于总页数，才显示下一页按钮-->
-                <#if (returnCurrentPage < totalPages) >
-                     <li><a href="${request.contextPath}/postlist/${returnCurrentPage+1}"><i class="material-icons">chevron_right</i></a></li>
-                <#else>
-                </#if>
-
-
-                <li class="right"><i class="material-icons pink-text text-accent-1 ">grade</i>&nbsp;总共${totalElements}条记录</li>
-
-
-            </ul>
-
-
+                 <table class="bordered highlight">
+                     <thead>
+                     <tr>
+                         <th data-field="id">标签名</th>
+                         <th data-field="name">文章数</th>
+                         <th data-field="price">操作</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <#list blogsContent as blog >
+                         <tr>
+                             <td>张三</td>
+                             <td>17</td>
+                             <td><a href="">编辑</a>&nbsp;|&nbsp;<a href="">删除</a></td>
+                         </tr>
+                     </#list>
+                     </tbody>
+                 </table>
 
         </div>
 

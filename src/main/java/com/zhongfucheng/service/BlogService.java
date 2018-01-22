@@ -18,7 +18,6 @@ public interface BlogService {
 
     Blog saveBlog(Blog blog);
 
-
     /**
      * 根据用户id获取所有的文章
      * @param user

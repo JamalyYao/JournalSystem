@@ -1,8 +1,10 @@
 package com.zhongfucheng.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by ozc on 2018/1/12.
@@ -31,7 +33,8 @@ public class Blog implements Serializable {
     /** 用户外键. */
     private User user;
 
-
+    /** 一篇文章对应多个标签 */
+    private List<Tag> tagList = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -44,6 +47,18 @@ public class Blog implements Serializable {
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
+    }
+    /**
+     * 一篇文章对应多个标签，设置级联删除
+     */
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "blog", fetch = FetchType.EAGER)
+    public List<Tag> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
     }
 
     public void setUser(User user) {

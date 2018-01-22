@@ -39,5 +39,21 @@ public class TagServiceImpl implements TagService {
         return tagRepository.selectTagNames(user);
     }
 
+    @Override
+    public List<Tag> selectTagNamesAndCount(User user) {
+
+/*        Specification<Tag> specification = (Specification<Tag>) (root, query, cb) -> {
+
+            Path<Object> tagNamePath = root.get("tagName");
+
+            return  cb.equal("").count(tagNamePath);
+        };*/
+
+
+        return null;
+    }
+
+
+
 
 }

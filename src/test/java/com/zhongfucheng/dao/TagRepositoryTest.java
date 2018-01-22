@@ -35,4 +35,13 @@ public class TagRepositoryTest {
         System.out.println(distinctByUser);
 
     }
+
+    @Test
+    public void selectTagNamesAndCount() {
+
+        User user = new User();
+        user.setUserId(1);
+
+        List<String> distinctByUser = tagRepository.selectTagNames(user);
+    }
 }

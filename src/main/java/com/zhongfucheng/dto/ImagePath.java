@@ -11,7 +11,6 @@ package com.zhongfucheng.dto;
 public class ImagePath {
 
 
-
     private String realPath;
 
     private String relativePath;

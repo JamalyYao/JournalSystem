@@ -22,5 +22,12 @@ public interface TagService {
     List<String> selectTagNames(User user);
 
 
+    /**
+     * 查询标签、并统计该标签的文章数
+     *
+     * @param user
+     * @return
+     */
+    List<Tag> selectTagNamesAndCount(User user);
 
 }

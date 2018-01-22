@@ -141,7 +141,7 @@
                     <li class="collection-item">
                         <div class="truncate">
                             <p class="truncate">${blog.contentNoHTML}</p>
-                            <span class="#bdbdbd grey-text lighten-1">发表时间：${blog.createTime}</span><a
+                            <span class="#bdbdbd grey-text lighten-1"> <i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">contacts</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span><a
                                 target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
                                 class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
                         </div>

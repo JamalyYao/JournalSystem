@@ -2,6 +2,7 @@ package com.zhongfucheng.dao;
 
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +15,8 @@ import java.util.List;
  * @author ozc
  * @version 1.0
  */
-public interface TagRepository extends JpaRepository<Tag, Integer> {
+public interface TagRepository extends JpaRepository<Tag, Integer>, Specification<Tag> {
+
 
 
     /**
@@ -27,6 +29,15 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
     @Query("SELECT  DISTINCT(t.tagName) from  Tag t WHERE t.user = :user")
     List<String> selectTagNames(@Param("user") User user);
 
+
+    /**
+     * 查询标签、并统计该标签的文章数
+     *
+     * @param user
+     * @return
+     */
+    @Query("SELECT t.tagName, count(t.tagName) FROM Tag t WHERE t.user = :user GROUP BY t.tagName ")
+    List<Object[]> selectTagNamesAndCount(@Param("user") User user);
 
 
 }

@@ -38,7 +38,6 @@ var editJournal = {
 
         //提交表单
         $("#submitButton").click(function () {
-
             //文章标题，内容，标签
             var title = $("#title").val();
             editJournal.submitForm(title, editor.txt.html(),editor.txt.text(), tags.toString());
@@ -131,10 +130,8 @@ var editJournal = {
             type: "delete",
             success: function (result) {
                 if (result && result['code'] == 0) {
-
                     //退出成功返回首页
                     window.location.href = '/index.html';
-
 
                 } else {
                     console.log(result)
@@ -160,7 +157,7 @@ var editJournal = {
             success: function (result) {
                 if (result && result['code'] == 0) {
                     //跳转回去日志界面
-                    window.location.href = "/blogs?userId="+result['data'].userId ;
+                    window.location.href = editJournal.URL.backJournalURL() ;
 
                 } else {
                     Error.displayError(result);
