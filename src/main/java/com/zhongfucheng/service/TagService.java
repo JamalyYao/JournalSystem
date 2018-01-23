@@ -3,6 +3,7 @@ package com.zhongfucheng.service;
 import com.zhongfucheng.domain.Blog;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
+import com.zhongfucheng.dto.LabelStatistics;
 
 import java.util.List;
 
@@ -28,6 +29,23 @@ public interface TagService {
      * @param user
      * @return
      */
-    List<Tag> selectTagNamesAndCount(User user);
+    List<LabelStatistics> selectTagNamesAndCount(User user);
+
+
+    /**
+     * 根据标签名删除标签
+     *
+     * @param tagName
+     */
+    void deleteTagByTagName(String tagName);
+
+
+    /**
+     * 更新标签的名字
+     *
+     * @param oldVal
+     * @param newVal
+     */
+    void updateTag(String oldVal, String newVal);
 
 }

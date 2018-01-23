@@ -272,4 +272,22 @@ public class BlogController {
     }
 
 
+    /**
+     * 编辑文章，跳转到编辑页面
+     *
+     * @param blogId
+     * @return
+     */
+    @GetMapping(value = "/postedit/{blogId}")
+    public String  toPostEditView(@PathVariable("blogId") Integer blogId, Model model) {
+
+        Blog blog = blogService.findBlogDetailById(blogId);
+
+        model.addAttribute("blog", blog);
+
+        return "postedit";
+
+    }
+
+
 }

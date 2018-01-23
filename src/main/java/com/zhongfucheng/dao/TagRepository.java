@@ -2,8 +2,9 @@ package com.zhongfucheng.dao;
 
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,9 +16,7 @@ import java.util.List;
  * @author ozc
  * @version 1.0
  */
-public interface TagRepository extends JpaRepository<Tag, Integer>, Specification<Tag> {
-
-
+public interface TagRepository extends JpaRepository<Tag, Integer>, JpaSpecificationExecutor<Tag> {
 
     /**
      * @param user
@@ -36,8 +35,25 @@ public interface TagRepository extends JpaRepository<Tag, Integer>, Specificatio
      * @param user
      * @return
      */
-    @Query("SELECT t.tagName, count(t.tagName) FROM Tag t WHERE t.user = :user GROUP BY t.tagName ")
+    @Query("SELECT t.tagName, count(t.tagName) FROM Tag t WHERE t.user = :user GROUP BY t.tagName")
     List<Object[]> selectTagNamesAndCount(@Param("user") User user);
+
+
+    /**
+     * 根据标签名删除标签
+     */
+    void deleteTagByTagName(String tagName);
+
+
+    /**
+     * 更新标签的名字
+     *
+     * @param oldVal
+     * @param newVal
+     */
+    @Modifying
+    @Query("update Tag t set t.tagName= :newVal where t.tagName=:oldVal")
+    void updateTag(@Param("oldVal") String oldVal, @Param("newVal") String newVal);
 
 
 }

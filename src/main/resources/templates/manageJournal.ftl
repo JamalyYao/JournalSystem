@@ -1,3 +1,5 @@
+
+<!--管理文章页面-->
 <html>
 <head>
     <!--Import Google Icon Font-->
@@ -78,18 +80,19 @@
             <ul class="collection">
                 <li class="collection-item avatar ">
                     <i class="material-icons circle  pink accent-1">folder</i>
-                    <a href=""><span class="title">文章管理</span></a>
+                    <a href="${request.contextPath}/postlist/1"><span class="title">文章管理</span></a>
                 </li>
 
                 <li class="collection-item avatar">
                     <i class="material-icons circle pink accent-1">grade</i>
-                    <a href=""><span class="title">标签管理</span></a>
+                    <a href="${request.contextPath}/tags"><span class="title">标签管理</span></a>
                 </li>
             </ul>
         </div>
 
         <!--右侧数据-->
         <div class="col s9">
+            <#if blogsContent?? && (blogsContent?size > 0)>
              <#list blogsContent as blog >
                  <ul class="collection with-header">
                      <li class="collection-header"><h5><a target="_blank"
@@ -98,7 +101,7 @@
                      </li>
                      <li class="collection-item">
                          <div class="truncate">
-                             <span class="#bdbdbd grey-text lighten-1"><i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">contacts</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span>
+                             <span class="#bdbdbd grey-text lighten-1"><i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">grade</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span>
 
                              <a blogId="${blog.blogId}" href="javascript:;"
 
@@ -107,7 +110,7 @@
                              </a>
 
                              <a
-                                     target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
+                                     target="_blank" href="${request.contextPath}/postedit/${blog.blogId}"
                                      class="secondary-content pink-text text-accent-1">编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
 
                          <a
@@ -117,16 +120,21 @@
                      </li>
                  </ul>
              </#list>
+            <#else>
+               <h3>您还没有编写过任何的文章。</h3>
+            </#if>
+
+
+            <!--只有大于0时，才显示分页-->
+            <#if (totalElements>0) >
 
             <!--分页-->
             <ul class="pagination">
-
                 <!--在当前页数大于1，才显示上一页按钮-->
                 <#if (returnCurrentPage>1) >
                     <li><a href="${request.contextPath}/postlist/${returnCurrentPage-1}"><i class="material-icons">chevron_left</i></a></li>
                 <#else>
                 </#if>
-
 
                 <!--循环遍历总页数，如果页面处在当前页上，那么突出显示-->
                 <#list 1.. totalPages as page >
@@ -143,10 +151,10 @@
 
 
                 <li class="right"><i class="material-icons pink-text text-accent-1 ">grade</i>&nbsp;总共${totalElements}条记录</li>
-
-
             </ul>
+            <#else>
 
+            </#if>
 
 
         </div>
@@ -172,7 +180,7 @@
         //侧边导航条
         $("#button-collapse").sideNav();
 
-        category.init();
+        manageJournal.init();
     });
 
 

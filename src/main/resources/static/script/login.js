@@ -77,6 +77,12 @@ var login = {
                             }, 1000);
 
                         } else {
+
+                            //清空并刷新验证码
+                            $("#inputCaptcha").val("");
+                            $("#captcha").attr("src", path + "/user/gifCode?time=" + new Date().getTime());
+
+
                             Error.displayError(result);
                         }
                     },

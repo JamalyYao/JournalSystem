@@ -8,13 +8,16 @@ var category = {
         logOutUserURL: function () {
             return path + "/session";
         },
-        deleteBlogURL: function (blogId) {
-            console.log(path + "/blogs/" + blogId);
-            return path + "/blogs/" + blogId;
-        },
         postlistURL: function () {
 
             return path + "/postlist/1";
+        },
+        deleteTagURL: function (tagName) {
+            return path + "/tags/" + tagName;
+        },
+        updateTagURL: function (oldVal,newVal) {
+            return path + "/tags/" + oldVal+"/"+newVal;
+
         }
     },
     init: function () {
@@ -27,12 +30,12 @@ var category = {
         //根据内容选择器，选择删除超链接
         $("a:contains('删除')").click(function () {
 
-            var blogId = $(this).attr("blogId");
+            var tagName = $(this).attr("tagName");
 
             //给用户判断是否确定要删除
             sweetAlert({
                     title: "确定删除吗？",
-                    text: "你将无法恢复该文章！",
+                    text: "你将无法恢复该标签！",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -41,8 +44,35 @@ var category = {
                 },
                 //如果点击确定，那么就使用ajax去请求删除
                 function () {
-                    category.deleteBlog(blogId);
+                    category.deleteTag(tagName);
                 });
+
+        });
+
+        $("a:contains('编辑')").click(function () {
+
+            //获取输入框控件，取消disabled，光标定位
+            var $inputTagName = $(this).parent().prev().prev().children();
+            $inputTagName.removeAttr("disabled");
+            $inputTagName.focus();
+
+            //得到原先的值
+            var oldVal = $inputTagName.val();
+
+
+            //先清空，再添加(防止不停点击出现多个)
+            $("span:contains('保存')").empty();
+            $inputTagName.parent().append("<span name='opera'>&nbsp;&nbsp;&nbsp;<a href='javascript:;'>保存</a>&nbsp;|&nbsp;<a href=''>取消</a></span>");
+
+
+            $("a:contains('保存')").click(function () {
+                //获取新值
+                var newVal = $inputTagName.val();
+
+                category.updateTag(oldVal,newVal);
+
+            });
+
 
         });
 
@@ -117,6 +147,48 @@ var category = {
 
 
     },
+    //删除标签
+    deleteTag: function (tagName) {
+
+        $.ajax({
+            url: category.URL.deleteTagURL(tagName),
+            type: "DELETE",
+            success: function (result) {
+                if (result && result['code'] == 0) {
+
+                    //成功了，就刷新页面。
+                    window.location.reload();
+                } else {
+                    console.log(result);
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+    },
+
+    //更新标签
+    updateTag: function (oldVal,newVal) {
+
+        $.ajax({
+            url: category.URL.updateTagURL(oldVal,newVal),
+            type: "put",
+            success: function (result) {
+                if (result && result['code'] == 0) {
+                    //成功了，就刷新页面。
+                    window.location.reload();
+                } else {
+                    console.log(result);
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+
+
+    }
 
 
 };

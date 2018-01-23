@@ -76,20 +76,20 @@
             <ul class="collection">
                 <li class="collection-item avatar ">
                     <i class="material-icons circle  pink accent-1">folder</i>
-                    <a href=""><span class="title">文章管理</span></a>
+                    <a href="${request.contextPath}/postlist/1"><span class="title">文章管理</span></a>
                 </li>
 
                 <li class="collection-item avatar">
                     <i class="material-icons circle pink accent-1">grade</i>
-                    <a href=""><span class="title">标签管理</span></a>
+                    <a href="${request.contextPath}/tags"><span class="title">标签管理</span></a>
                 </li>
             </ul>
         </div>
 
         <!--右侧数据-->
-        <div class="col s9">
+        <div class="col s9 ">
 
-                 <table class="bordered highlight">
+                 <table class="bordered highlight white section" style="border: 1px solid #ccc; ">
                      <thead>
                      <tr>
                          <th data-field="id">标签名</th>
@@ -98,11 +98,11 @@
                      </tr>
                      </thead>
                      <tbody>
-                     <#list blogsContent as blog >
+                     <#list labelStatistics as label >
                          <tr>
-                             <td>张三</td>
-                             <td>17</td>
-                             <td><a href="">编辑</a>&nbsp;|&nbsp;<a href="">删除</a></td>
+                             <td><input type="text" class="black-text" value="${label.tagName}" style="width: 80px" disabled></td>
+                             <td><a class="black-text" href="${request.contextPath}/blogs/${label.tagName}">${label.blogCount}</a></td>
+                             <td><a href="javascript:;">编辑</a>&nbsp;|&nbsp;<a href="javascript:;" tagName="${label.tagName}">删除</a></td>
                          </tr>
                      </#list>
                      </tbody>
@@ -119,7 +119,7 @@
 
 
 <script src="${request.contextPath}/script/commonScript.js"></script>
-<script src="${request.contextPath}/script/manageJournal.js"></script>
+<script src="${request.contextPath}/script/category.js"></script>
 
 <!--弹出框-->
 <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>

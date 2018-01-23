@@ -72,7 +72,7 @@
 </ul>
 
 
-<div class="container">
+<div class="container ">
 
     <!--个人信息-->
     <div class="row section">
@@ -82,9 +82,9 @@
     <div class="divider"></div>
 
     <!--日志操作导航栏-->
-    <div class="row section">
+    <div class="row section ">
         <div class="col s12">
-            <ul class="tabs .tabs-fixed-width">
+            <ul class="tabs .tabs-fixed-width  ">
                 <li class="tab col s3"><a class="active" target="_self" href="${request.contextPath}/blogs"><i
                         class="material-icons">search</i>查看日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/editJournal.html"><i
@@ -119,7 +119,7 @@
                      <#list tags as tag >
 
                             <div class="chip pink lighten-2 ">
-                                <a href="/blogs/${tag}" class="white-text ">${tag}</a>
+                                <a href="${request.contextPath}/blogs/${tag}" class="white-text ">${tag}</a>
                             </div>
                      </#list>
                 </div>
@@ -141,7 +141,7 @@
                     <li class="collection-item">
                         <div class="truncate">
                             <p class="truncate">${blog.contentNoHTML}</p>
-                            <span class="#bdbdbd grey-text lighten-1"> <i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">contacts</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span><a
+                            <span class="#bdbdbd grey-text lighten-1"> <i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">grade</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span><a
                                 target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
                                 class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
                         </div>
@@ -149,8 +149,8 @@
                 </ul>
                 </#list>
            <#else>
-               您还没有编写过任何的文章。
-           </#if>
+              <h3>您还没有编写过任何的文章。</h3>
+            </#if>
 
         </div>
 
