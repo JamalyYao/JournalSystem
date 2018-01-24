@@ -47,22 +47,26 @@
             <div class="background">
                 <img src="${request.contextPath}/imgs/bg-small.png">
             </div>
-            <img id="slide-out-headPortrait" class="materialboxed" src="${request.contextPath}/imgs/headPortrait.png"/><br>
+            <img id="slide-out-headPortrait" class="materialboxed"
+                 src="${request.contextPath}/imgs/headPortrait.png"/><br>
             <span class="black-text " id="userNickName">张三</span><br>
             <span id="userEmail" class="black-text email">未填邮箱地址</span>
         </div>
     </li>
-    <li><a class="waves-effect" href="${request.contextPath}/personalInfo.html"><i class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
+    <li><a class="waves-effect" href="${request.contextPath}/personalInfo.html"><i
+            class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
     </li>
     <li>
         <div class="divider"></div>
     </li>
     <li><a class="subheader">用户操作</a></li>
 
-    <li><a class="waves-effect" href="${request.contextPath}/index.html"><i class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a>
+    <li><a class="waves-effect" href="${request.contextPath}/index.html"><i
+            class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a>
     </li>
 
-    <li><a class="waves-effect" href="${request.contextPath}/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
+    <li><a class="waves-effect" href="${request.contextPath}/editJournal.html"><i
+            class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
     </li>
 
     <li><a class="waves-effect" href="${request.contextPath}/blogs"><i
@@ -83,25 +87,26 @@
             <label for="title">请输入文章标题</label>
         </div>
 
-
         <!--编辑器-->
         <div id="editor" class="section">
-             ${blog.content}
+        ${blog.content}
         </div>
+
+
+        <input type="hidden" id="blogId" value="${blog.blogId}">
 
         <!--标签-->
         <div class="#eeeeee grey lighten-3 section ">
             <i class="material-icons prefix pink-text text-accent-1">mode_edit</i>文章标签：
+            <#assign name=""/>
             <div class="chips chips-placeholder">
-
-                <#--//TODO 这里没有显示，我怀疑是我遍历出错了。明天再看-->
                 <#list blog.tagList as tag>
-                    ${tag.tagName}
+                     <#assign name= name+"${tag.tagName},"/>
                 </#list>
             </div>
         </div>
+        <input type="hidden" name="tags" value="${name}">
 
-        <input type="hidden" name="tags">
 
         <div class="row section ">
             <div class="col s6">
@@ -139,7 +144,7 @@
 <script>
     $(function () {
         //初始化该页面的JS
-        editJournal.init();
+        editJournal.init("${name}");
     });
 
 </script>

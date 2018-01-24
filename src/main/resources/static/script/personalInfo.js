@@ -4,22 +4,13 @@ var personalInfo = {
         uploadHeadPortraitURL: function () {
             return path + "/image"
         },
-        getUserURL: function () {
+        updateUserInfoURL: function () {
             return path + "/user";
-        },
-        submitFormURL: function () {
-            return path + "/user";
-        },
-        logOutUserURL:function () {
-
-            return path + "/session";
-
         }
     },
     init: function () {
         //获取用户的数据
         personalInfo.getUser();
-
 
         //更换头像
         $("#fileButton").change(function () {
@@ -28,18 +19,17 @@ var personalInfo = {
 
         //提交表单
         $("#submitForm").click(function () {
-            personalInfo.submitForm();
-
+            personalInfo.updateUserInfo();
         });
 
         //退出登陆
         $("#logout").click(function () {
-            personalInfo.logOutUser();
+            common.logOutUser();
         });
 
     },
 
-    //更新头像
+    //异步更新头像
     uploadHeadPortait: function () {
         var opt = {
             //重新指定form的action的值
@@ -59,43 +49,37 @@ var personalInfo = {
                 Error.displayError(result);
             }
         };
-        $("#personalInfo").ajaxSubmit(opt);
+        //异步提交表单
+        $("#personalInfoForm").ajaxSubmit(opt);
     },
 
     //获得用户的信息
     getUser: function () {
         $.ajax({
-            url: personalInfo.URL.getUserURL(),
+            url: common.URL.getUserURL(),
             type: "get",
             success: function (result) {
-                console.log(result);
+
                 if (result && result['code'] == 0) {
 
                     //设置导航栏和表单的初始值
                     $("#userNickName").html(result['data'].userNickName);
-                    $("#userId").val(result['data'].id);
-
                     if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
                         $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
-
                         $("#displayImg").attr("src", file_path + result['data'].headPortrait);
                         $("#headPortrait").attr("src", result['data'].headPortrait);
 
                     }
                     if (result['data'].email != null && result['data'].email != "") {
                         $("#userEmail").html(result['data'].email);
-
                         $("#email").focus();
-
                         $("#email").val(result['data'].email);
                     }
-
                     if (result['data'].email != null && result['data'].email != "") {
                         $("#userEmail").html(result['data'].email);
                     }
                 } else {
-                    console.log(result)
-                    //Error.displayError(result);
+                    console.log(result);
                 }
             },
             error: function () {
@@ -105,14 +89,13 @@ var personalInfo = {
     },
 
     //提交表单
-    submitForm: function () {
+    updateUserInfo: function () {
         $.ajax({
-            url: personalInfo.URL.submitFormURL(),
+            url: personalInfo.URL.updateUserInfoURL(),
             type: "put",
             data: $("#personalInfo").serialize(),
             success: function (result) {
 
-                console.log(result);
                 if (result && result['code'] == 0) {
                     //5秒后跳转到登陆页面
                     sweetAlert({
@@ -123,7 +106,7 @@ var personalInfo = {
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                        window.location.href = '/index.html';
+                        window.location.href = common.URL.backIndexURL();
                     }, 1000);
 
                 } else {
@@ -131,40 +114,12 @@ var personalInfo = {
                 }
             },
             error: function () {
-                sweetAlert({
-                    title: "系统错误了！",
-                    text: "请联系管理员！",
-                    type: "error",
-                    showConfirmButton: false
-                });
-            }
-        });
-
-    },
-
-    //退出登陆
-    logOutUser: function () {
-        $.ajax({
-            url: personalInfo.URL.logOutUserURL(),
-            type: "delete",
-            success: function (result) {
-                if (result && result['code'] == 0) {
-
-                    //退出成功返回首页
-                    window.location.href = '/index.html';
-
-
-                } else {
-                    console.log(result)
-                }
-            },
-            error: function () {
                 Error.displayError(result);
             }
         });
 
-
     }
+
 
 
 };

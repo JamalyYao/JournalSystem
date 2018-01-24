@@ -18,7 +18,7 @@ public interface UserService {
      * @param mobileNo
      * @return
      */
-    List<User> findUserByMobileNo(String mobileNo);
+    List<User> findUserByMobileNo(String mobileNo)  ;
 
 
     /**
@@ -27,7 +27,7 @@ public interface UserService {
      * @param userNickName
      * @return
      */
-    List<User> findUserByUserNickName(String userNickName);
+    List<User> findUserByUserNickName(String userNickName)  ;
 
 
     /**
@@ -36,7 +36,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    User registerUser(User user);
+    User userRegister(User user)  ;
 
 
     /**
@@ -46,7 +46,7 @@ public interface UserService {
      * @param password
      * @return
      */
-    User userLogin(String mobileNo, String password);
+    User userLogin(String mobileNo, String password)  ;
 
 
     /**
@@ -55,7 +55,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    User userUpload(User user);
+    User userUpload(User user)  ;
 
 
     /**
@@ -63,7 +63,7 @@ public interface UserService {
      * @param id
      * @return
      */
-    User findUserById(int id);
+    User findUserById(Integer id)  ;
 
 
 }

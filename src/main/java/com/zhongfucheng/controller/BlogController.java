@@ -48,7 +48,7 @@ public class BlogController {
 
 
     /**
-     * 发表博客
+     * 发表日记
      *
      * @param session
      * @return
@@ -57,6 +57,7 @@ public class BlogController {
     @ResponseBody
     public Result saveBlog(HttpSession session, Blog blog, String tags) {
 
+
         //得到当前用户信息
         User user = (User) session.getAttribute("user");
 
@@ -64,7 +65,9 @@ public class BlogController {
         blog.setAuthor(user.getUserNickName());
         blog.setCreateTime(new Date());
         blog.setUser(user);
+
         Blog saveBlog = blogService.saveBlog(blog);
+
 
 
         //解析页面带过来的Tags，保存Tag
@@ -80,7 +83,57 @@ public class BlogController {
             }
             tagService.saveTags(tagList);
         }
+
+
         return ResultUtil.success(user);
+
+    }
+
+
+    /**
+     * 更新文章
+     * @param blog
+     * @param tags
+     * @return
+     */
+    @PutMapping(value = "/blog", produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
+    public Result updateBlog(Blog blog, String tags,HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+
+        //根据页面带过来的Id获取原有的信息，并置换页面传递过来的数据
+        Blog updateBlog = blogService.findBlogDetailById(blog.getBlogId());
+        updateBlog.setTitle(blog.getTitle());
+        updateBlog.setContentNoHTML(blog.getContentNoHTML());
+        updateBlog.setContent(blog.getContent());
+
+
+        //删除该文章原有的标签
+        tagService.deleteTagByBlog(updateBlog);
+        updateBlog.getTagList().clear();
+
+
+        List<Tag> tagList = new ArrayList<>();
+
+        //解析页面带过来的Tags，保存Tag
+        if (tags != null && tags.length() > 0) {
+            String[] eachTag = tags.split(",");
+            for (String tag : eachTag) {
+                Tag tag1 = new Tag();
+                tag1.setUser(user);
+                tag1.setTagName(tag);
+                tag1.setBlog(updateBlog);
+                tagList.add(tag1);
+            }
+        }
+
+        //设置Blog的相关数据，保存Blog
+        tagService.saveTags(tagList);
+        blogService.updateBlogContent(updateBlog);
+
+        return ResultUtil.success();
 
     }
 
@@ -90,7 +143,7 @@ public class BlogController {
      *
      * @return
      */
-    @GetMapping(value = "/blogs")
+    @GetMapping(value = "/journals")
     public String selectBlogs(HttpSession session, Model model) {
 
         List<Blog> blogs = null;
@@ -136,8 +189,8 @@ public class BlogController {
         User user = (User) session.getAttribute("user");
 
         List<Blog> blogs = null;
-        List<ArchiveRecords> archiveRecords = null;
-        List<String> tags = null;
+        List<ArchiveRecords> archiveRecords;
+        List<String> tags;
 
 
         //根据标签名查询出对应的文章
@@ -174,9 +227,9 @@ public class BlogController {
     public String selectBlogsByDate(@PathVariable("year") Integer year, @PathVariable("month") Integer month, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
 
-        List<Blog> blogs = null;
-        List<ArchiveRecords> archiveRecords = null;
-        List<String> tags = null;
+        List<Blog> blogs;
+        List<ArchiveRecords> archiveRecords;
+        List<String> tags;
 
 
         //解析日期，根据时间查询相关文章
@@ -184,7 +237,7 @@ public class BlogController {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
             Date startDate = sdf.parse(year + "-" + month + "-1");
             Date endDate = sdf.parse(year + "-" + month + "-31");
-            blogs = blogService.selectBlogByTime(startDate, endDate);
+            blogs = blogService.selectBlogByTime(user,startDate, endDate);
         } catch (ParseException e) {
             e.printStackTrace();
             throw new UserException(ResultEnum.UNKONW_ERROR);

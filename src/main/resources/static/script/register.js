@@ -1,6 +1,5 @@
 var register = {
 
-    //封装注册相关ajax的url
     URL: {
         checkUserNickNameURL: function () {
             return path + "/user/userNickName";
@@ -8,13 +7,15 @@ var register = {
         checkMobileNoURL: function () {
             return path + "/user/mobileNo";
         },
-        submitFormURL: function () {
+        userRegisterURL: function () {
             return path + "/user";
         },
         getMobileCodeURL: function () {
             return path + "/user/mobileCode";
+        },
+        backLoginViewURL: function () {
+            return path + "/login.html";
         }
-
     },
 
     //验证表单
@@ -95,7 +96,7 @@ var register = {
             //ajax提交表单
             submitHandler: function () {
                 $.ajax({
-                    url: register.URL.submitFormURL(),
+                    url: register.URL.userRegisterURL(),
                     type: "post",
                     data: $("#registerForm").serialize(),
                     success: function (result) {
@@ -109,7 +110,7 @@ var register = {
                                 showConfirmButton: false
                             });
                             setTimeout(function () {
-                                window.location.href = '/login.html';
+                                window.location.href = register.URL.backLoginViewURL();
                             }, 3000);
 
                         } else {
@@ -121,7 +122,8 @@ var register = {
                     }
                 });
             },
-            onkeyup: false// 是否在敲击键盘时验证
+            // 是否在敲击键盘时验证
+            onkeyup: false
         });
 
         //自定义正则表达示验证方法
@@ -141,7 +143,7 @@ var register = {
         }, "手机号码格式必须正确！");
     },
 
-    //点击获取验证码，按钮倒数(刷新页面，倒数就无效了)
+    //版本1.0：点击获取验证码，按钮倒数(刷新页面，倒数就无效了)
     reciprocal: function () {
         var wait = 5;
 
@@ -192,7 +194,7 @@ var register = {
     },
 
     //页面初始化
-    init: function (params) {
+    init: function () {
 
         //表单验证
         register.validateForm();
@@ -208,6 +210,8 @@ var register = {
             if (Cookie.getCookieValue("wait") > 0) {
                 register.reciprocal2();
             }
+
+            //向输入的手机号码发送验证码
             $.ajax({
                 url: register.URL.getMobileCodeURL(),
                 type: "get",

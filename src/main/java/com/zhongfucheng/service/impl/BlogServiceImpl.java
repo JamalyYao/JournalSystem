@@ -70,8 +70,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> selectBlogByTime(Date start, Date end) {
-        return blogRepository.findBlogsByCreateTimeBetweenOrderByCreateTimeDesc(start, end);
+    public List<Blog> selectBlogByTime(User user,Date start, Date end) {
+        return blogRepository.findBlogsByUserAndCreateTimeBetweenOrderByCreateTimeDesc(user,start, end);
     }
 
     @Override
@@ -115,6 +115,10 @@ public class BlogServiceImpl implements BlogService {
 
         blogRepository.delete(blogId);
 
+    }
+    @Override
+    public void updateBlogContent(Blog blog) {
+        blogRepository.save(blog);
     }
 
 

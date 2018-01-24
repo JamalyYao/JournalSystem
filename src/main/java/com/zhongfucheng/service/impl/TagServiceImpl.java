@@ -26,13 +26,12 @@ public class TagServiceImpl implements TagService {
     @Autowired
     private TagRepository tagRepository;
 
+
+    @Transactional
     @Override
     public Blog saveTags(List<Tag> tags) {
-
-
         //JPA支持批量插入
         tagRepository.save(tags);
-
         return null;
     }
 
@@ -73,6 +72,14 @@ public class TagServiceImpl implements TagService {
     public void updateTag(String oldVal, String newVal) {
         tagRepository.updateTag(oldVal, newVal);
 
+
+    }
+
+
+    @Transactional
+    @Override
+    public void deleteTagByBlog(Blog blog) {
+        tagRepository.deleteTagsByBlog(blog);
 
     }
 

@@ -3,6 +3,7 @@ package com.zhongfucheng.controller;
 import com.zhongfucheng.domain.User;
 import com.zhongfucheng.dto.Result;
 import com.zhongfucheng.enums.ResultEnum;
+import com.zhongfucheng.exception.UserException;
 import com.zhongfucheng.service.UserService;
 import com.zhongfucheng.utils.ResultUtil;
 import com.zhongfucheng.utils.WebUtils;
@@ -36,12 +37,10 @@ import java.util.List;
 @RestController
 public class UserController {
 
-    //日志对象
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserService userService;
-
 
     /**
      * 用户注册
@@ -51,51 +50,55 @@ public class UserController {
     @PostMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
     public Result register(@Valid User user, String captcha, BindingResult bindingResult, HttpSession session) {
 
-        // 传过来的参数错误
-        List<ObjectError> allErrors = bindingResult.getAllErrors();
-        if (allErrors != null && allErrors.size() > 0) {
-            logger.error(bindingResult.getFieldError().getDefaultMessage());
-            return ResultUtil.error(ResultEnum.PARAM_ERROR);
-        }
-
-        //判断验证码是否正确
-        if (WebUtils.validateCaptcha(captcha, "validateCode", session)) {
-
-            //判断完就把验证码删除了
-            session.removeAttribute("validateCode");
-
-            // 注册
-            User user1 = userService.registerUser(user);
-            if (user1 != null) {
-                return ResultUtil.success(null);
-            } else {
-                return ResultUtil.error(ResultEnum.UNKONW_ERROR);
+        try {
+            // 传过来的参数错误
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            if (allErrors != null && allErrors.size() > 0) {
+                logger.error(bindingResult.getFieldError().getDefaultMessage());
+                return ResultUtil.error(ResultEnum.PARAM_ERROR);
             }
-        } else {
-            return ResultUtil.error(ResultEnum.CAPTCHA_ERROR);
+
+            //判断验证码是否正确
+            if (WebUtils.validateCaptcha(captcha, "validateCode", session)) {
+
+                //判断完就把验证码删除了
+                session.removeAttribute("validateCode");
+
+                // 注册
+                User user1 = userService.userRegister(user);
+                if (user1 != null) {
+                    return ResultUtil.success(null);
+                } else {
+                    return ResultUtil.error(ResultEnum.UNKONW_ERROR);
+                }
+            } else {
+                return ResultUtil.error(ResultEnum.CAPTCHA_ERROR);
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new UserException(ResultEnum.REGISTER_ERROR);
         }
-
-
     }
 
     /**
      * 更新用户的数据
      */
     @PutMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
-    public Result uploadUser( String email, String headPortrait,HttpSession session) {
+    public Result uploadUserInfo(String email, String headPortrait, HttpSession session) {
 
-        User user = (User) session.getAttribute("user");
-
-        if (email != null && email != "") {
-            user.setEmail(email);
+        try {
+            User user = (User) session.getAttribute("user");
+            if (email != null && email != "") {
+                user.setEmail(email);
+            }
+            if (headPortrait != null && headPortrait != "") {
+                user.setHeadPortrait(headPortrait);
+            }
+            userService.userUpload(user);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new UserException(ResultEnum.UPLOAD_USERINFO_ERROR);
         }
-
-        if (headPortrait != null && headPortrait != "") {
-            user.setHeadPortrait(headPortrait);
-        }
-
-        userService.userUpload(user);
-
 
         return ResultUtil.success();
     }
@@ -105,21 +108,25 @@ public class UserController {
      * 发送手机验证码(设置验证码到session中)
      */
     @GetMapping("/user/mobileCode")
-    public void mobileCode(HttpSession session, String mobileNo) {
+    public void getMobileCode(HttpSession session, String mobileNo) {
         //生成4位随机数
-        String fourRandom = WebUtils.getFourRandom();
-        SendSmsDemo.sendSMS(mobileNo, "3", new String[]{fourRandom, "3"}, session);
+        try {
+            String fourRandom = WebUtils.getFourRandom();
+            SendSmsDemo.sendSMS(mobileNo, "3", new String[]{fourRandom, "3"}, session);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new UserException(ResultEnum.SEND_MOBILEMESSAGE_ERROR);
+        }
 
     }
 
     /**
-     * 获取用户
+     * 获取用户信息
      *
      * @param
      */
-    @GetMapping(value = "/user", produces = {"application/json;charset=UTF-8"})
-    public Result getUser(HttpSession session) {
-
+    @GetMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
+    public Result getUserInfo(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
             return ResultUtil.success(user);
@@ -189,7 +196,7 @@ public class UserController {
      * @return
      */
     @PostMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
-    public Result login(String mobileNo, String password, String inputCaptcha, HttpSession session,HttpServletResponse response) {
+    public Result login(String mobileNo, String password, String inputCaptcha, HttpSession session, HttpServletResponse response) {
 
         //判断验证码是否正确
         if (WebUtils.validateCaptcha(inputCaptcha, "captcha", session)) {
@@ -200,7 +207,7 @@ public class UserController {
                 session.setAttribute("user", user);
 
                 /*设置自动登陆，一个星期*/
-                Cookie cookie = new Cookie("JSESSIONID",session.getId());
+                Cookie cookie = new Cookie("JSESSIONID", session.getId());
                 cookie.setMaxAge(604800);
                 response.addCookie(cookie);
 
@@ -222,10 +229,9 @@ public class UserController {
      * @return
      */
     @DeleteMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
-    public Result login(HttpSession session) {
+    public Result logout(HttpSession session) {
         session.removeAttribute("user");
         return ResultUtil.success();
-
     }
 
 }

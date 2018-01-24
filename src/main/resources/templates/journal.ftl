@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <title>Ozc Journal｜日志</title>
 
-    <!--Import Google Icon Font-->
+    <!--Materialize CSS  -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <!--Materialize -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 </head>
@@ -31,7 +28,7 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li id="registerLi"><a class="#000000 black-text" href="${request.contextPath}/register.html">注册</a></li>
             <li id="loginLi"><a class="#000000 black-text" href="${request.contextPath}/login.html">登陆</a></li>
-            <li id="journalLi"><a class="#000000 black-text" href="${request.contextPath}/blogs">日志</a></li>
+            <li id="journalLi"><a class="#000000 black-text" href="${request.contextPath}/journals">日志</a></li>
             <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
                                    href="#">个人中心</a>
             </li>
@@ -65,7 +62,7 @@
             class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
     </li>
 
-    <li><a class="waves-effect" href="${request.contextPath}/blogs"><i
+    <li><a class="waves-effect" href="${request.contextPath}/journals"><i
             class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
     <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
     </li>
@@ -85,7 +82,7 @@
     <div class="row section ">
         <div class="col s12">
             <ul class="tabs .tabs-fixed-width  ">
-                <li class="tab col s3"><a class="active" target="_self" href="${request.contextPath}/blogs"><i
+                <li class="tab col s3"><a class="active" target="_self" href="${request.contextPath}/journals"><i
                         class="material-icons">search</i>查看日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/editJournal.html"><i
                         class="material-icons">mode_edit</i>编写新日志</a></li>

@@ -67,6 +67,10 @@ public class BlogRepositoryTest {
     @Test
     public void findBlogsByCreateTimeBetween() throws ParseException {
 
+
+        User user = new User();
+        user.setUserId(2);
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
         String startDate1 = "2018-1-01";
         String endDate1 = "2018-" +
@@ -75,7 +79,7 @@ public class BlogRepositoryTest {
         Date endDate = sdf.parse(endDate1);
 
 
-        List<Blog> blogs = blogRepository.findBlogsByCreateTimeBetweenOrderByCreateTimeDesc(startDate, endDate);
+        List<Blog> blogs = blogRepository.findBlogsByUserAndCreateTimeBetweenOrderByCreateTimeDesc(user,startDate, endDate);
 
         System.out.println(blogs);
 

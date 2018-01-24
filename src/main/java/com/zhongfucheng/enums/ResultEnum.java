@@ -15,6 +15,10 @@ public enum ResultEnum {
     CAPTCHA_ERROR(-3, "验证码错误"),
     LOGIN_ERROR(-4, "用户名/密码错误"),
     USER_NOEXIST(-5, "找不到用户/用户还没登陆"),
+    REGISTER_ERROR(-6, "注册失败"),
+    UPLOAD_USERINFO_ERROR(-7, "更新用户信息失败"),
+    SEND_MOBILEMESSAGE_ERROR(-8, "更新用户信息失败"),
+
     ;
 
     private Integer code;

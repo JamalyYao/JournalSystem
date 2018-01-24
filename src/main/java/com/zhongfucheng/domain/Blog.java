@@ -43,17 +43,19 @@ public class Blog implements Serializable {
     }
 
     /** 多篇日志对应一个用户*/
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
+
     /**
-     * 一篇文章对应多个标签，设置级联删除
+     * 一篇文章对应多个标签
      */
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "blog", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.REFRESH,CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "blog")
     public List<Tag> getTagList() {
+
         return tagList;
     }
 

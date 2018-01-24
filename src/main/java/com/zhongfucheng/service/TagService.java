@@ -48,4 +48,10 @@ public interface TagService {
      */
     void updateTag(String oldVal, String newVal);
 
+    /**
+     * 根据文章Id删除其标签
+     * @param blog
+     */
+    void deleteTagByBlog(Blog blog);
+
 }

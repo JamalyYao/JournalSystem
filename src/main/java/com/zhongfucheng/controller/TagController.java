@@ -76,7 +76,8 @@ public class TagController {
      */
     @PutMapping("/tags/{oldVal}/{newVal}")
     @ResponseBody
-    public Result<Tag> deleteTagByTagName(@PathVariable("oldVal") String oldVal, @PathVariable("newVal") String newVal) {
+    public Result<Tag> updateTagByTagName(@PathVariable("oldVal") String oldVal, @PathVariable("newVal") String newVal) {
+
 
         tagService.updateTag(oldVal, newVal);
 

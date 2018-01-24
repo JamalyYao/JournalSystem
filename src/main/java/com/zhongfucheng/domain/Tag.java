@@ -27,17 +27,6 @@ public class Tag implements Serializable {
      */
     private Blog blog;
 
-
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "tagId=" + tagId +
-                ", tagName='" + tagName + '\'' +
-                ", user=" + user +
-                ", blog=" + blog +
-                '}';
-    }
-
     @Id
     @GeneratedValue
     public Integer getTagId() {
@@ -45,14 +34,14 @@ public class Tag implements Serializable {
     }
 
     // 用户外键
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
 
     //文章外键
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "blog_id")
     public Blog getBlog() {
         return blog;
@@ -81,5 +70,14 @@ public class Tag implements Serializable {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "tagId=" + tagId +
+                ", tagName='" + tagName + '\'' +
+                ", user=" + user +
+                ", blog=" + blog +
+                '}';
+    }
 
 }

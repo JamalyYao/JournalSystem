@@ -12,6 +12,39 @@ $(function () {
 //图片服务器路径
 var file_path = "http://localhost:8888";
 
+var common = {
+
+    URL: {
+        backIndexURL:function () {
+            return path + "/index.html";
+        },
+        getUserURL: function () {
+            return path + "/session";
+        },
+        logOutUserURL:function () {
+            return path + "/session";
+        }
+    },
+
+    //退出用户
+    logOutUser: function () {
+        $.ajax({
+            url: common.URL.logOutUserURL(),
+            type: "delete",
+            success: function (result) {
+                if (result && result['code'] == 0) {
+                    //退出成功返回首页
+                    window.location.href = common.URL.backIndexURL();
+                } else {
+                    console.log(result)
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+    }
+};
 
 // 显示或者记录错误
 var Error = {
@@ -42,7 +75,6 @@ var Cookie = {
     //发送验证码时添加cookie
     addCookie: function (name, value, expiresHours) {
 
-
         var cookieString = name + "=" + escape(value);
         //判断是否设置过期时间,0代表关闭浏览器时失效
         if (expiresHours > 0) {
@@ -63,7 +95,6 @@ var Cookie = {
         }
         document.cookie = cookieString;
     },
-
     //根据名字获取cookie的值
     getCookieValue: function (name) {
         var strCookie = document.cookie;

@@ -1,8 +1,7 @@
 var login = {
 
-    //封装注册相关ajax的url
     URL: {
-        submitFormURL: function () {
+        userLoginURL: function () {
             return path + "/session";
         },
         changeGifCodeURL: function () {
@@ -59,7 +58,7 @@ var login = {
             //ajax提交表单
             submitHandler: function () {
                 $.ajax({
-                    url: login.URL.submitFormURL(),
+                    url: login.URL.userLoginURL(),
                     type: "post",
                     data: $("#loginForm").serialize(),
                     success: function (result) {
@@ -73,7 +72,7 @@ var login = {
                                 showConfirmButton: false
                             });
                             setTimeout(function () {
-                                window.location.href = '/index.html';
+                                window.location.href = common.URL.backIndexURL();
                             }, 1000);
 
                         } else {
@@ -81,23 +80,16 @@ var login = {
                             //清空并刷新验证码
                             $("#inputCaptcha").val("");
                             $("#captcha").attr("src", path + "/user/gifCode?time=" + new Date().getTime());
-
-
                             Error.displayError(result);
                         }
                     },
                     error: function () {
-                        sweetAlert({
-                            title: "系统错误了！",
-                            text: "请联系管理员！",
-                            type: "error",
-                            showConfirmButton: false
-                        });
+                        Error.displayError(result);
                     }
                 });
             },
-            onkeyup: false// 是否在敲击键盘时验证
-
+            // 是否在敲击键盘时验证
+            onkeyup: false
         });
 
         //自定义正则表达示验证方法
@@ -120,7 +112,7 @@ var login = {
 
 
     //页面初始化
-    init: function (params) {
+    init: function () {
         login.validateForm();
 
         //点击图片更换验证码

@@ -49,7 +49,7 @@ public class User implements Serializable {
      */
     @JsonIgnore
     Set<Blog> blogSet = new HashSet<>();
-    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.REFRESH}, mappedBy = "user", fetch = FetchType.EAGER)
     public Set<Blog> getBlogSet() {
         return blogSet;
     }

@@ -1,22 +1,29 @@
 //存储标签最终的值
 var tags = new Array();
 
+//接收后台带过来的数组
+var acceptTags = new Array();
+
 var editJournal = {
     URL: {
         getUserURL: function () {
             return path + "/user";
         },
-        submitFormURL: function () {
+        saveJournalURL: function () {
             return path + "/blog";
         },
         logOutUserURL: function () {
             return path + "/session";
         },
-        backJournalURL:function () {
+        backJournalURL: function () {
             return path + "/blogs";
+        },
+        updateJournalURL: function () {
+            return path + "/blog";
         }
     },
-    init: function () {
+    init: function (params) {
+
 
         //获取用户
         editJournal.getUser();
@@ -25,7 +32,7 @@ var editJournal = {
         $("#button-collapse").sideNav();
 
         //标签的相关操作(增加、删除、获取值)
-        editJournal.tagOpera();
+        editJournal.tagOpera(params);
 
         //文本编辑器
         var E = window.wangEditor
@@ -36,12 +43,18 @@ var editJournal = {
         editor.create();
 
 
-        //提交表单
+        //提交表单(更新)
         $("#submitButton").click(function () {
             //文章标题，内容，标签
             var title = $("#title").val();
-            editJournal.submitForm(title, editor.txt.html(),editor.txt.text(), tags.toString());
 
+            //文章Id(如果存在),那么就更新，不存在则保存
+            var blogId = $("#blogId").val();
+            if (blogId && blogId != "") {
+                editJournal.updateJournal(title, editor.txt.html(), editor.txt.text(), tags.toString(),blogId);
+            } else {
+                editJournal.saveJournal(title, editor.txt.html(), editor.txt.text(), tags.toString());
+            }
         });
 
 
@@ -56,23 +69,32 @@ var editJournal = {
         });
 
 
-
     },
-    tagOpera: function () {
-        //添加标签
+    tagOpera: function (params) {
+        if (params && params != "") {
+            //去除最后一个逗号，并按照逗号进行分割成字符数组
+            var strings = params.substring(0, params.lastIndexOf(",")).split(",");
+            for (var indexStr in  strings) {
+                var tip = {
+                    tag: strings[indexStr] + ''
+                };
+                acceptTags.push(tip);
+                tags.push(strings[indexStr].toString());
+            }
+        }
+        //初始化标签(如果存在)
         $('.chips-placeholder').material_chip({
+            data: acceptTags,
             placeholder: 'Enter a tag',
             secondaryPlaceholder: '按回车确认'
         });
 
-
+        //标签的添加和修改
         $('.chips').on('chip.add', function (e, chip) {
             tags.push(chip.tag);
         });
         $('.chips').on('chip.delete', function (e, chip) {
-
             for (var index  in tags) {
-
                 if (tags[index] == chip.tag) {
                     tags.splice(index, 1);
                 }
@@ -143,21 +165,48 @@ var editJournal = {
         });
     },
 
-    //提交表单
-    submitForm: function (title, content,contentNoHTML, tags) {
+    //保存日志
+    saveJournal: function (title, content, contentNoHTML, tags) {
         $.ajax({
-            url: editJournal.URL.submitFormURL(),
+            url: editJournal.URL.saveJournalURL(),
             type: "post",
             data: {
                 "title": title,
                 "content": content,
                 "tags": tags,
-                "contentNoHTML":contentNoHTML
+                "contentNoHTML": contentNoHTML
             },
             success: function (result) {
                 if (result && result['code'] == 0) {
                     //跳转回去日志界面
-                    window.location.href = editJournal.URL.backJournalURL() ;
+                    window.location.href = editJournal.URL.backJournalURL();
+
+                } else {
+                    Error.displayError(result);
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+    },
+
+    //修改日志的信息
+    updateJournal: function (title, content, contentNoHTML, tags, blogId) {
+        $.ajax({
+            url: editJournal.URL.updateJournalURL(),
+            type: "put",
+            data: {
+                "title": title,
+                "content": content,
+                "tags": tags,
+                "contentNoHTML": contentNoHTML,
+                "blogId": blogId
+            },
+            success: function (result) {
+                if (result && result['code'] == 0) {
+                    //跳转回去日志界面
+                    window.location.href = editJournal.URL.backJournalURL();
 
                 } else {
                     Error.displayError(result);
@@ -168,10 +217,7 @@ var editJournal = {
             }
         });
 
-
-    },
-
-
+    }
 
 
 };

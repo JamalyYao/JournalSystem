@@ -58,6 +58,8 @@ var manageJournal = {
 
                 if (result && result['code'] == 0) {
 
+
+                    console.log(result);
                     //大字版显示
                     $("#userNickName-Head").html(result['data'].userNickName);
                     $("#userEmail-Head").html(result['data'].email);
@@ -83,7 +85,7 @@ var manageJournal = {
                 } else {
 
                     //如果没有登陆，将日志和个人中心的按钮隐藏掉
-                    $("#manageJournalLi").hide();
+                    $("#journalLi").hide();
                     $("#personalLi").hide();
 
                     console.log(result)

@@ -34,7 +34,7 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> ,JpaSpecifi
     /**
      * 根据日期查询相关的日志(按时间倒序)
      */
-    List<Blog> findBlogsByCreateTimeBetweenOrderByCreateTimeDesc(Date start, Date end);
+    List<Blog> findBlogsByUserAndCreateTimeBetweenOrderByCreateTimeDesc(User user,Date start, Date end);
 
 
     /**

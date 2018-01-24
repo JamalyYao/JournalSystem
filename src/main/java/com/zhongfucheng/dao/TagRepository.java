@@ -1,5 +1,6 @@
 package com.zhongfucheng.dao;
 
+import com.zhongfucheng.domain.Blog;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -54,6 +55,14 @@ public interface TagRepository extends JpaRepository<Tag, Integer>, JpaSpecifica
     @Modifying
     @Query("update Tag t set t.tagName= :newVal where t.tagName=:oldVal")
     void updateTag(@Param("oldVal") String oldVal, @Param("newVal") String newVal);
+
+
+    /**
+     * 根据文章Id删除其标签
+     * @param blog
+     */
+    void deleteTagsByBlog(Blog blog);
+
 
 
 }

@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param mobileNo
      * @return
      */
-    List<User> findUserByMobileNo(String mobileNo);
+    List<User> findUserByMobileNo(String mobileNo)  ;
 
 
     /**
@@ -29,7 +29,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param userNickName
      * @return
      */
-    List<User> findUserByUserNickName(String userNickName);
+    List<User> findUserByUserNickName(String userNickName)  ;
 
 
     /**
@@ -39,6 +39,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @param password
      * @return
      */
-    User findUserByMobileNoAndPassword(String mobileNo, String password);
+    User findUserByMobileNoAndPassword(String mobileNo, String password)  ;
 
 }

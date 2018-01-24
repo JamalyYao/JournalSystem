@@ -110,7 +110,7 @@
                              </a>
 
                              <a
-                                     target="_blank" href="${request.contextPath}/postedit/${blog.blogId}"
+                                     target="_self" href="${request.contextPath}/postedit/${blog.blogId}"
                                      class="secondary-content pink-text text-accent-1">编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
 
                          <a

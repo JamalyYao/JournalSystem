@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUserByUserNickName(String userNickName) {
+    public List<User> findUserByUserNickName(String userNickName)   {
         return userRepository.findUserByUserNickName(userNickName);
     }
 
     @Override
-    public User registerUser(User user) {
+    public User userRegister(User user)   {
 
         user.setValidity(1);
         return userRepository.save(user);
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User userLogin(String mobileNo, String password) {
+    public User userLogin(String mobileNo, String password)   {
         return userRepository.findUserByMobileNoAndPassword(mobileNo, password);
     }
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(int id) {
+    public User findUserById(Integer id)   {
         return userRepository.findOne(id);
     }
 

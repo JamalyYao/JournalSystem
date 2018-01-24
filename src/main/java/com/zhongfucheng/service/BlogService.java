@@ -34,10 +34,9 @@ public interface BlogService {
     List<ArchiveRecords> selectArchiveRecords(String userId);
 
     /**
-     * 根据时间来查询对应的日志
+     * 根据日期查询相关的日志(按时间倒序,当前用户下)
      */
-
-    List<Blog> selectBlogByTime(Date start, Date end);
+    List<Blog> selectBlogByTime(User user, Date start, Date end);
 
 
     /**
@@ -65,6 +64,13 @@ public interface BlogService {
      * @param blogId
      */
     void deleteBlogById(Integer blogId);
+
+    /**
+     * 更新文章的内容
+     */
+    void updateBlogContent(Blog blog);
+
+
 
 
 
