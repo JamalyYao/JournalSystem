@@ -86,7 +86,7 @@
                         class="material-icons">search</i>查看日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/editJournal.html"><i
                         class="material-icons">mode_edit</i>编写新日志</a></li>
-                <li class="tab col s3 "><a target="_self" href="${request.contextPath}/postlist/1"><i
+                <li class="tab col s3 "><a target="_self" href="${request.contextPath}/postList/1"><i
                         class="material-icons ">settings</i>管理日志</a></li>
                 <li class="tab col s3"><a target="_self" href="${request.contextPath}/index.html"><i
                         class="material-icons ">label</i>返回首页</a>
@@ -97,13 +97,13 @@
 
     <div class="row">
 
-        <!--左侧显示模块-->
+        <!--左侧显示模块(日志存档和标签)-->
         <div class="col s3">
             <div class="card  pink accent-1">
                 <div class="card-content white-text">
                     <span class="card-title"><i class="material-icons">view_list</i>文章存档 </span>
                        <#list archiveRecords as record>
-                            <p><a href="/blogs/${record.year}/${record.month}"
+                            <p><a href="/journals/${record.year}/${record.month}"
                                   class="white-text">${record.year}年${record.month}月</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(${record.num}
                                 )</p>
                        </#list>
@@ -116,30 +116,48 @@
                      <#list tags as tag >
 
                             <div class="chip pink lighten-2 ">
-                                <a href="${request.contextPath}/blogs/${tag}" class="white-text ">${tag}</a>
+                                <a href="${request.contextPath}/journals/${tag}" class="white-text ">${tag}</a>
                             </div>
                      </#list>
                 </div>
             </div>
+
+
+            <#-- //TODO 文章搜索功能，有空就做！-->
+<#--            <div class="card pink accent-1 ">
+                <div class="card-content white-text  ">
+                    <span class="card-title "><i class="material-icons">search</i>文章搜索 </span><br>
+                    <div class="input-field inline">
+                        <i class="material-icons prefix">mode_edit</i>
+                        <input id="title" name="title" type="text">
+                        <label for="title" class="white-text">输入日记标题关键字...</label>
+                        <button class="btn waves-effect waves-light white" type="submit" name="action">提交
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </div>-->
         </div>
 
         <!--右侧文章内容-->
         <div class="col s9">
 
-           <#if blogs?? && (blogs?size > 0)>
-
-                <#list blogs as blog>
-
+           <#if journals?? && (journals?size > 0)>
+                <#list journals as journal>
                 <ul class="collection with-header">
                     <li class="collection-header"><h5><a target="_blank"
-                                                         href="${request.contextPath}/blogs/:${blog.blogId}"
-                                                         class="pink-text text-accent-1">${blog.title}</a></h5>
+                                                         href="${request.contextPath}/journals/:${journal.journalId}"
+                                                         class="pink-text text-accent-1">${journal.title}</a></h5>
                     </li>
                     <li class="collection-item">
                         <div class="truncate">
-                            <p class="truncate">${blog.contentNoHTML}</p>
-                            <span class="#bdbdbd grey-text lighten-1"> <i class=" material-icons">query_builder</i>${blog.createTime}</span><span class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i class=" material-icons">grade</i><#list blog.tagList as tag>&nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span><a
-                                target="_blank" href="${request.contextPath}/blogs/:${blog.blogId}"
+                            <p class="truncate">${journal.contentNoHTML}</p>
+                            <span class="#bdbdbd grey-text lighten-1"> <i
+                                    class=" material-icons">query_builder</i>${journal.createTime}</span><span
+                                class="#bdbdbd grey-text lighten-1">&nbsp;&nbsp;&nbsp;<i
+                                class=" material-icons">grade</i><#list journal.tagList as tag>
+                            &nbsp;&nbsp;&nbsp;${tag.tagName}</#list></span><a
+                                target="_blank" href="${request.contextPath}/journals/:${journal.journalId}"
                                 class="secondary-content pink-text text-accent-1"><i class="material-icons ">search</i>查看全文</a>
                         </div>
                     </li>
@@ -147,7 +165,7 @@
                 </#list>
            <#else>
               <h3>您还没有编写过任何的文章。</h3>
-            </#if>
+           </#if>
 
         </div>
 
@@ -165,8 +183,6 @@
 
 <script>
     $(function () {
-        //侧边导航条
-        $("#button-collapse").sideNav();
 
 
         journal.init();

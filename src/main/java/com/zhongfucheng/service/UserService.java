@@ -55,7 +55,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    User userUpload(User user)  ;
+    User userUpload(User user) ;
 
 
     /**

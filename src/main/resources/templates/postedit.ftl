@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <title>Ozc Journal｜编辑日志</title>
 
-
-    <!--Import Google Icon Font-->
+    <!--Materialize CSS-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <!--Materialize -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 
@@ -33,13 +29,14 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li id="registerLi"><a class="#000000 black-text" href="${request.contextPath}/register.html">注册</a></li>
             <li id="loginLi"><a class="#000000 black-text" href="${request.contextPath}/login.html">登陆</a></li>
-            <li id="journalLi"><a class="#000000 black-text" href="${request.contextPath}/blogs">日志</a></li>
+            <li id="journalLi"><a class="#000000 black-text" href="${request.contextPath}/journals">日志</a></li>
             <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
                                    href="#">个人中心</a>
             </li>
         </ul>
     </div>
 </nav>
+
 <!--左侧导航条-->
 <ul id="slide-out" class="side-nav ">
     <li>
@@ -68,46 +65,41 @@
     <li><a class="waves-effect" href="${request.contextPath}/editJournal.html"><i
             class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
     </li>
-
-    <li><a class="waves-effect" href="${request.contextPath}/blogs"><i
+    <li><a class="waves-effect" href="${request.contextPath}/journals"><i
             class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
     <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
     </li>
 </ul>
 
-
 <!--表单内容-->
 <div class="container #ffffff white   ">
-
     <form id="journalContentForm">
         <!--标题-->
         <div class="input-field  #eeeeee grey lighten-3  ">
             <i class="material-icons prefix pink-text text-accent-1">mode_edit</i>
-            <input id="title" name="title" type="text" value="${blog.title}"/>
+            <input id="title" name="title" type="text" value="${journal.title}"/>
             <label for="title">请输入文章标题</label>
         </div>
 
         <!--编辑器-->
         <div id="editor" class="section">
-        ${blog.content}
+        ${journal.content}
         </div>
 
 
-        <input type="hidden" id="blogId" value="${blog.blogId}">
+        <input type="hidden" id="journalId" value="${journal.journalId}">
 
         <!--标签-->
         <div class="#eeeeee grey lighten-3 section ">
             <i class="material-icons prefix pink-text text-accent-1">mode_edit</i>文章标签：
             <#assign name=""/>
             <div class="chips chips-placeholder">
-                <#list blog.tagList as tag>
+                <#list journal.tagList as tag>
                      <#assign name= name+"${tag.tagName},"/>
                 </#list>
             </div>
         </div>
         <input type="hidden" name="tags" value="${name}">
-
-
         <div class="row section ">
             <div class="col s6">
                 <button id="submitButton" class="btn waves-effect waves-light pink accent-1 " type="button">
@@ -128,13 +120,13 @@
 
 </div>
 
-<!--Import jQuery before materialize.js-->
+<!-- jQuery js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
 
+<#--通用和页面JS-->
 <script src="${request.contextPath}/script/commonScript.js"></script>
-
 <script src="${request.contextPath}/script/editJournal.js"></script>
 
 

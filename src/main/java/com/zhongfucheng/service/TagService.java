@@ -1,6 +1,6 @@
 package com.zhongfucheng.service;
 
-import com.zhongfucheng.domain.Blog;
+import com.zhongfucheng.domain.Journal;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
 import com.zhongfucheng.dto.LabelStatistics;
@@ -17,7 +17,7 @@ public interface TagService {
 
 
     //保存Tags
-    Blog saveTags(List<Tag> tag);
+    Journal saveTags(List<Tag> tag);
 
     //查询当前用户下所有不同名字的标签
     List<String> selectTagNames(User user);
@@ -50,8 +50,8 @@ public interface TagService {
 
     /**
      * 根据文章Id删除其标签
-     * @param blog
+     * @param journal
      */
-    void deleteTagByBlog(Blog blog);
+    void deleteTagByBlog(Journal journal);
 
 }

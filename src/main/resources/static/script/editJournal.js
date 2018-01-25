@@ -6,20 +6,14 @@ var acceptTags = new Array();
 
 var editJournal = {
     URL: {
-        getUserURL: function () {
-            return path + "/user";
-        },
         saveJournalURL: function () {
-            return path + "/blog";
-        },
-        logOutUserURL: function () {
-            return path + "/session";
+            return path + "/journal";
         },
         backJournalURL: function () {
-            return path + "/blogs";
+            return path + "/journals";
         },
         updateJournalURL: function () {
-            return path + "/blog";
+            return path + "/journal";
         }
     },
     init: function (params) {
@@ -43,24 +37,23 @@ var editJournal = {
         editor.create();
 
 
-        //提交表单(更新)
+        //提交表单(更新和保存)
         $("#submitButton").click(function () {
             //文章标题，内容，标签
             var title = $("#title").val();
 
             //文章Id(如果存在),那么就更新，不存在则保存
-            var blogId = $("#blogId").val();
-            if (blogId && blogId != "") {
-                editJournal.updateJournal(title, editor.txt.html(), editor.txt.text(), tags.toString(),blogId);
+            var journalId = $("#journalId").val();
+            if (journalId && journalId != "") {
+                editJournal.updateJournal(title, editor.txt.html(), editor.txt.text(), tags.toString(),journalId);
             } else {
                 editJournal.saveJournal(title, editor.txt.html(), editor.txt.text(), tags.toString());
             }
         });
 
-
         //退出用户
         $("#logout").click(function () {
-            editJournal.logOutUser();
+            common.logOutUser();
         });
 
         //点击返回按钮，回到日志界面
@@ -106,7 +99,7 @@ var editJournal = {
     //得到用户
     getUser: function () {
         $.ajax({
-            url: editJournal.URL.getUserURL(),
+            url: common.URL.getUserURL(),
             type: "get",
             success: function (result) {
 
@@ -145,25 +138,6 @@ var editJournal = {
             }
         });
     },
-    //退出用户
-    logOutUser: function () {
-        $.ajax({
-            url: editJournal.URL.logOutUserURL(),
-            type: "delete",
-            success: function (result) {
-                if (result && result['code'] == 0) {
-                    //退出成功返回首页
-                    window.location.href = '/index.html';
-
-                } else {
-                    console.log(result)
-                }
-            },
-            error: function () {
-                Error.displayError(result);
-            }
-        });
-    },
 
     //保存日志
     saveJournal: function (title, content, contentNoHTML, tags) {
@@ -192,7 +166,7 @@ var editJournal = {
     },
 
     //修改日志的信息
-    updateJournal: function (title, content, contentNoHTML, tags, blogId) {
+    updateJournal: function (title, content, contentNoHTML, tags, journalId) {
         $.ajax({
             url: editJournal.URL.updateJournalURL(),
             type: "put",
@@ -201,13 +175,12 @@ var editJournal = {
                 "content": content,
                 "tags": tags,
                 "contentNoHTML": contentNoHTML,
-                "blogId": blogId
+                "journalId": journalId
             },
             success: function (result) {
                 if (result && result['code'] == 0) {
                     //跳转回去日志界面
                     window.location.href = editJournal.URL.backJournalURL();
-
                 } else {
                     Error.displayError(result);
                 }

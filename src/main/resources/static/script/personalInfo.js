@@ -93,7 +93,7 @@ var personalInfo = {
         $.ajax({
             url: personalInfo.URL.updateUserInfoURL(),
             type: "put",
-            data: $("#personalInfo").serialize(),
+            data: $("#personalInfoForm").serialize(),
             success: function (result) {
 
                 if (result && result['code'] == 0) {

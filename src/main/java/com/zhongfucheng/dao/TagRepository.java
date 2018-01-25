@@ -1,6 +1,6 @@
 package com.zhongfucheng.dao;
 
-import com.zhongfucheng.domain.Blog;
+import com.zhongfucheng.domain.Journal;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,7 +24,6 @@ public interface TagRepository extends JpaRepository<Tag, Integer>, JpaSpecifica
      * @return
      * @descript: 查询当前用户下所有的标签(去除重复的)
      */
-
     //@Query后面应该是跟实体类名,字段也要用实体类里面定义的字段.如:表名:user,类名:User,那就得用User,表字段名user_name,实体字段:userName,那么用的时候就得用userName
     @Query("SELECT  DISTINCT(t.tagName) from  Tag t WHERE t.user = :user")
     List<String> selectTagNames(@Param("user") User user);
@@ -59,9 +58,9 @@ public interface TagRepository extends JpaRepository<Tag, Integer>, JpaSpecifica
 
     /**
      * 根据文章Id删除其标签
-     * @param blog
+     * @param journal
      */
-    void deleteTagsByBlog(Blog blog);
+    void deleteTagsByJournal(Journal journal);
 
 
 

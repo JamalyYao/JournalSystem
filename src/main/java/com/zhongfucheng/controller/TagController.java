@@ -3,7 +3,7 @@ package com.zhongfucheng.controller;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
 import com.zhongfucheng.dto.Result;
-import com.zhongfucheng.service.BlogService;
+import com.zhongfucheng.service.JournalService;
 import com.zhongfucheng.service.TagService;
 import com.zhongfucheng.service.UserService;
 import com.zhongfucheng.utils.ResultUtil;
@@ -32,7 +32,7 @@ public class TagController {
     @Autowired
     private UserService userService;
     @Autowired
-    private BlogService blogService;
+    private JournalService journalService;
     @Autowired
     private TagService tagService;
 
@@ -47,8 +47,6 @@ public class TagController {
     public String  getTagsByUserId(HttpSession session, Model model) {
 
         User user = (User) session.getAttribute("user");
-
-
         model.addAttribute("labelStatistics", tagService.selectTagNamesAndCount(user));
 
         return "category";
@@ -77,7 +75,6 @@ public class TagController {
     @PutMapping("/tags/{oldVal}/{newVal}")
     @ResponseBody
     public Result<Tag> updateTagByTagName(@PathVariable("oldVal") String oldVal, @PathVariable("newVal") String newVal) {
-
 
         tagService.updateTag(oldVal, newVal);
 

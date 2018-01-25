@@ -1,7 +1,7 @@
 package com.zhongfucheng.service.impl;
 
 import com.zhongfucheng.dao.TagRepository;
-import com.zhongfucheng.domain.Blog;
+import com.zhongfucheng.domain.Journal;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
 import com.zhongfucheng.dto.LabelStatistics;
@@ -29,7 +29,7 @@ public class TagServiceImpl implements TagService {
 
     @Transactional
     @Override
-    public Blog saveTags(List<Tag> tags) {
+    public Journal saveTags(List<Tag> tags) {
         //JPA支持批量插入
         tagRepository.save(tags);
         return null;
@@ -78,8 +78,8 @@ public class TagServiceImpl implements TagService {
 
     @Transactional
     @Override
-    public void deleteTagByBlog(Blog blog) {
-        tagRepository.deleteTagsByBlog(blog);
+    public void deleteTagByBlog(Journal journal) {
+        tagRepository.deleteTagsByJournal(journal);
 
     }
 

@@ -2,36 +2,28 @@ var category = {
 
 
     URL: {
-        getUserURL: function () {
-            return path + "/user";
-        },
-        logOutUserURL: function () {
-            return path + "/session";
-        },
-        postlistURL: function () {
-
-            return path + "/postlist/1";
-        },
         deleteTagURL: function (tagName) {
             return path + "/tags/" + tagName;
         },
         updateTagURL: function (oldVal,newVal) {
             return path + "/tags/" + oldVal+"/"+newVal;
-
         }
     },
     init: function () {
-        category.getUser();
 
+        //侧边导航条
+        $("#button-collapse").sideNav();
+
+        //获取用户和退出用户
+        category.getUser();
         $("#logout").click(function () {
-            category.logOutUser();
+            common.logOutUser();
         });
 
         //根据内容选择器，选择删除超链接
         $("a:contains('删除')").click(function () {
 
             var tagName = $(this).attr("tagName");
-
             //给用户判断是否确定要删除
             sweetAlert({
                     title: "确定删除吗？",
@@ -59,18 +51,16 @@ var category = {
             //得到原先的值
             var oldVal = $inputTagName.val();
 
-
             //先清空，再添加(防止不停点击出现多个)
             $("span:contains('保存')").empty();
+
             $inputTagName.parent().append("<span name='opera'>&nbsp;&nbsp;&nbsp;<a href='javascript:;'>保存</a>&nbsp;|&nbsp;<a href=''>取消</a></span>");
 
 
             $("a:contains('保存')").click(function () {
                 //获取新值
                 var newVal = $inputTagName.val();
-
                 category.updateTag(oldVal,newVal);
-
             });
 
 
@@ -82,7 +72,7 @@ var category = {
     //得到用户
     getUser: function () {
         $.ajax({
-            url: category.URL.getUserURL(),
+            url: common.URL.getUserURL(),
             type: "get",
             success: function (result) {
 
@@ -124,29 +114,7 @@ var category = {
             }
         });
     },
-    //退出用户
-    logOutUser: function () {
-        $.ajax({
-            url: category.URL.logOutUserURL(),
-            type: "delete",
-            success: function (result) {
-                if (result && result['code'] == 0) {
 
-                    //退出成功返回首页
-                    window.location.href = '/index.html';
-
-
-                } else {
-                    console.log(result)
-                }
-            },
-            error: function () {
-                Error.displayError(result);
-            }
-        });
-
-
-    },
     //删除标签
     deleteTag: function (tagName) {
 
@@ -170,7 +138,6 @@ var category = {
 
     //更新标签
     updateTag: function (oldVal,newVal) {
-
         $.ajax({
             url: category.URL.updateTagURL(oldVal,newVal),
             type: "put",

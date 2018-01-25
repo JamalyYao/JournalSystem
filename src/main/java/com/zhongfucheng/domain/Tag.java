@@ -25,7 +25,7 @@ public class Tag implements Serializable {
     /**
      * 文章id外键.
      */
-    private Blog blog;
+    private Journal journal;
 
     @Id
     @GeneratedValue
@@ -42,9 +42,9 @@ public class Tag implements Serializable {
 
     //文章外键
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinColumn(name = "blog_id")
-    public Blog getBlog() {
-        return blog;
+    @JoinColumn(name = "journal_id")
+    public Journal getJournal() {
+        return journal;
     }
 
     public Tag() {
@@ -62,8 +62,8 @@ public class Tag implements Serializable {
         this.tagName = tagName;
     }
 
-    public void setBlog(Blog blog) {
-        this.blog = blog;
+    public void setJournal(Journal journal) {
+        this.journal = journal;
     }
 
     public void setUser(User user) {
@@ -76,7 +76,7 @@ public class Tag implements Serializable {
                 "tagId=" + tagId +
                 ", tagName='" + tagName + '\'' +
                 ", user=" + user +
-                ", blog=" + blog +
+                ", journal=" + journal +
                 '}';
     }
 

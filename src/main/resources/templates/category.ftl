@@ -1,14 +1,12 @@
 <html>
 <head>
-    <!--Import Google Icon Font-->
+
+    <!--Materialize CSS-->
+
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <!--Materialize -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 
     <style>
         body {
@@ -28,13 +26,14 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li id="registerLi"><a class="#000000 black-text" href="${request.contextPath}/register.html">注册</a></li>
             <li id="loginLi"><a class="#000000 black-text" href="${request.contextPath}/login.html">登陆</a></li>
-            <li id="journalLi"><a class="#000000 black-text" href="${request.contextPath}/blogs">日志</a></li>
+            <li id="journalLi"><a class="#000000 black-text" href="${request.contextPath}/journals">日志</a></li>
             <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
                                    href="#">个人中心</a>
             </li>
         </ul>
     </div>
 </nav>
+
 <!--左侧导航条-->
 <ul id="slide-out" class="side-nav">
     <li>
@@ -61,14 +60,13 @@
             class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
     </li>
 
-    <li><a class="waves-effect" href="${request.contextPath}/blogs"><i
+    <li><a class="waves-effect" href="${request.contextPath}/journals"><i
             class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
     <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
     </li>
 </ul>
 
 
-<!-- Page Layout here -->
 <div class="container">
     <div class="row section">
         <!--左侧管理导航-->
@@ -76,7 +74,7 @@
             <ul class="collection">
                 <li class="collection-item avatar ">
                     <i class="material-icons circle  pink accent-1">folder</i>
-                    <a href="${request.contextPath}/postlist/1"><span class="title">文章管理</span></a>
+                    <a href="${request.contextPath}/postList/1"><span class="title">文章管理</span></a>
                 </li>
 
                 <li class="collection-item avatar">
@@ -88,7 +86,6 @@
 
         <!--右侧数据-->
         <div class="col s9 ">
-
                  <table class="bordered highlight white section" style="border: 1px solid #ccc; ">
                      <thead>
                      <tr>
@@ -100,8 +97,8 @@
                      <tbody>
                      <#list labelStatistics as label >
                          <tr>
-                             <td><input type="text" class="black-text" value="${label.tagName}" style="width: 80px" disabled></td>
-                             <td><a class="black-text" href="${request.contextPath}/blogs/${label.tagName}">${label.blogCount}</a></td>
+                             <td><input type="text" class="black-text" value="${label.tagName}" style="width: 200px" disabled></td>
+                             <td><a class="black-text" href="${request.contextPath}/journals/${label.tagName}">${label.blogCount}</a></td>
                              <td><a href="javascript:;">编辑</a>&nbsp;|&nbsp;<a href="javascript:;" tagName="${label.tagName}">删除</a></td>
                          </tr>
                      </#list>
@@ -113,11 +110,12 @@
     </div>
 </div>
 
-<!--Import jQuery before materialize.js-->
+<!-- jQuery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
 
+<#--通用和页面JS-->
 <script src="${request.contextPath}/script/commonScript.js"></script>
 <script src="${request.contextPath}/script/category.js"></script>
 
@@ -128,9 +126,6 @@
 <script>
 
     $(function () {
-        //侧边导航条
-        $("#button-collapse").sideNav();
-
         category.init();
     });
 

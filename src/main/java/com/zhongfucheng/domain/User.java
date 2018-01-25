@@ -48,10 +48,10 @@ public class User implements Serializable {
      * 一个用户对应多篇日志
      */
     @JsonIgnore
-    Set<Blog> blogSet = new HashSet<>();
+    Set<Journal> journalSet = new HashSet<>();
     @OneToMany(cascade = {CascadeType.REFRESH}, mappedBy = "user", fetch = FetchType.EAGER)
-    public Set<Blog> getBlogSet() {
-        return blogSet;
+    public Set<Journal> getJournalSet() {
+        return journalSet;
     }
 
 
@@ -126,8 +126,8 @@ public class User implements Serializable {
         this.headPortrait = headPortrait;
     }
 
-    public void setBlogSet(Set<Blog> blogSet) {
-        this.blogSet = blogSet;
+    public void setJournalSet(Set<Journal> journalSet) {
+        this.journalSet = journalSet;
     }
 
     @Override

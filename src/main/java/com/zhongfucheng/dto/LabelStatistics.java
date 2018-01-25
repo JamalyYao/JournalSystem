@@ -16,9 +16,6 @@ public class LabelStatistics implements Serializable {
     private String tagName;
     private String  blogCount;
 
-
-
-
     public String getTagName() {
         return tagName;
     }
