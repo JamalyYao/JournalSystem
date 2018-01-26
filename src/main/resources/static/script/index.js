@@ -42,10 +42,20 @@ var index = {
                     if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
                         $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
                     }
+
+
+                    //播放音乐
+                    audio.play();
+
+
+
                 } else {
-                    //如果没有登陆，将日志和个人中心的按钮隐藏掉
+                    //如果没有登陆，将日志和个人中心、音乐模块的按钮隐藏掉
                     $("#journalLi").hide();
                     $("#personalLi").hide();
+                    $("#musicLiLeft").hide();
+                    $("#musicLiPause").hide();
+                    $("#musicLiRight").hide();
 
                 }
             },

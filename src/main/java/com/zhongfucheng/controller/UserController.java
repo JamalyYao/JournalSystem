@@ -234,4 +234,12 @@ public class UserController {
         return ResultUtil.success();
     }
 
+
+/*    // TODO测试
+    @GetMapping(value = "/login")
+    public String loginView() {
+
+        return "http://localhost:8088/login.html";
+    }*/
+
 }
