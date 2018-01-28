@@ -1,40 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ozc Journal｜登陆</title>
-
-    <!--Jquery校验-->
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-
-    <!--Materialize -->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-
-    <!--弹出框-->
-    <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
-    <link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
-
-    <!--页面样式-->
-    <link rel="stylesheet" href="css/register&login.css">
-
-    <!--页面和通用的JS-->
-    <script src="script/commonScript.js"></script>
-    <script src="script/login.js"></script>
-    <script>
-        $(function () {
-            login.init();
-        });
-    </script>
-</head>
-
-<body>
-<div id="main"></div>
-
-
 <div class="section no-pad-bot" id="index-banner">
     <div class="container">
         <br><br>
@@ -94,6 +57,3 @@
         <br><br>
     </div>
 </div>
-
-</body>
-</html>

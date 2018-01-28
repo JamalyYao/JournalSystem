@@ -55,13 +55,12 @@ var personalInfo = {
 
     //获得用户的信息
     getUser: function () {
+
         $.ajax({
             url: common.URL.getUserURL(),
             type: "get",
             success: function (result) {
-
                 if (result && result['code'] == 0) {
-
                     //设置导航栏和表单的初始值
                     $("#userNickName").html(result['data'].userNickName);
                     if (result['data'].headPortrait != null && result['data'].headPortrait != "") {

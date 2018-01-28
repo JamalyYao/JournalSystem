@@ -221,7 +221,6 @@ public class UserController {
         }
 
     }
-
     /**
      * 用户退出
      *
@@ -233,13 +232,5 @@ public class UserController {
         session.removeAttribute("user");
         return ResultUtil.success();
     }
-
-
-/*    // TODO测试
-    @GetMapping(value = "/login")
-    public String loginView() {
-
-        return "http://localhost:8088/login.html";
-    }*/
 
 }

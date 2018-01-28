@@ -37,15 +37,7 @@
             audio.pause();
         }
     };
-    <!--暂停-->
-    /*
-        var btn2 = document.getElementById("btn-stop");
-        btn2.onclick = function () {
-            if (audio.played) {
-                audio.pause();
-            }
-        }
-    */
+
 
     var music = new Array();
     music = ["1", "2", "3"];//歌单
@@ -96,6 +88,7 @@
     $(function () {
         //$.pjax({ url: path +"/testIndex.html", container: '#main' });
         $(document).pjax("#loginLi", '#main');
+
 
     });
 

@@ -12,33 +12,6 @@
 <body>
 
 
-<!--导航条-->
-<nav class="#ffffff white" role="navigation">
-    <div class="nav-wrapper container">
-        <img class="brand-logo" src="imgs/logo-small.png"/>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-
-            <li id="musicLiLeft"><a href="javascript:;" id="btn-pre"><i
-                    class="material-icons black-text">chevron_left</i></a>
-                &nbsp; &nbsp; &nbsp; &nbsp;
-            </li>
-            <li id="musicLiPause"><a href="javascript:;" id="btn-play"><i
-                    class="material-icons black-text">pause</i></a>
-                &nbsp; &nbsp; &nbsp; &nbsp;
-            </li>
-            <li id="musicLiRight"><a href="javascript:;" id="btn-next"><i class="material-icons black-text">chevron_right</i></a>
-                &nbsp; &nbsp; &nbsp; &nbsp;
-            </li>
-            <li id="registerLi"><a class="#000000 black-text" href="/register.html">注册</a></li>
-            <li id="loginLi"><a class="#000000 black-text" href="/login.html">登陆</a></li>
-            <li id="journalLi"><a class="#000000 black-text" href="/journals">日志</a></li>
-            <li id="personalLi"><a class="#000000 black-text" id="button-collapse" data-activates="slide-out"
-                                   href="#">个人中心</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
 <replace id="main">
 
     <style>
@@ -70,27 +43,27 @@
             <div class="slider">
                 <ul class="slides">
                     <li>
-                        <img src="imgs/carousel-item-4.jpg" width="1280px" height="400px">
+                        <img src="${request.contextPath}/imgs/carousel-item-4.jpg" width="1280px" height="400px">
                         <div class="caption left-align">
                         </div>
                     </li>
                     <li>
-                        <img src="imgs/carousel-item-1.jpg" width="1280px" height="400px">
+                        <img src="${request.contextPath}/imgs/carousel-item-1.jpg" width="1280px" height="400px">
                         <div class="caption left-align">
                         </div>
                     </li>
                     <li>
-                        <img src="imgs/carousel-item-8.jpg" width="1280px" height="400px">
+                        <img src="${request.contextPath}/imgs/carousel-item-8.jpg" width="1280px" height="400px">
                         <div class="caption left-align">
                         </div>
                     </li>
                     <li>
-                        <img src="imgs/carousel-item-2.jpg" width="1280px" height="400px">
+                        <img src="${request.contextPath}/imgs/carousel-item-2.jpg" width="1280px" height="400px">
                         <div class="caption left-align">
                         </div>
                     </li>
                     <li>
-                        <img src="imgs/carousel-item-9.jpg" width="1280" height="400">
+                        <img src="${request.contextPath}/imgs/carousel-item-9.jpg" width="1280" height="400">
                         <div class="caption left-align">
                         </div>
                     </li>
@@ -146,7 +119,7 @@
     <ul id="slide-out" class="side-nav ">
         <li>
             <div class="userView">
-                <img id="slide-out-headPortrait" class="materialboxed" src="imgs/headPortrait.png"/><br>
+                <img id="slide-out-headPortrait" class="materialboxed" src="${request.contextPath}/imgs/headPortrait.png"/><br>
                 <span class="black-text " id="userNickName">张三</span><br>
                 <span id="userEmail" class="black-text email">未填邮箱地址</span>
             </div>
@@ -155,7 +128,7 @@
                 class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
         </li>
 
-        <li><a class="waves-effect" href="/music.html"><i
+        <li><a class="waves-effect" href="${request.contextPath}/music.html"><i
                 class="material-icons pink-text text-accent-1">insert_chart</i>设置个人音乐</a>
         </li>
         <li>
@@ -163,14 +136,14 @@
         </li>
         <li><a class="subheader">用户操作</a></li>
 
-        <li><a class="waves-effect" href="/index.html"><i
+        <li><a class="waves-effect" href="${request.contextPath}/index.html"><i
                 class="material-icons prefix  pink-text text-accent-1">label</i>回到首页</a>
         </li>
 
-        <li><a class="waves-effect" href="/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
+        <li><a class="waves-effect" href="${request.contextPath}/editJournal.html"><i class="material-icons prefix pink-text text-accent-1">mode_edit</i>编写新的日志</a>
         </li>
 
-        <li><a class="waves-effect" href="/journals"><i
+        <li><a class="waves-effect" href="${request.contextPath}/journals"><i
                 class="material-icons pink-text text-accent-1">search</i>查看日志</a></li>
         <li id="logout"><a class="waves-effect"><i class="material-icons pink-text text-accent-1">settings_power</i>退出登陆</a>
         </li>
@@ -204,40 +177,6 @@
 </replace>
 
 
-<!--音乐播放-->
-<audio id="audio" src="http://localhost:8088/1.mp3">
-</audio>
-
-
-<!--Materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-
-<!--公用页面和本地JS-->
-<script src="script/commonScript.js"></script>
-<script src="script/index.js"></script>
-
-
-<!--涉及到的相关页面的JS-->
-<script src="script/personalInfo.js"></script>
-
-<!--jquery AJAX提交表单js -->
-<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
-
-<!--弹出框-->
-<script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
-<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
-
-
-<!--pjax-->
-<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
-<script>
-    $(function () {
-        index.init();
-    });
-    //$.pjax({ url: path +"/testIndex.html", container: '#main' });
-    $(document).pjax("#personalInfo", '#main',{fragment:"#main"});
-</script>
 
 
 </body>

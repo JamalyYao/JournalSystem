@@ -44,3 +44,5 @@ spring:
 # 图片服务器路径
 file_path: http://localhost:8888
 
+
+

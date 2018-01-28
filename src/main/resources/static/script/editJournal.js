@@ -130,7 +130,7 @@ var editJournal = {
                     $("#journalLi").hide();
                     $("#personalLi").hide();
 
-                    console.log(result)
+
                 }
             },
             error: function () {
