@@ -53,6 +53,10 @@
     <li><a class="waves-effect" href="${request.contextPath}/personalInfo.html"><i
             class="material-icons pink-text text-accent-1">perm_identity</i>完善个人信息</a>
     </li>
+
+    <li><a class="waves-effect" href="${request.contextPath}/music.html"><i
+            class="material-icons pink-text text-accent-1">insert_chart</i>设置个人音乐</a>
+    </li>
     <li>
         <div class="divider"></div>
     </li>

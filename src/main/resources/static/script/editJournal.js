@@ -4,6 +4,9 @@ var tags = new Array();
 //接收后台带过来的数组
 var acceptTags = new Array();
 
+//歌单
+var musicArray = new Array();
+
 var editJournal = {
     URL: {
         saveJournalURL: function () {
@@ -14,10 +17,14 @@ var editJournal = {
         },
         updateJournalURL: function () {
             return path + "/journal";
+        },
+        selectUserMusicURL: function () {
+            return path + "/user/music";
         }
     },
     init: function (params) {
 
+        editJournal.selectUserMusic();
 
         //获取用户
         editJournal.getUser();
@@ -45,7 +52,7 @@ var editJournal = {
             //文章Id(如果存在),那么就更新，不存在则保存
             var journalId = $("#journalId").val();
             if (journalId && journalId != "") {
-                editJournal.updateJournal(title, editor.txt.html(), editor.txt.text(), tags.toString(),journalId);
+                editJournal.updateJournal(title, editor.txt.html(), editor.txt.text(), tags.toString(), journalId);
             } else {
                 editJournal.saveJournal(title, editor.txt.html(), editor.txt.text(), tags.toString());
             }
@@ -61,6 +68,9 @@ var editJournal = {
             window.location.href = editJournal.URL.backJournalURL();
         });
 
+
+        //播放音乐
+        editJournal.audioPlay();
 
     },
     tagOpera: function (params) {
@@ -124,11 +134,24 @@ var editJournal = {
                         $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
                     }
 
+                    //播放音乐
+
+                    //TODO 获取歌曲数组没必要在这里写，在别的地方写就可以了。
+                    audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
+
+                    console.log(musicArray);
+                    audio.play();
+
+
                 } else {
 
                     //如果没有登陆，将日志和个人中心的按钮隐藏掉
                     $("#journalLi").hide();
                     $("#personalLi").hide();
+
+                    $("#musicLiLeft").hide();
+                    $("#musicLiPause").hide();
+                    $("#musicLiRight").hide();
 
 
                 }
@@ -190,7 +213,94 @@ var editJournal = {
             }
         });
 
-    }
+    },
+
+
+    //生成从minNum到maxNum的随机数
+    createRandomInteger: function (minNum, maxNum) {
+
+        switch (arguments.length) {
+            case 1:
+                return parseInt(Math.random() * minNum + 1, 10);
+                break;
+            case 2:
+                return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+                break;
+            default:
+                return 0;
+                break;
+        }
+
+
+    },
+
+    //播放音乐相关操作
+    audioPlay: function () {
+        var btn1 = document.getElementById("btn-play");
+        btn1.onclick = function () {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        };
+
+        /* var musicArrayLength = musicArray.length;
+        var music = new Array();
+        music = ["1", "2", "3"];//歌单
+        var num = 0;
+        var name = document.getElementById("name");*/
+
+        //生成随机数(在数组长度范围内)
+        //var randomInteger = editJournal.createRandomInteger(0, musicArray.length) ;
+
+
+        <!--上一首-->
+        var btn3 = document.getElementById("btn-pre");
+        btn3.onclick = function () {
+            // num = (num + 2) % 3;
+            //audio.src = "music/" + music[num] + ".mp3";
+            audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
+
+            //name.innerHTML = music[num];
+            audio.play();
+        };
+        <!--下一首-->
+        var btn4 = document.getElementById("btn-next");
+        btn4.onclick = function () {
+            //num = (num + 1) % 3;
+            //audio.src = "music/" + music[num] + ".mp3";
+            audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
+            //name.innerHTML = music[num];
+            audio.play();
+        };
+        audio.addEventListener('ended', function () {
+            btn4.onclick();
+        }, false);
+    },
+
+    //获取用户下的所有歌曲，存到数组里边
+    selectUserMusic: function () {
+        $.ajax({
+            url: editJournal.URL.selectUserMusicURL(),
+            type: "get",
+            success: function (result) {
+                if (result && result['code'] == 0) {
+                    for (var index in result['data']) {
+                        musicArray.push(result['data'][index].musicPath);
+                    }
+                    console.log(musicArray);
+                } else {
+                    Error.displayError(result);
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+
+
+    },
 
 
 };

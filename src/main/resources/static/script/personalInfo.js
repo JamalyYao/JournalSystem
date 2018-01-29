@@ -17,6 +17,9 @@ var personalInfo = {
             personalInfo.uploadHeadPortait();
         });
 
+        //侧边导航条
+        $("#button-collapse").sideNav();
+
         //提交表单
         $("#submitForm").click(function () {
             personalInfo.updateUserInfo();

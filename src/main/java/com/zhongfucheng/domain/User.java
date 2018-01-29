@@ -44,6 +44,14 @@ public class User implements Serializable {
 
     private String headPortrait = "";
 
+
+    /**
+     * 用于自动登陆时的凭证
+     */
+    private String loginToken = "";
+    
+
+
     /**
      * 一个用户对应多篇日志
      */
@@ -128,6 +136,14 @@ public class User implements Serializable {
 
     public void setJournalSet(Set<Journal> journalSet) {
         this.journalSet = journalSet;
+    }
+
+    public String getLoginToken() {
+        return loginToken;
+    }
+
+    public void setLoginToken(String loginToken) {
+        this.loginToken = loginToken;
     }
 
     @Override

@@ -24,6 +24,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
     /**
+     * 通过登陆凭证码出用户
+     *
+     * @param loginToken
+     * @return
+     */
+    User findUserByLoginToken(String loginToken)  ;
+
+
+    /**
      * 通过昵称判断该用户是否存在
      *
      * @param userNickName

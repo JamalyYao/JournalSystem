@@ -5,16 +5,23 @@ var index = {
         $('.slider').slider();
 
         //侧边导航条
-        $("#button-collapse").sideNav('show');
+        $("#button-collapse").sideNav();
+
 
         index.getUser();
+
+
+/*        if(Cookie.getCookieValue("loginToken")) {
+        }*/
+        //当有cookie的时候才去
+
+
+
+
         $("#logout").click(function () {
             common.logOutUser();
         });
-        //播放音乐
-        index.audioPlay();
 
-        //
     },
 
     //得到用户的信息
@@ -23,6 +30,8 @@ var index = {
             url: common.URL.getUserURL(),
             type: "get",
             success: function (result) {
+
+                console.log(result);
 
                 if (result && result['code'] == 0) {
 
@@ -44,19 +53,10 @@ var index = {
                     if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
                         $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
                     }
-                    //播放音乐
-                    audio.play();
-
-
                 } else {
                     //如果没有登陆，将日志和个人中心、音乐模块的按钮隐藏掉
                     $("#journalLi").hide();
                     $("#personalLi").hide();
-
-                    $("#musicLiLeft").hide();
-                    $("#musicLiPause").hide();
-                    $("#musicLiRight").hide();
-
 
                 }
             },
@@ -64,45 +64,9 @@ var index = {
                 Error.displayError(result);
             }
         });
-    },
-
-    //播放音乐相关操作
-    audioPlay :function () {
-
-        var btn1 = document.getElementById("btn-play");
-        btn1.onclick = function () {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        };
-        var music = new Array();
-        music = ["1", "2", "3"];//歌单
-        var num = 0;
-        var name = document.getElementById("name");
-
-
-        <!--上一首-->
-        var btn3 = document.getElementById("btn-pre");
-        btn3.onclick = function () {
-            num = (num + 2) % 3;
-            audio.src = "music/" + music[num] + ".mp3";
-            name.innerHTML = music[num];
-            audio.play();
-        };
-        <!--下一首-->
-        var btn4 = document.getElementById("btn-next");
-        btn4.onclick = function () {
-            num = (num + 1) % 3;
-            audio.src = "music/" + music[num] + ".mp3";
-            name.innerHTML = music[num];
-            audio.play();
-        }
-        audio.addEventListener('ended', function () {
-            btn4.onclick();
-        }, false);
     }
+
+
 
 
 };

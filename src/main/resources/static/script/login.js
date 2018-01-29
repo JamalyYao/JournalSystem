@@ -2,7 +2,7 @@ var login = {
 
     URL: {
         userLoginURL: function () {
-            return path + "/session";
+            return path + "/user/session";
         },
         changeGifCodeURL: function () {
             return path + "/user/gifCode?" + new Date().getTime();
@@ -84,6 +84,8 @@ var login = {
                         }
                     },
                     error: function () {
+
+                        console.log(result);
                         Error.displayError(result);
                     }
                 });

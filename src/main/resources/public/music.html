@@ -11,9 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 
-    <!--弹出框-->
-    <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
-    <link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+
+
+
+
 
     <style>
         /*左侧导航条样式*/
@@ -46,9 +47,9 @@
         </div>
         <!--表单-->
         <div class="row">
-            <form class="col s8 offset-s4" id="personalInfoForm" action="/user" method="put" enctype="multipart/form-data">
+            <form class="col s8 offset-s4" id="musicForm" action="/music" method="put" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s8">
                         <table class="highlight">
                             <thead>
                             <tr>
@@ -56,33 +57,16 @@
                                 <th data-field="price">操作</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>你的眼神</td>
-                                <td><a href="">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>一人我饮酒醉</td>
-                                <td><a href="">删除</a></td>
-                            </tr>
+                            <tbody id="musicList">
+
                             </tbody>
                         </table>
 
-<!--                        <div class="file-field input-field right">
-                            <div class="btn pink accent-1" id="fileButton">
-                                <span > 上传音乐</span>
-                                <input type="file" name="imgsFile" >
-                            </div>
-                            <input type='hidden' id='headPortrait' name='headPortrait' value=''/>
-                        </div>-->
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="input-field col s12 ">
-                        <button class="btn waves-effect waves-light pink accent-1" type="button" id="submitForm" name="action" style="width: 400px">上传音乐
-                            <i class="material-icons right">insert_chart</i>
-                        </button>
+                    <div class="input-field col s8">
+                        <input type="file" id="input-file-now" name="musicFile" class="dropify" >
                     </div>
                 </div>
             </form>
@@ -127,16 +111,35 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
+<!--弹出框-->
+<script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+
 <!--jquery AJAX提交表单js -->
 <script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
 
+<!--上传控件-->
+<script src="https://cdn.bootcss.com/Dropify/0.2.2/js/dropify.min.js"></script>
+<link href="https://cdn.bootcss.com/Dropify/0.2.2/css/dropify.min.css" rel="stylesheet">
+
+
+
 <!--通用和页面JS-->
 <script src="script/commonScript.js"></script>
-<script src="script/personalInfo.js"></script>
+<script src="script/music.js"></script>
 
 <script>
     $(function () {
-        personalInfo.init();
+        music.init();
+
+        $('.dropify').dropify({
+            messages: {
+                'default': '点击上传音乐或者把MP3格式的音乐拖动到这里',
+                'replace': '点击继续上传',
+                'remove':  '关闭',
+                'error':   'Ooops, something wrong happended.'
+            }
+        });
     });
 
 </script>

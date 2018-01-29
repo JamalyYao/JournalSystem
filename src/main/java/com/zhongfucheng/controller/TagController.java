@@ -3,9 +3,7 @@ package com.zhongfucheng.controller;
 import com.zhongfucheng.domain.Tag;
 import com.zhongfucheng.domain.User;
 import com.zhongfucheng.dto.Result;
-import com.zhongfucheng.service.JournalService;
 import com.zhongfucheng.service.TagService;
-import com.zhongfucheng.service.UserService;
 import com.zhongfucheng.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +27,6 @@ public class TagController {
     //日志对象
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private JournalService journalService;
     @Autowired
     private TagService tagService;
 

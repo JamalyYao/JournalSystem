@@ -1,6 +1,4 @@
 var category = {
-
-
     URL: {
         deleteTagURL: function (tagName) {
             return path + "/tags/" + tagName;

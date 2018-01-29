@@ -5,6 +5,7 @@ import com.zhongfucheng.dto.Result;
 import com.zhongfucheng.enums.ResultEnum;
 import com.zhongfucheng.exception.UserException;
 import com.zhongfucheng.service.UserService;
+import com.zhongfucheng.utils.CookieUtil;
 import com.zhongfucheng.utils.ResultUtil;
 import com.zhongfucheng.utils.WebUtils;
 import com.zhongfucheng.utils.note.SendSmsDemo;
@@ -18,13 +19,13 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -133,9 +134,7 @@ public class UserController {
         } else {
             return ResultUtil.error(ResultEnum.USER_NOEXIST);
         }
-
     }
-
     /**
      * 检查手机是否已被使用（由Juqery-validation的remote调用，返回true或者false）
      */
@@ -195,7 +194,7 @@ public class UserController {
      * @param session
      * @return
      */
-    @PostMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
+    @PostMapping(value = "/user/session", produces = {"application/json;charset=UTF-8"})
     public Result login(String mobileNo, String password, String inputCaptcha, HttpSession session, HttpServletResponse response) {
 
         //判断验证码是否正确
@@ -204,14 +203,21 @@ public class UserController {
             //判断有没有该用户
             User user = userService.userLogin(mobileNo, password);
             if (user != null) {
-                session.setAttribute("user", user);
 
-                /*设置自动登陆，一个星期*/
-                Cookie cookie = new Cookie("JSESSIONID", session.getId());
-                cookie.setMaxAge(604800);
-                response.addCookie(cookie);
 
-                return ResultUtil.success(user);
+                /*设置自动登陆，一个星期.  将token保存在数据库中*/
+                String loginToken = WebUtils.md5(new Date().toString() + session.getId());
+                user.setLoginToken(loginToken);
+                User user1 = userService.userUpload(user);
+
+                session.setAttribute("user", user1);
+
+                CookieUtil.addCookie(response,"loginToken",loginToken,604800);
+
+
+
+
+                return ResultUtil.success(user1);
 
             } else {
                 return ResultUtil.error(ResultEnum.LOGIN_ERROR);
@@ -221,6 +227,7 @@ public class UserController {
         }
 
     }
+
     /**
      * 用户退出
      *
@@ -228,9 +235,15 @@ public class UserController {
      * @return
      */
     @DeleteMapping(value = "/session", produces = {"application/json;charset=UTF-8"})
-    public Result logout(HttpSession session) {
+    public Result logout(HttpSession session,HttpServletRequest request,HttpServletResponse response ) {
+
+        //删除session和cookie
         session.removeAttribute("user");
+
+        CookieUtil.clearCookie(request, response, "loginToken");
+
         return ResultUtil.success();
     }
+
 
 }

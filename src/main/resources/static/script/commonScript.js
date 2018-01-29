@@ -12,20 +12,9 @@ $(function () {
 //图片服务器路径
 var file_path = "http://localhost:8888";
 
+
+
 var common = {
-
-    init : function () {
-
-        //播放音乐
-        audio.play();
-
-
-        //音乐操作
-        common.audioPlay();
-
-    },
-
-
     URL: {
         backIndexURL:function () {
             return path + "/index.html";
@@ -55,45 +44,7 @@ var common = {
                 Error.displayError(result);
             }
         });
-    },
-    //播放音乐相关操作
-    audioPlay :function () {
-
-        var btn1 = document.getElementById("btn-play");
-        btn1.onclick = function () {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        };
-        var music = new Array();
-        music = ["1", "2", "3"];//歌单
-        var num = 0;
-        var name = document.getElementById("name");
-
-
-        <!--上一首-->
-        var btn3 = document.getElementById("btn-pre");
-        btn3.onclick = function () {
-            num = (num + 2) % 3;
-            audio.src = "music/" + music[num] + ".mp3";
-            name.innerHTML = music[num];
-            audio.play();
-        };
-        <!--下一首-->
-        var btn4 = document.getElementById("btn-next");
-        btn4.onclick = function () {
-            num = (num + 1) % 3;
-            audio.src = "music/" + music[num] + ".mp3";
-            name.innerHTML = music[num];
-            audio.play();
-        }
-        audio.addEventListener('ended', function () {
-            btn4.onclick();
-        }, false);
     }
-
 };
 
 // 显示或者记录错误
