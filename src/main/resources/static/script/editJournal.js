@@ -73,6 +73,8 @@ var editJournal = {
         editJournal.audioPlay();
 
     },
+
+    //标签相关操作
     tagOpera: function (params) {
         if (params && params != "") {
             //去除最后一个逗号，并按照逗号进行分割成字符数组
@@ -133,15 +135,6 @@ var editJournal = {
                     if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
                         $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
                     }
-
-                    //播放音乐
-
-                    //TODO 获取歌曲数组没必要在这里写，在别的地方写就可以了。
-                    audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
-
-                    console.log(musicArray);
-                    audio.play();
-
 
                 } else {
 
@@ -290,7 +283,17 @@ var editJournal = {
                     for (var index in result['data']) {
                         musicArray.push(result['data'][index].musicPath);
                     }
+
+
+
+                    //播放音乐
+
+                    //TODO 获取歌曲数组没必要在这里写，在别的地方写就可以了。
+                    audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
                     console.log(musicArray);
+                    audio.play();
+
+
                 } else {
                     Error.displayError(result);
                 }
