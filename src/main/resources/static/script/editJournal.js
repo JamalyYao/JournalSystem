@@ -258,7 +258,7 @@ var editJournal = {
 
             console.log(file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)]);
             audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
-//
+////
             audio.play();
         };
         audio.addEventListener('ended', function () {
