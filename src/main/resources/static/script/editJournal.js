@@ -161,6 +161,7 @@ var editJournal = {
             }
         });
     },
+    //
 
     //保存日志
     saveJournal: function (title, content, contentNoHTML, tags) {
