@@ -15,6 +15,7 @@ var music = {
             return path + "/music/" + musicId;
         }
     },
+    //
     init: function () {
         //获取用户的数据
         music.getUser();
