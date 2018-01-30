@@ -239,33 +239,26 @@ var editJournal = {
             }
         };
 
-        /* var musicArrayLength = musicArray.length;
-        var music = new Array();
-        music = ["1", "2", "3"];//歌单
-        var num = 0;
-        var name = document.getElementById("name");*/
-
-        //生成随机数(在数组长度范围内)
-        //var randomInteger = editJournal.createRandomInteger(0, musicArray.length) ;
-
 
         <!--上一首-->
         var btn3 = document.getElementById("btn-pre");
         btn3.onclick = function () {
-            // num = (num + 2) % 3;
-            //audio.src = "music/" + music[num] + ".mp3";
+
+
+            console.log(musicArray.length);
+            console.log(file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)]);
             audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
 
-            //name.innerHTML = music[num];
             audio.play();
         };
         <!--下一首-->
         var btn4 = document.getElementById("btn-next");
         btn4.onclick = function () {
-            //num = (num + 1) % 3;
-            //audio.src = "music/" + music[num] + ".mp3";
+            console.log(musicArray.length);
+
+            console.log(file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)]);
             audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
-            //name.innerHTML = music[num];
+
             audio.play();
         };
         audio.addEventListener('ended', function () {
@@ -284,13 +277,8 @@ var editJournal = {
                         musicArray.push(result['data'][index].musicPath);
                     }
 
-
-
-                    //播放音乐
-
-                    //TODO 获取歌曲数组没必要在这里写，在别的地方写就可以了。
+                    //播放音乐(随机)
                     audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
-                    console.log(musicArray);
                     audio.play();
 
 
@@ -302,8 +290,6 @@ var editJournal = {
                 Error.displayError(result);
             }
         });
-
-
     },
 
 
