@@ -15,8 +15,7 @@ var journal = {
             $("#userNickName-Head").html(result['data'].userNickName);
             $("#userEmail-Head").html(result['data'].email);
         }
-
-
     }
+
 
 };

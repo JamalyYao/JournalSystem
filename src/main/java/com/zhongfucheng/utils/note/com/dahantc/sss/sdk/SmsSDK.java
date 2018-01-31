@@ -1,11 +1,11 @@
 package com.zhongfucheng.utils.note.com.dahantc.sss.sdk;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class SmsSDK {
 	private String apiUrl;
@@ -17,7 +17,7 @@ public class SmsSDK {
 	private String currentData = dataUtil.GetCurrentDate();
 
 	/**
-	 * 
+	 *
 	 * @param apiUrl
 	 */
 	public void setApiUrl(String apiUrl) {
@@ -25,7 +25,7 @@ public class SmsSDK {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param accountSid
 	 */
 	public void setAccountSid(String accountSid) {
@@ -33,7 +33,7 @@ public class SmsSDK {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param accountToken
 	 */
 	public void setAuthToken(String accountToken) {

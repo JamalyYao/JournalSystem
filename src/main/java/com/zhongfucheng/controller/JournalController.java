@@ -230,7 +230,7 @@ public class JournalController {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
             Date startDate = sdf.parse(year + "-" + month + "-1");
-            Date endDate = sdf.parse(year + "-" + month + "-31");
+            Date endDate = sdf.parse(year + "-" + month + "-32");
             journals = journalService.selectJournalsByTime(user, startDate, endDate);
         } catch (ParseException e) {
             e.printStackTrace();

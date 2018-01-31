@@ -12,18 +12,18 @@ public class SendSmsDemo {
 
 
 	
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		
-		/*
+		*//*
 	     * 短信接口调用说明
 	     * 假设您想给手机号159xxxx1234发送一条短信，
 	     * 您打算使用的模板ID为2，对应模板内容为："您好，您的手机验证码为：{1}，{2}分钟内有效"
 	     * 给这个模板传入的参数为5678和3，则调用方式为：
 	     * sendSMS("159xxxx1234", "2", ['5678','3']);
 	     * 最终收到的短信内容为："【云通讯】您好，您的手机验证码为5678，3分钟内有效"
-	     */
+	     *//*
 		//SendSmsDemo.sendSMS("13719193845", "4", new String[]{"5937", "3"});
-	}
+	}*/
 	
 	public static void sendSMS(String to, String tempId, String[] datas, HttpSession session) {
 		// 初始化SDK

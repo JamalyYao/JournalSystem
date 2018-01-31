@@ -1,7 +1,6 @@
 #服务端容器的配置
 server:
-  port: 8080
-  address: http://www.zhongfucheng.top
+  port: 8887
 
 
 #数据库配置
@@ -40,7 +39,7 @@ spring:
     template-loader-path: classpath:/templates
 
 # 图片服务器路径
-file_path: http://localhost:8888
+file_path: http://localhost:8080/fileWeb3
 
 
 

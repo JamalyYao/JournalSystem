@@ -22,6 +22,7 @@ public class Journal implements Serializable {
     private String content;
 
     /** 内容无携带HTML*/
+
     private String contentNoHTML;
 
     private String title = "";
@@ -59,6 +60,19 @@ public class Journal implements Serializable {
         return tagList;
     }
 
+
+    /**
+     * 设置类型为TEXT，不然VARCHAR是不够存的。
+     */
+    @Column(columnDefinition="TEXT")
+    public String getContentNoHTML() {
+        return contentNoHTML;
+    }
+    @Column(columnDefinition="TEXT")
+    public String getContent() {
+        return content;
+    }
+
     public void setTagList(List<Tag> tagList) {
         this.tagList = tagList;
     }
@@ -68,9 +82,6 @@ public class Journal implements Serializable {
     }
     public void setJournalId(Integer journalId) {
         this.journalId = journalId;
-    }
-    public String getContent() {
-        return content;
     }
 
     public void setContent(String content) {
@@ -100,9 +111,8 @@ public class Journal implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-    public String getContentNoHTML() {
-        return contentNoHTML;
-    }
+
+
 
     public void setContentNoHTML(String contentNoHTML) {
         this.contentNoHTML = contentNoHTML;

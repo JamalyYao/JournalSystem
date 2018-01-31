@@ -1,12 +1,5 @@
 package com.zhongfucheng.utils.note;
 
-import com.zhongfucheng.utils.note.com.dahantc.sss.sdk.VoiceCore;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class SendVoiceDemo {
 
     /**
@@ -24,11 +17,11 @@ public class SendVoiceDemo {
      *
      * @param args
      */
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
 
-        /**
+        *//**
          * 参数构造
-         */
+         *//*
         String requestURL = "http://www.dahancloud.com/voice/submitVoice";//url固定不变
         List<Map<String, String>> phoneMaplist = new ArrayList<>();
         Map<String, String> phoneMap = new HashMap<String, String>();
@@ -40,14 +33,14 @@ public class SendVoiceDemo {
                 phoneMaplist);
 
 
-        /**
+        *//**
          * 发送请求，获取返回值
-         */
+         *//*
         String result = VoiceCore.sendInfo(requestURL, requestJsonParam);//可以看出用户接入语音接口的实质，其余的可以不参照默认的实现
 
-        /**
+        *//**
          * 根据返回值，确定成功 和失败分别怎么办
-         */
+         *//*
         if (result.contains("DH:0000")) {
             //todo
             System.out.println("语音发送成功");
@@ -58,5 +51,5 @@ public class SendVoiceDemo {
         }
 
 
-    }
+    }*/
 }

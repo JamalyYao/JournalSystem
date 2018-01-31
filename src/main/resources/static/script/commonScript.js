@@ -11,7 +11,7 @@ $(function () {
 
 
 //图片服务器路径
-var file_path = "http://localhost:8888";
+var file_path = "http://localhost:8080/fileWeb3";
 
 var common = {
     URL: {
@@ -94,9 +94,8 @@ var Error = {
 
     //显示错误
     displayError: function (result) {
-        sweetAlert(Error.sweetAlertInfo(result.msg));
+        console.log(Error.sweetAlertInfo(result.msg));
     },
-
     //配置错误的信息
     sweetAlertInfo: function (info) {
 
