@@ -9,20 +9,19 @@ $(function () {
     path = prePath;
 });
 
+
 //图片服务器路径
 var file_path = "http://localhost:8888";
 
-
-
 var common = {
     URL: {
-        backIndexURL:function () {
+        backIndexURL: function () {
             return path + "/index.html";
         },
         getUserURL: function () {
             return path + "/session";
         },
-        logOutUserURL:function () {
+        logOutUserURL: function () {
             return path + "/session";
         }
     },
@@ -44,6 +43,49 @@ var common = {
                 Error.displayError(result);
             }
         });
+    },
+    //得到用户的信息(需要用到result，因此得设置成同步)
+    getUser: function () {
+
+        var responseText = "";
+        $.ajax({
+            url: common.URL.getUserURL(),
+            type: "get",
+            async: false,
+            success: function (result) {
+                if (result && result['code'] == 0) {
+
+                    //如果登陆了，那么将注册和登陆按钮隐藏掉
+                    $("#registerLi").hide();
+                    $("#loginLi").hide();
+
+                    //为id赋值(很多地方可能都会用到)
+                    $("#userId").val(result['data'].id);
+
+
+                    //如果存在，那么初始化“完善个人信息”表单的数据(左侧导航条)
+                    $("#userNickName").html(result['data'].userNickName);
+                    if (result['data'].email != null && result['data'].email != "") {
+                        $("#userEmail").html(result['data'].email);
+                    }
+                    if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
+                        $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
+                    }
+
+                    //返回值给调用者判断
+                    responseText = result;
+
+                } else {
+                    //如果没有登陆，将日志和个人中心、音乐模块的按钮隐藏掉
+                    $("#journalLi").hide();
+                    $("#personalLi").hide();
+                }
+            },
+            error: function () {
+                Error.displayError(result);
+            }
+        });
+        return responseText;
     }
 };
 

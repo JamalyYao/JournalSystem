@@ -57,6 +57,43 @@ public class UploadFileController {
 
 
     /**
+     * 使用jersy的客户端上传资源
+     */
+
+    public void uploadBytesByJersy(String realPath, byte[] bytes) {
+
+        //创建jersy的客户端
+        Client client = Client.create();
+        //创建web资源对象
+        WebResource wr = client.resource(realPath);
+        //拿到文件的二进制数据，使用web资源对象上传
+        wr.put(bytes);
+    }
+
+    /**
+     * 获取一个随机的文件名
+     *
+     * @param originalFilename
+     * @return
+     */
+    public String createRandomName(String originalFilename) {
+        //上传文件的名字是不能相同的，因此我们设置一下文件的名称
+        String fileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+        Random random = new Random();
+        for (int i = 0; i < 3; i++) {
+            fileName = fileName + random.nextInt(10);
+
+        }
+        //获取该文件的后缀
+        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String result = fileName + suffix;
+
+        return result;
+
+
+    }
+
+    /**
      * 上传MP3音乐
      *
      * @param musicFile
@@ -68,39 +105,25 @@ public class UploadFileController {
         User user = (User) session.getAttribute("user");
 
 
-        //上传文件的名字是不能相同的，因此我们设置一下文件的名称
-        String fileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            fileName = fileName + random.nextInt(10);
-        }
-
-        //拿到该文件的原始名称
+        //拿到该文件的原始名称，得到一个随机的文件名
         String originalFilename = musicFile.getOriginalFilename();
+        String randomName = createRandomName(originalFilename);
 
-        //获取该文件的后缀
-        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
 
         /***
          * 绝对路径是留给页面src属性做显示的
          * 相对路径是保存在数据库中，通过input来进行提交的。
          */
         //获得上传文件的绝对路径
-        String realPath = filePath + "/music/" + fileName + suffix;
+        String realPath = filePath + "/music/" + randomName;
 
         //获得相对路径
-        String relativePath = "/music/" + fileName + suffix;
+        String relativePath = "/music/" + randomName;
 
 
-        //创建jersy的客户端
-        Client client = Client.create();
-        //创建web资源对象
-        WebResource wr = client.resource(realPath);
 
-        byte[] bytes = musicFile.getBytes();
-
-        //拿到文件的二进制数据，使用web资源对象上传
-        wr.put(bytes);
+        //上传资源
+        uploadBytesByJersy(realPath, musicFile.getBytes());
 
 
         //将音乐信息到数据库中保存
@@ -115,8 +138,6 @@ public class UploadFileController {
     }
 
 
-
-
     /**
      * 上传头像
      *
@@ -125,14 +146,11 @@ public class UploadFileController {
      */
     @PostMapping(value = "/image", produces = {"application/json;charset=UTF-8"})
     public Result uploadPic(@RequestParam MultipartFile imgsFile, HttpSession session) throws IOException {
-        //上传文件的名字是不能相同的，因此我们设置一下文件的名称
-        String fileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            fileName = fileName + random.nextInt(10);
-        }
-        //拿到该文件的原始名称
+
+
+        //拿到该文件的原始名称，得到一个随机的文件名
         String originalFilename = imgsFile.getOriginalFilename();
+        String randomName = createRandomName(originalFilename);
 
         //获取该文件的后缀
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -142,33 +160,25 @@ public class UploadFileController {
          * 相对路径是保存在数据库中，通过input来进行提交的。
          */
         //获得上传文件的绝对路径
-        String realPath = filePath + "/upload/" + fileName + suffix;
+        String realPath = filePath + "/upload/" + randomName;
 
         //获得相对路径
-        String relativePath = "/upload/" + fileName + suffix;
+        String relativePath = "/upload/" + randomName;
 
         //缩略图的生成
         BufferedImage bufferedImage = Thumbnails.of(imgsFile.getInputStream()).size(WIDTH, HEIGHT).asBufferedImage();
 
+
         //将BufferImage转成byte进行上传
-        byte[] bytes = WebUtils.imageToBytes(bufferedImage, suffix.substring(1,suffix.length()));
+        byte[] bytes = WebUtils.imageToBytes(bufferedImage, suffix.substring(1, suffix.length()));
+
+        //上传资源
+        uploadBytesByJersy(realPath, bytes);
 
 
-        //创建jersy的客户端
-        Client client = Client.create();
-        //创建web资源对象
-        WebResource wr = client.resource(realPath);
-
-        //拿到文件的二进制数据，使用web资源对象上传
-        wr.put(bytes);
-
-
-        return ResultUtil.success(new FilePath(realPath, relativePath,originalFilename));
+        return ResultUtil.success(new FilePath(realPath, relativePath, originalFilename));
 
     }
-
-
-
 
 
     /**
@@ -180,36 +190,21 @@ public class UploadFileController {
     @RequestMapping(value = "/upload", produces = {"application/json;charset=UTF-8"})
     public Map uploadPicFile(@RequestParam MultipartFile imgsFile, HttpSession session) throws IOException {
 
-        //上传文件的名字是不能相同的，因此我们设置一下文件的名称
-        String fileName = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
-        Random random = new Random();
-        for (int i = 0; i < 3; i++) {
-            fileName = fileName + random.nextInt(10);
-        }
-        //拿到该文件的原始名称
+        //拿到该文件的原始名称，得到一个随机的文件名
         String originalFilename = imgsFile.getOriginalFilename();
+        String randomName = createRandomName(originalFilename);
 
-        //获取该文件的后缀
-        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
 
         /***
          * 绝对路径是留给页面src属性做显示的
          * 相对路径是保存在数据库中，通过input来进行提交的。
          */
         //获得上传文件的绝对路径
-        String realPath = filePath + "/upload/" + fileName + suffix;
+        String realPath = filePath + "/upload/" + randomName;
 
-        //获得相对路径
-        String relativePath = "/upload/" + fileName + suffix;
 
-        //创建jersy的客户端
-        Client client = Client.create();
-        //创建web资源对象
-        WebResource wr = client.resource(realPath);
-        byte[] bytes = imgsFile.getBytes();
-        //拿到文件的二进制数据，使用web资源对象上传
-        wr.put(bytes);
-
+        //上传资源
+        uploadBytesByJersy(realPath, imgsFile.getBytes());
 
         //返回的JSON要符合富文本编辑器：
         List<String> list = new ArrayList();

@@ -10,7 +10,17 @@ var personalInfo = {
     },
     init: function () {
         //获取用户的数据
-        personalInfo.getUser();
+        var result = common.getUser();
+
+        //补充表单信息
+        if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
+            $("#displayImg").attr("src", file_path + result['data'].headPortrait);
+            $("#headPortrait").attr("src", result['data'].headPortrait);
+        }
+        if (result['data'].email != null && result['data'].email != "") {
+            $("#email").focus();
+            $("#email").val(result['data'].email);
+        }
 
         //更换头像
         $("#fileButton").change(function () {
@@ -56,39 +66,6 @@ var personalInfo = {
         $("#personalInfoForm").ajaxSubmit(opt);
     },
 
-    //获得用户的信息
-    getUser: function () {
-
-        $.ajax({
-            url: common.URL.getUserURL(),
-            type: "get",
-            success: function (result) {
-                if (result && result['code'] == 0) {
-                    //设置导航栏和表单的初始值
-                    $("#userNickName").html(result['data'].userNickName);
-                    if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
-                        $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
-                        $("#displayImg").attr("src", file_path + result['data'].headPortrait);
-                        $("#headPortrait").attr("src", result['data'].headPortrait);
-
-                    }
-                    if (result['data'].email != null && result['data'].email != "") {
-                        $("#userEmail").html(result['data'].email);
-                        $("#email").focus();
-                        $("#email").val(result['data'].email);
-                    }
-                    if (result['data'].email != null && result['data'].email != "") {
-                        $("#userEmail").html(result['data'].email);
-                    }
-                } else {
-                    console.log(result);
-                }
-            },
-            error: function () {
-                Error.displayError(result);
-            }
-        });
-    },
 
     //提交表单
     updateUserInfo: function () {

@@ -210,7 +210,6 @@ var register = {
             if (Cookie.getCookieValue("wait") > 0) {
                 register.reciprocal2();
             }
-
             //向输入的手机号码发送验证码
             $.ajax({
                 url: register.URL.getMobileCodeURL(),

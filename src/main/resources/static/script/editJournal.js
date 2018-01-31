@@ -27,7 +27,16 @@ var editJournal = {
         editJournal.selectUserMusic();
 
         //获取用户
-        editJournal.getUser();
+        var result = common.getUser();
+
+        //如果没有获取得到用户，那么音乐的按钮是不显示的
+        if (result == "" || result == null || result['code'] != 0) {
+            $("#musicLiLeft").hide();
+            $("#musicLiPause").hide();
+            $("#musicLiRight").hide();
+
+        }
+
 
         //侧边导航条
         $("#button-collapse").sideNav();
@@ -107,54 +116,6 @@ var editJournal = {
         });
 
     },
-
-    //得到用户
-    getUser: function () {
-        $.ajax({
-            url: common.URL.getUserURL(),
-            type: "get",
-            success: function (result) {
-
-                if (result && result['code'] == 0) {
-
-                    //如果登陆了，那么将注册和登陆按钮隐藏掉
-                    $("#registerLi").hide();
-                    $("#loginLi").hide();
-
-
-                    //为id赋值(很多地方可能都会用到)
-                    $("#userId").val(result['data'].id);
-
-                    //如果存在，那么初始化“完善个人信息”表单的数据
-                    $("#userNickName").html(result['data'].userNickName);
-                    if (result['data'].email != null && result['data'].email != "") {
-                        $("#userEmail").html(result['data'].email);
-                    }
-
-                    //侧边导航条的头像
-                    if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
-                        $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
-                    }
-
-                } else {
-
-                    //如果没有登陆，将日志和个人中心的按钮隐藏掉
-                    $("#journalLi").hide();
-                    $("#personalLi").hide();
-
-                    $("#musicLiLeft").hide();
-                    $("#musicLiPause").hide();
-                    $("#musicLiRight").hide();
-
-
-                }
-            },
-            error: function () {
-                Error.displayError(result);
-            }
-        });
-    },
-    //
 
     //保存日志
     saveJournal: function (title, content, contentNoHTML, tags) {
@@ -239,26 +200,19 @@ var editJournal = {
             }
         };
 
-
-        <!--上一首-->
+        //上一首
         var btn3 = document.getElementById("btn-pre");
         btn3.onclick = function () {
 
 
-            console.log(musicArray.length);
-            console.log(file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)]);
-            audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
+            audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length - 1)];
 
             audio.play();
         };
-        <!--下一首-->
+        //下一首
         var btn4 = document.getElementById("btn-next");
         btn4.onclick = function () {
-            console.log(musicArray.length);
-
-            console.log(file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)]);
-            audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
-////
+            audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length - 1)];
             audio.play();
         };
         audio.addEventListener('ended', function () {
@@ -276,12 +230,9 @@ var editJournal = {
                     for (var index in result['data']) {
                         musicArray.push(result['data'][index].musicPath);
                     }
-
                     //播放音乐(随机)
-                    audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length)];
+                    audio.src = file_path + musicArray[editJournal.createRandomInteger(0, musicArray.length - 1)];
                     audio.play();
-
-
                 } else {
                     Error.displayError(result);
                 }

@@ -179,8 +179,6 @@
 <script>
 
     $(function () {
-
-
         manageJournal.init();
     });
 

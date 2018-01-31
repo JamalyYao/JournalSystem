@@ -6,16 +6,21 @@
 
 
     <!--Materialize  CSS-->
-
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <!--样式-->
-    <link rel="stylesheet" href="${request.contextPath}/css/register&login.css">
+
+    <!--页面样式-->
+    <style>
+        body {
+            background-image: url(../imgs/register&loginBG.gif);
+            background-repeat: repeat;
+        }
+    </style>
+
 </head>
 
 

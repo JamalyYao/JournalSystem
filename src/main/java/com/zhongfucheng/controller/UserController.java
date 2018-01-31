@@ -214,9 +214,6 @@ public class UserController {
 
                 CookieUtil.addCookie(response,"loginToken",loginToken,604800);
 
-
-
-
                 return ResultUtil.success(user1);
 
             } else {

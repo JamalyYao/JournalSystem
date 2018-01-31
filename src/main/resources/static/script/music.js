@@ -15,10 +15,12 @@ var music = {
             return path + "/music/" + musicId;
         }
     },
-    //
+
     init: function () {
-        //获取用户的数据
-        music.getUser();
+        //获取用户的信息(通用)
+        common.getUser();
+
+
         music.selectUserMusic();
 
         //更换头像
@@ -60,6 +62,8 @@ var music = {
         });
 
     },
+
+    //删除歌曲
     deleteMusic: function (musicId) {
         $.ajax({
             url: music.URL.deleteMusicURL(musicId),
@@ -93,10 +97,7 @@ var music = {
 
                         $("#musicList").append("<tr><td>" + result['data'][index].musicName + "</td><td><a href='javascript:;' musicId='" + result['data'][index].musicId + "'>删除</a></td></tr>");
 
-                        musicArray.push(result['data'][index].musicPath);
                     }
-
-                    console.log(musicArray);
                 } else {
                     Error.displayError(result);
                 }
@@ -118,14 +119,9 @@ var music = {
             dateType: "json",
             success: function (result) {
                 if (result && result['code'] == 0) {
-
                     //获取歌名
                     var filename = result['data'].originalFilename;
-
                     $("#musicList").append("<tr><td>" + filename + "</td><td><a href='#'>删除</a></td></tr>");
-                    console.log(result);
-                    /*  $("#displayImg").attr("src", result['data'].realPath);
-                      $("#headPortrait").val(result['data'].relativePath);*/
 
                 } else {
                     Error.displayError(result);
@@ -136,44 +132,11 @@ var music = {
             }
         };
 
-
         //异步提交表单
         $("#musicForm").ajaxSubmit(opt);
-    },
-
-    //获得用户的信息
-    getUser: function () {
-
-        $.ajax({
-            url: common.URL.getUserURL(),
-            type: "get",
-            success: function (result) {
-                if (result && result['code'] == 0) {
-                    //设置导航栏和表单的初始值
-                    $("#userNickName").html(result['data'].userNickName);
-                    if (result['data'].headPortrait != null && result['data'].headPortrait != "") {
-                        $("#slide-out-headPortrait").attr("src", file_path + result['data'].headPortrait);
-                        $("#displayImg").attr("src", file_path + result['data'].headPortrait);
-                        $("#headPortrait").attr("src", result['data'].headPortrait);
-
-                    }
-                    if (result['data'].email != null && result['data'].email != "") {
-                        $("#userEmail").html(result['data'].email);
-                        $("#email").focus();
-                        $("#email").val(result['data'].email);
-                    }
-                    if (result['data'].email != null && result['data'].email != "") {
-                        $("#userEmail").html(result['data'].email);
-                    }
-                } else {
-                    console.log(result);
-                }
-            },
-            error: function () {
-                Error.displayError(result);
-            }
-        });
     }
+
+
 
 
 };

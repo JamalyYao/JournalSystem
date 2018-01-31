@@ -1,6 +1,8 @@
 #服务端容器的配置
 server:
-  port: 8088
+  port: 8080
+  address: http://www.zhongfucheng.top
+
 
 #数据库配置
 spring:
@@ -21,10 +23,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-
-
-
 # 文件上传的大小
   http:
     multipart:

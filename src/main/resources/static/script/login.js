@@ -6,6 +6,7 @@ var login = {
         },
         changeGifCodeURL: function () {
             return path + "/user/gifCode?" + new Date().getTime();
+
         }
 
     },
@@ -79,12 +80,11 @@ var login = {
 
                             //清空并刷新验证码
                             $("#inputCaptcha").val("");
-                            $("#captcha").attr("src", path + "/user/gifCode?time=" + new Date().getTime());
+                            $("#captcha").attr("src", login.URL.changeGifCodeURL());
                             Error.displayError(result);
                         }
                     },
                     error: function () {
-
                         console.log(result);
                         Error.displayError(result);
                     }
