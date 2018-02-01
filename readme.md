@@ -162,15 +162,15 @@ SpringBoot遇到的问题有：
 	- [http://blog.csdn.net/xiao_xuwen/article/details/52890730](http://blog.csdn.net/xiao_xuwen/article/details/52890730)
 	- [http://www.cnblogs.com/xiaohunshi/p/5706943.html](http://www.cnblogs.com/xiaohunshi/p/5706943.html)
 - springBoot拦截器
-	- [http://blog.csdn.net/catoop/article/details/50501696](http://blog.csdn.net/catoop/article/details/50501696)
+	- [http://blog.csdn.net/catoop/article/details/50501696](http://blog.csdn.net/catoop/article/details/50501696) 
 - SpringBoot拦截器无法注入Bean
 	- [https://my.oschina.net/u/1790105/blog/1490098](https://my.oschina.net/u/1790105/blog/1490098)
-	- [http://blog.csdn.net/mjlfto/article/details/65635135](http://blog.csdn.net/mjlfto/article/details/65635135)
+	- [http://blog.csdn.net/mjlfto/article/details/65635135](http://blog.csdn.net/mjlfto/article/details/65635135)	
 - 出现: Could not find acceptable representation原因及解决方法
 	- [http://blog.csdn.net/neosmith/article/details/51557957](http://blog.csdn.net/neosmith/article/details/51557957)
 	- 或者是因为返回的JSON数据，而你返回了一个页面(使用RESTCONTROLLER没有注意）
 - springBoot下使用统一异常处理方法：
-	- [http://www.cnblogs.com/magicalSam/p/7198420.html](http://www.cnblogs.com/magicalSam/p/7198420.html)
+	- [http://www.cnblogs.com/magicalSam/p/7198420.html](http://www.cnblogs.com/magicalSam/p/7198420.html)	
 - springBoot集成Freemarker
 	- [http://ifeve.com/spring-boot-%E9%9B%86%E6%88%90-freemarker-%E8%AF%A6%E8%A7%A3%E6%A1%88%E4%BE%8B/](http://ifeve.com/spring-boot-%E9%9B%86%E6%88%90-freemarker-%E8%AF%A6%E8%A7%A3%E6%A1%88%E4%BE%8B/)
 	- [http://blog.csdn.net/z69183787/article/details/73850417](http://blog.csdn.net/z69183787/article/details/73850417)
@@ -198,13 +198,13 @@ SpringData JPA遇到的问题有：
 - mysql统计查询思路：
 	- [http://blog.csdn.net/w3chhhhhh/article/details/54097890](http://blog.csdn.net/w3chhhhhh/article/details/54097890)
 - 网站自动登陆的设计：
-	- [https://www.cnblogs.com/jacksoft/p/5216862.html](https://www.cnblogs.com/jacksoft/p/5216862.html)
+	- [https://www.cnblogs.com/jacksoft/p/5216862.html](https://www.cnblogs.com/jacksoft/p/5216862.html) 
 - 上传图片压缩，缩放的问题
 	- [http://www.cnblogs.com/atyou/archive/2013/08/04/3236068.html](http://www.cnblogs.com/atyou/archive/2013/08/04/3236068.html)
 - 异常处理：
 	- [https://www.zhihu.com/search?type=content&q=java%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8](https://www.zhihu.com/search?type=content&q=java%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8)
 
-
+ 
 # 放置项目到linux下启动 #
 
 
@@ -273,7 +273,7 @@ springboot之修改内置tomcat配置项
 - [http://blog.csdn.net/tim_phper/article/details/51992986](http://blog.csdn.net/tim_phper/article/details/51992986)
 
 
-//
+
 
 
 
