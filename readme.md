@@ -1,3 +1,8 @@
+
+
+
+
+
 # 搭建环境 #
 
 这次主要想用springboot来进行开发，试试大名鼎鼎的springboot是怎么快速搭建环境的。
@@ -200,9 +205,72 @@ SpringData JPA遇到的问题有：
 	- [https://www.zhihu.com/search?type=content&q=java%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8](https://www.zhihu.com/search?type=content&q=java%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8)
 
 
+# 放置项目到linux下启动 #
 
 
 
+如果有本地的jar，不能用pom来管理起来。那么我们可以将本地的jar添加到本地仓库中。**这样以防maven在package的时候报错了**。
+
+- [http://blog.csdn.net/Colton_Null/article/details/77510141](http://blog.csdn.net/Colton_Null/article/details/77510141)
+
+
+使用Maven打jar包出错了：Unable to find a single main class from the following candidates [com.hhly.InformationApplication, com.hhly.test.Application]
+
+- 原因就是项目不单单有一个main方法，我们把其余的main方法去除了就行了。
+- [https://www.cnblogs.com/xingzc/p/5972488.html](https://www.cnblogs.com/xingzc/p/5972488.html)
+
+
+
+之前我用的时JDK7，结果在使用jar包启动时出错了，原因就是springBoot支持的是jdk8，而我在linux下只有JDK7，因此下载JDK8，下面的链接是JDK8的tar包下载地址
+- [http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz](http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz)
+
+
+
+直接使用jar的方式在服务器后台启动。
+
+```java
+
+
+nohup /opt/jdk1.8.0_161/bin/java -jar /opt/zhongfuchengweb-0.0.1-SNAPSHOT.jar &
+```
+
+
+在后天上运行的脚本：
+
+- [http://blog.csdn.net/baochanghong/article/details/54286399](http://blog.csdn.net/baochanghong/article/details/54286399)
+- [http://blog.csdn.net/howieli_1995/article/details/72566107](http://blog.csdn.net/howieli_1995/article/details/72566107)
+
+
+如果想要把springBoot项目打包成war包，在tomcat上运行，可以参考：
+
+- [http://blog.csdn.net/javahighness/article/details/52515226](http://blog.csdn.net/javahighness/article/details/52515226)
+
+
+springboot之修改内置tomcat配置项
+
+- [http://blog.csdn.net/ljj1338/article/details/76384608](http://blog.csdn.net/ljj1338/article/details/76384608)
+
+
+
+在Nginx上配置多个站点，**我是直接多配置一个server的**。
+
+- [https://www.cnblogs.com/Erick-L/p/7066564.html](https://www.cnblogs.com/Erick-L/p/7066564.html)
+
+
+
+**我本来一直在想springboot是以jar的方式来进行启动的，nginx会不会把静态文件给处理了。后来查看了一下网页的源码，发现nginx配置静态文件直接写我们的ip地址，还是可以处理的。**
+
+
+![](https://i.imgur.com/by6edVE.png)
+
+
+![](https://i.imgur.com/0szKwp3.png)
+
+使用Nginx后，上传文件时，如果文件太大的话，会报出错误的。但是后台报错并不明显。搞了很久才知道是Nginx的问题：
+
+**413 Request Entity Too Large报错处理**
+
+- [http://blog.csdn.net/tim_phper/article/details/51992986](http://blog.csdn.net/tim_phper/article/details/51992986)
 
 
 

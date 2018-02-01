@@ -23,7 +23,7 @@ var music = {
 
         music.selectUserMusic();
 
-        //更换头像
+        //上传歌曲
         $("#input-file-now").change(function () {
             music.uploadMusic();
         });

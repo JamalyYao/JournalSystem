@@ -26,6 +26,7 @@ spring:
   http:
     multipart:
       max-file-size: 100Mb
+      max-request-size: 100Mb
 
 # freemarker配置
   freemarker:
@@ -39,7 +40,9 @@ spring:
     template-loader-path: classpath:/templates
 
 # 图片服务器路径
-file_path: http://localhost:8080/fileWeb3
+file_path: http://120.78.198.228:8080/fileWeb3
 
+# 图片服务器路径
+#file_path: http://localhost:8888
 
 

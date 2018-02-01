@@ -11,7 +11,11 @@ $(function () {
 
 
 //图片服务器路径
-var file_path = "http://localhost:8080/fileWeb3";
+var file_path = "http://120.78.198.228:8080/fileWeb3";
+
+
+//图片服务器路径
+//var file_path = "http://localhost:8888";
 
 var common = {
     URL: {
