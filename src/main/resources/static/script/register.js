@@ -114,6 +114,12 @@ var register = {
                             }, 3000);
 
                         } else {
+
+                            sweetAlert({
+                                title: result.msg,
+                                showConfirmButton: true
+                            });
+
                             Error.displayError(result);
                         }
                     },

@@ -77,6 +77,10 @@ var login = {
                             }, 1000);
 
                         } else {
+                            sweetAlert({
+                                title: result.msg,
+                                showConfirmButton: true
+                            });
 
                             //清空并刷新验证码
                             $("#inputCaptcha").val("");
