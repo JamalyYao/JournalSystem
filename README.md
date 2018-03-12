@@ -235,7 +235,7 @@ nohup /opt/jdk1.8.0_161/bin/java -jar /opt/zhongfuchengweb-0.0.1-SNAPSHOT.jar &
 ```
 
 
-在后天上运行的脚本：
+在上运行的脚本：
 
 - [http://blog.csdn.net/baochanghong/article/details/54286399](http://blog.csdn.net/baochanghong/article/details/54286399)
 - [http://blog.csdn.net/howieli_1995/article/details/72566107](http://blog.csdn.net/howieli_1995/article/details/72566107)
@@ -266,11 +266,28 @@ springboot之修改内置tomcat配置项
 
 ![](https://i.imgur.com/0szKwp3.png)
 
+
+
 使用Nginx后，上传文件时，如果文件太大的话，会报出错误的。但是后台报错并不明显。搞了很久才知道是Nginx的问题：
 
 **413 Request Entity Too Large报错处理**
 
 - [http://blog.csdn.net/tim_phper/article/details/51992986](http://blog.csdn.net/tim_phper/article/details/51992986)
+
+
+
+运行项目的脚本：
+
+```
+
+cd /opt/nginx/sbin/
+./nginx
+cd /opt/elasticsearch-2.3.3/bin/
+./elasticsearch -d  -Des.insecure.allow.root=true
+cd /opt/apache-tomcat-7.0.82/bin/
+./startup.sh
+nohup /opt/jdk1.8.0_161/bin/java -jar /opt/zhongfuchengweb-0.0.1-SNAPSHOT.jar & 
+```
 
 
 
