@@ -139,7 +139,7 @@ server:
 SpringBoot相关资料：
 
 - 我自己的笔记：
-	- [https://zhongfucheng.bitcron.com/?s=springBoot](https://zhongfucheng.bitcron.com/?s=springBoot)
+	- [https://zhongfucheng.bitcron.com/?s=springBoot](https://zhongfucheng.bitcron.com/post/javaeechang-yong-kuang-jia/springboot-ru-men-yu-hui-gu-re-bu-shu)
 - [http://blog.didispace.com/Spring-Boot%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/](http://blog.didispace.com/Spring-Boot%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/)
 - [http://www.cnblogs.com/magicalSam/p/7196340.html](http://www.cnblogs.com/magicalSam/p/7196340.html)
 - springBoot整合mybatis，这次是没有用到的，可能以后会用到:
@@ -150,7 +150,7 @@ SpringBoot相关资料：
 
 SpringData JPA相关资料：
 
-- 我自己的笔记：[https://zhongfucheng.bitcron.com/?s=SpringData%20JPA](https://zhongfucheng.bitcron.com/?s=SpringData%20JPA)
+- 我自己的笔记：[https://zhongfucheng.bitcron.com/?s=SpringData%20JPA](https://zhongfucheng.bitcron.com/post/javaeechang-yong-kuang-jia/springdatajparu-men-jiu-zhe-yao-jian-dan)
 - [http://blog.csdn.net/qq_35797610/article/details/78737211](http://blog.csdn.net/qq_35797610/article/details/78737211)
 
 
